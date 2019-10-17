@@ -1,0 +1,309 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 18awg_bk_1
+D Hook-up Wire 18AWG 16/30 PVC
+K Wire 18awg
+$ENDCMP
+#
+$CMP 18awg_or_1
+D Hook-up Wire 18AWG 16/30 PVC
+K Wire 18awg
+$ENDCMP
+#
+$CMP 22awg_bk_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_bl_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_br_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_gr_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_or_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_rd_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_sl_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_wh_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_yl_1
+D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awgx2_u_4_1mm
+D 2 Conductor 7/30 Cable 22 AWG Gray
+K cable 22awg
+F ~
+$ENDCMP
+#
+$CMP 22awgx3_u_4_3mm
+D 3 Conductor 7/30 Cable 22 AWG Gray
+K cable 22awg
+F ~
+$ENDCMP
+#
+$CMP 22awgx4_u_4_8mm
+D 4 Conductor 7/30 Cable 22 AWG Gray
+K cable 22awg
+F ~
+$ENDCMP
+#
+$CMP Conn_01x05_Female
+D Generic connector, single row, 01x05
+K connector
+F ~
+$ENDCMP
+#
+$CMP Dc_2_5x5_5_plug
+D Cable Assy 2.5mm ID, 5.5mm OD Plug to Wire flat 18awg
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Dc_barrel_712ah
+D DC Power Connectors HI-TEMP 2.5MM POWER 2.5mmx5.5mm
+K 712AH Barrel
+$ENDCMP
+#
+$CMP Hiro_df1e-4s
+D Hirose  01x04 2.5mm df1e-4s-2.5c
+K connector
+F ~
+$ENDCMP
+#
+$CMP Hiro_df1e-5s
+D Hirose  01x05 2.5mm df1e-5s-2.5c
+K connector
+F ~
+$ENDCMP
+#
+$CMP Hiro_df1e-6s
+D Hirose  01x05 2.5mm df1e-5s-2.5c
+K connector
+F ~
+$ENDCMP
+#
+$CMP Hiro_df1e-8s
+D Hirose  01x05 2.5mm df1e-5s-2.5c
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jae_il-g-2s
+D Jae 2 Position Housing Receptacle Brown 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jae_il-g-3s
+D Jae 3 Position Housing Receptacle Brown 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smp-02v
+D 2 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smp-03v
+D 3 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smp-04v
+D 4 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smp-06v
+D 6 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smr-02v
+D 2 Position Rectangular Housing Connector Receptacle Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smr-03v
+D 3 Position Rectangular Housing Connector Receptacle Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smr-04v
+D 4 Position Rectangular Housing Connector Receptacle Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smr-06v
+D 6 Position Rectangular Housing Connector Receptacle Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_vhr-2n
+D Jst 2-Position Housing Connector Receptacle 3.96mm
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_vhr-3n
+D Jst 3-Position Housing Connector Receptacle 3.96mm
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_vhr-4n
+D Jst 4-Position Housing Connector Receptacle 3.96mm
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_43025-02
+D Generic connector, double row, 02x01, this symbol is compatible with counter-clockwise, top-bottom and odd-even numbering schemes., script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_43025-04
+D Micro-Fit 3.0 Receptacle Housing, Dual Row, 04 Circuits
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_43025-06
+D Micro-Fit 3.0 Receptacle Housing, Dual Row, 06 Circuits
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_43025-08
+D Micro-Fit 3.0 Receptacle Housing, Dual Row, 8 Circuits
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_43025-10
+D Micro-Fit 3.0 Receptacle Housing, Dual Row, 10 Circuits
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_43025-12
+D Micro-Fit 3.0 Receptacle Housing, Dual Row, 12 Circuits
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_43025-16
+D Micro-Fit 3.0 Receptacle Housing, Dual Row, 16 Circuits
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_43645-02
+D Molex Micro-Fit 3.0 Receptacle Housing, Single Row, 2 Circuits, Black
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_44441-02
+D MX Sabre 2 Position Blade Type Power Housing Black 0.295" (7.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_510210800
+D Molex 1.25mm Pitch, PicoBlade Receptacle Crimp Housing
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_5264-02
+D 2.50mm Pitch, Mini-SPOX Receptacle Crimp Housing
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_5264-03
+D 2.50mm Pitch, Mini-SPOX Receptacle Crimp Housing
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_5264-05
+D 2.50mm Pitch, Mini-SPOX Receptacle Crimp Housing
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_901600150
+D 2.54mm Pitch C-Grid III Crimp Housing Dual Row, 50 Circuits
+K connector
+F ~
+$ENDCMP
+#
+$CMP Qc_22awg_ra_6_3x0_8_h
+D 0.250" (6.35mm) Quick Connect Female 18-22 AWG RA Fully Insulated
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
+$CMP Qc_rcpt_6_3x0_8_h
+D 0.250" (6.35mm) Quick Connect Female 18-22 AWG Crimp Connector Fully Insulated
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
+$CMP Usb-a_plug
+D USB Type A connector
+K connector USB
+F  ~
+$ENDCMP
+#
+$CMP Usb-b_plug
+D USB Type B connector Plug
+K connector USB
+F  ~
+$ENDCMP
+#
+$CMP Usb-minib_plug
+D USB Mini Type B connector
+K connector USB Mini
+F ~
+$ENDCMP
+#
+#End Doc Library

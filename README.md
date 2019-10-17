@@ -1,2 +1,2 @@
-# kicadToCreo
-Convert Kicad schematic to creo cabling netlist
+# kicadcreo
+Export logical data from kicad to creo harness 
