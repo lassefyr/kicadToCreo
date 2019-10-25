@@ -11,10 +11,9 @@ You can copy the entire repository to your PC.
 
 ### Installing
 
-You need to setup the script in Kicad sch. Press the bom button and add plugins
-- kicadToCreo.py (coverts your schematic to creo schematic netlist)
-- xmlReadCreo.py (read creo schematic netlist, when done, and updates lenghts and part numbers to a new kicad schematic.
-
+You need to setup the script in Kicad eeschema. Press the bom button and add plugins (path to the python scripts that you downloaded)
+- kicadToCreo.py (converts your schematic to creo schematic netlist)
+- xmlReadCreo.py (when done routing in Creo, this script reads the Creo schematic netlist and updates lenghts and part numbers to Kicad schematic file. New filename will be originalschemafilename+"_creo".sch)
 
 ## Testing
 
@@ -29,6 +28,6 @@ There are a test schematic in directory /kicad_sample_design
 	- how the cable looks like in creo (.pdf snapshot)
 	- All connectors used are under creo_connectors directory
 
-The creo 3d-connectors that were used on this design are on directory "creo_connectors"
+The creo 3d-connectors that were used on this design are on directory "creo_connectors". You check these to see how the Pins are named on the Creo symbols.
 
 
