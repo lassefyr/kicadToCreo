@@ -30,4 +30,12 @@ There are a test schematic in directory /kicad_sample_design
 
 The creo 3d-connectors that were used on this design are on directory "creo_connectors". You check these to see how the Pins are named on the Creo symbols.
 
+## Back Annotation
+Create an Schematic xml file from creo. Name it "Kicad design filename"+**_creoin.xml** and copy it into the Kicad design directory (where the original kicad schematic is). Run the xmlReadCreo.py from Kicad Schematic. You will get another schematic file where wire lenghts are displayed.
+
+## Additions
+2019-11 tried to add Sheath spools but failed. It seems that there is a bug in Creo. 
+Read the PTC article CS312099 "Sheath type spools are exported to NWF as cable spool and to XML as wire in Creo Parametric
+Applies to Creo Parametric 4.0 to 6.0."
+
 
