@@ -62,6 +62,9 @@ class xmlWriteCompData:
 #			if refDes[:1] != "J":
 			if refDes [:1] == "W" or refDes [:3] == "CBL":
 				continue
+
+			if (refDes.startswith("TUBE") or refDes.startswith("SHRINK") or refDes.startswith("TAPE")): 
+				continue		
 			
 			for listIndex in range(len(self.CMP_PARAMS)):
 				tempStr =  comp.getField(self.CMP_PARAMS[listIndex])
@@ -70,9 +73,12 @@ class xmlWriteCompData:
 				else:
 					self.CMP_USEVAL[listIndex] =	self.CMP_DEFAULTS[listIndex]
 						
-# Component COMPONENT --------------------------------------------------------------------
+# Component COMPONENT --------------------------------------------------------------------			
 			if not self.CMP_USEVAL[0]:						
 				creoModel = comp.getField("Value")
+			else:
+				creoModel = self.CMP_USEVAL[0]
+				
 			if not creoModel:
 				print(refDes+ " no Creo model name found!")
 				creoModel = "NOT_DEFINED"

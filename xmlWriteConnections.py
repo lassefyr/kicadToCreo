@@ -9,6 +9,10 @@
 #
 # This has been tested only with Creo 4.0 070
 #
+# Changelog:
+# 2019-11-26 Single sided cable connections generated faulty xml. Added ignore unless both sides of the 
+#            cable are connected
+
 """
     @package
     Generate a net list file.
@@ -107,28 +111,31 @@ class xmlWriteConnections(xmlWriteSpools):
 				tempNet = self.find_net(netlist, refDes, str(i+1))
 				wireNet2 = tempNet.get( "net", "name" )
 #				print("Scanning "+wireNet1+" and "+wireNet2)
-				
-				if( thisIsCbl ):
-#					print("<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+spoolName+"_"+str(myCounter)+"\">", file = fout) #conductorName=\""+str(myCounter)+"\"
-					getSpoolIndex = self.spoolClass.getCblSpoolId(spoolName+"-"+str(myCounter))
-					if( getSpoolIndex<0 ):
-						print("No spoolIndex for "+spoolName+": pin:"+str(myCounter), file = sys.stderr)
-					else:
-						cblId = "sp"+str(getSpoolIndex+1)
-						print("<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+cblId+"\" type=\"SINGLE\">", file = fout) #conductorName=\""+str(myCounter)+"\"
-				else:
-					print("<CONNECTION name=\""+refDes+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"NONE\" spoolID=\"w_"+spoolName+"\" >", file = fout)
-				
-				if(  thisIsCbl ):
-					print("<SYS_PARAMETER id=\"conn_"+refDes+"_"+str(myCounter)+"\" />", file = fout)
-				else:	
-					print("<SYS_PARAMETER id=\"conn_"+refDes+"\" />", file = fout)
-				print("<PARAMETER name=\"LAYER\" value=\"DEF_LINES\"/>", file = fout)
 
-				scannedNode = self.find_matching_node(netlist, wireNet1)
-				if scannedNode:
-					matchRef = scannedNode.get("node", "ref")
-					matchPin = scannedNode.get("node", "pin")
+				scannedNode1 = self.find_matching_node(netlist, wireNet1)
+				scannedNode2 = self.find_matching_node(netlist, wireNet2)
+# Ignore nodes where both sides are not connected  
+				if  scannedNode1 and scannedNode2:
+				
+					if( thisIsCbl ):
+#						print("<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+spoolName+"_"+str(myCounter)+"\">", file = fout) #conductorName=\""+str(myCounter)+"\"
+						getSpoolIndex = self.spoolClass.getCblSpoolId(spoolName+"-"+str(myCounter))
+						if( getSpoolIndex<0 ):
+							print("No spoolIndex for "+spoolName+": pin:"+str(myCounter), file = sys.stderr)
+						else:
+							cblId = "sp"+str(getSpoolIndex+1)
+							print("<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+cblId+"\" type=\"SINGLE\">", file = fout) #conductorName=\""+str(myCounter)+"\"
+					else:
+						print("<CONNECTION name=\""+refDes+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"NONE\" spoolID=\"w_"+spoolName+"\" >", file = fout)
+				
+					if(  thisIsCbl ):
+						print("<SYS_PARAMETER id=\"conn_"+refDes+"_"+str(myCounter)+"\" />", file = fout)
+					else:	
+						print("<SYS_PARAMETER id=\"conn_"+refDes+"\" />", file = fout)
+					print("<PARAMETER name=\"LAYER\" value=\"DEF_LINES\"/>", file = fout)
+
+					matchRef = scannedNode1.get("node", "ref")
+					matchPin = scannedNode1.get("node", "pin")
 					connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\"")
 					
 					print("<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"\" type=\"COMPONENT\" >", file = fout)
@@ -136,10 +143,8 @@ class xmlWriteConnections(xmlWriteSpools):
 					print("<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>", file = fout)
 					print("</NODE>", file = fout)
 
-				scannedNode = self.find_matching_node(netlist, wireNet2)
-				if scannedNode:
-					matchRef = scannedNode.get("node", "ref")
-					matchPin = scannedNode.get("node", "pin")
+					matchRef = scannedNode2.get("node", "ref")
+					matchPin = scannedNode2.get("node", "pin")
 					connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\"")
 
 					print("<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"\" type=\"COMPONENT\" >", file = fout)
@@ -147,9 +152,8 @@ class xmlWriteConnections(xmlWriteSpools):
 					print("<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>", file = fout)
 					print("</NODE>", file = fout)
 				
-# Component print Connection -------------------------------------------------------------								
-			
-				if (len(connTableID) >= 2):		
+# Component print Connection -------------------------------------------------------------											
+#				if (len(connTableID) >= 2):		
 					print("<SEGMENT name=\"seg_"+refDes+"_"+str(myCounter)+"\" >", file = fout)
 					print("<ATTACH node1ID="+connTableID[0]+" node2ID="+connTableID[1]+" />", file = fout)
 					print("</SEGMENT>", file = fout)		

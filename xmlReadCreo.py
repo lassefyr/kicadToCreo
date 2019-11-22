@@ -97,7 +97,12 @@ for component in kiCadSch.components:
 						thisIsTheLengthParam = key
 						print (key+"   "+ field[key])  
 						print (field['ref'])
-						myindex = refDesVals.index(refDes)
+						try:
+							myindex = refDesVals.index(refDes)
+						except ValueError:
+							print("Refdes \""+refDes+"\" does not exist! Not routed yet?", file=sys.stderr )
+							continue
+						# myindex = refDesVals.index(refDes)
 						roundedWireLen = wireLength[myindex].split('.')[0]
 						print("length for this wire is "+roundedWireLen+"mm")
 						print("Harness is is "+harnessNum[myindex])
@@ -105,7 +110,11 @@ for component in kiCadSch.components:
 					# Get the component field "Harness_name" and modify
 					if field[key] == "\"Harness_name\"":
 						thisIsTheHarnName = key						
-						myindex = refDesVals.index(refDes)
+						try:
+							myindex = refDesVals.index(refDes)						
+						except ValueError:
+							print("Refdes \""+refDes+"\" does not exist! Not routed yet?", file=sys.stderr )
+							continue						
 						harnessName = harnessNum[myindex]
 						print("Harness is is "+harnessName)
 						field['ref'] = "\""+harnessName+"\""

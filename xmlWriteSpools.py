@@ -53,6 +53,11 @@ class xmlWriteSpools:
 		self.writeWireSpool(components)
 		print(self.__spoolData, file = fout)
 
+		# Zero the array before otherSpool
+		self.__spoolData = ""
+		self.writeOtherSpool(components)
+		print(self.__spoolData, file = fout)
+
 		# Zero the array before CblSpool
 		self.__spoolData = ""
 		self.writeCblSpool(components)
@@ -71,6 +76,7 @@ class xmlWriteSpools:
 		for comp in components:
 			refDes = comp.getRef()
 			part = comp.getLibPart()
+			description = comp.getDescription()
 			
 			if refDes[:3] != "CBL":
 				continue
@@ -143,11 +149,11 @@ class xmlWriteSpools:
 			type  = comp.getField("Type")
 			if not type:
 				type = "prefab"
-			
+							
 			self.__spoolData += "<SPOOL name=\""+spoolName+"\" type=\"NORMAL_SPOOL\" subType=\"CABLE_SPOOL\" >\n"
 			self.__spoolData += "<SYS_PARAMETER id=\"cbl_"+spoolName+"\" />\n"									
 			self.__spoolData += "<PARAMETER name=\"UNITS\" value=\"MM\" />\n"
-			self.__spoolData += "<PARAMETER name=\"OBJ_TYPE\" value=\"cableMM\" />\n"			
+			self.__spoolData += "<PARAMETER name=\"OBJ_TYPE\" value=\"CABLE\" />\n"			
 			self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBendRadius+"\" />\n"												
 			self.__spoolData += "<PARAMETER name=\"THICKNESS\" value=\""+thickness+"\" />\n"
 			self.__spoolData += "<PARAMETER name=\"NUM_COND\" value=\""+numOfCoductors+"\" />\n"	
@@ -156,6 +162,8 @@ class xmlWriteSpools:
 			self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+mainColor+"\" />\n"
 			self.__spoolData += "<PARAMETER name=\"VENDOR\" value=\""+vendor+"\" />\n"								
 			self.__spoolData += "<PARAMETER name=\"VENDOR_PN\" value=\""+vendorPn+"\" />\n"
+			if description:
+				self.__spoolData += "<PARAMETER name=\"SPECIFICATION\" value=\""+description+"\" />\n"
 
 			firstSpoolIndex = condIdIndex
 			for i in range(1, int(howManyPins/2+1)): #(each net has two counter parts)
@@ -204,6 +212,7 @@ class xmlWriteSpools:
 		for comp in components:
 			refDes = comp.getRef()
 			part = comp.getLibPart()
+			description = comp.getDescription()
 			
 			if refDes[:1] != "W":
 				continue
@@ -249,7 +258,7 @@ class xmlWriteSpools:
 			self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBend+"\" />\n"
 
 # Wire TYPE (always wire)-----------------------------------------------------------------						
-			self.__spoolData += "<PARAMETER name=\"OBJ_TYPE\" value=\"wire\" />\n"
+			self.__spoolData += "<PARAMETER name=\"OBJ_TYPE\" value=\"WIRE\" />\n"
 
 # Wire THICKNESS -------------------------------------------------------------------------									
 			thickness = comp.getField("Thickness")
@@ -275,9 +284,135 @@ class xmlWriteSpools:
 			user_parameter = comp.getField("Vendor_pn")
 			if user_parameter:
 				self.__spoolData += "<PARAMETER name=\"VENDOR_PN\" value=\""+user_parameter+"\" />\n"
-
+			
+# Wire USER_PARAMETERS (Specification) ---------------------------------------------------															
+			if description:
+				self.__spoolData += "<PARAMETER name=\"SPECIFICATION\" value=\""+description+"\" />\n"
+			
 # Wire END SPOOL DEFINE ------------------------------------------------------------------																					
 			self.__spoolData += "</SPOOL>\n"
 			
 			
+#-----------------------------------------------------------------------------------------
+# def writeOtherSpool(self, components ):
+#
+# Write spool data for Tubes, Tapes, and Shrinks
+# There seems to be some issues when reading the Sheath spool types
+# 
+# With type parameter I was able to get the type to be "Sheath"
+# but the diameters become "0"
+#
+#
+# MORE FROM PTC:
+# Sheath type spools are exported to NWF as cable spool and to XML as wire in Creo Parametric
+# Creo Parametric 4.0 to 6.0
+# Created: 21-Aug-2019   |   Modified: 21-Aug-2019   
+# Sheath type spools are exported to NWF as cable spool and to XML as wire in Creo Parametric 
+#
+#   Sheath type spools are exported to NWF as cable spool and to XML as wire
+#	When importing .nwf file the parameter spool TYPE changed it's value from SHEATH to PREFAB
+#
+#	Resolution:
+#		Reported to R&D as SPR 7732529
+#	Workaround:
+#		Load the .nwf file, save the ribbon spool to .spl file
+#		Change the parameter TYPE in the spl file to SHEATH
+#		Load the .spl file (overwrite the existing spool).
+#
+#-----------------------------------------------------------------------------------------
+	def writeOtherSpool(self, components ):
+		spoolList = []				# Spool list is empty
+		for comp in components:
+			refDes = comp.getRef()
+			part = comp.getLibPart()
+			description = comp.getDescription()
 			
+			if not (refDes.startswith("TUBE") or refDes.startswith("SHRINK") or refDes.startswith("TAPE")): 
+				continue
+			
+			spoolName = comp.getField("Value")
+			if not spoolName:
+				print(refDes+ " no Spool name defined!")
+				spoolName = "NOT_DEFINED"
+				continue
+
+# Check if Spool has been processed ------------------------------------------------------
+			exitCompInComponentsLoop = False			
+			for thisSpool in spoolList:
+				if thisSpool == spoolName:
+					exitCompInComponentsLoop = True
+			if exitCompInComponentsLoop == True:
+				continue
+			spoolList.append(spoolName)
+					
+					
+			self.__spoolData += "<SPOOL name=\""+spoolName+"\" type=\"NORMAL_SPOOL\" subType=\"SHEATH_SPOOL\" >\n"
+			self.__spoolData += "<SYS_PARAMETER id=\"Sh_"+spoolName+"\" />\n"
+
+# Sheath TYPE (Shrink, Tube, or Tape) ----------------------------------------------------						
+			self.__spoolData += "<PARAMETER name=\"TYPE\" value=\"SHEATH\" />\n"			
+
+			sheathType = comp.getField("Sheath_type")
+			sheathType = sheathType.upper()
+			if not sheathType:
+				print("No Sheath Type defined for " + refDes+"!")
+				sheathType = "TUBE"
+			self.__spoolData += "<PARAMETER name=\"SHEATH_TYPE\" value=\""+sheathType+"\" />\n"
+
+# Sheath WALL THICKNESS -------------------------------------------------------------------------									
+			thickness = comp.getField("Wall_Thickness")
+			if not thickness:
+				print("No Wall Thickness defined for "+refDes+"! Using default value = 1")
+				thickness = "1"
+			self.__spoolData += "<PARAMETER name=\"WALL_THICKNESS\" value=\""+thickness+"\" />\n"
+
+# Sheath COLOR -----------------------------------------------------------------------------			
+			spoolColor = comp.getField("Color")
+			if not spoolColor:
+				print("No Spool color defined!")
+				spoolColor = self.DEF_COLOR
+			self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+spoolColor+"\" />\n"
+
+# Sheath MIN_BEND_RADIUS -------------------------------------------------------------------			
+			minBend = comp.getField("Min_bend_radius")
+			if not minBend:
+				print("No minimum bend radius defined!")
+				minBend = self.MIN_BEND
+			self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBend+"\" />\n"
+
+# Sheath UNITS (default to mm)--------------------------------------------------------------															
+			self.__spoolData += "<PARAMETER name=\"UNITS\" value=\"MM\" />\n"
+
+# Sheath Inner Diameter  -------------------------------------------------------------------
+			innerDiam = comp.getField("Preshrink_inner_diameter")
+			if not innerDiam:
+				print("No Inned Diameter defined for " + refDes+"!")
+				innerDiam = "10"
+			self.__spoolData += "<PARAMETER name=\"PRESHRINK_INNER_DIAMETER\" value=\""+innerDiam+"\" />\n"
+
+# Sheath Outer Diameter  -------------------------------------------------------------------
+			outerDiam = comp.getField("Outer_Diameter")
+			if not outerDiam:
+				print("No Outer Diameter defined for " + refDes+"!")
+				innerDiam = "11"
+			if int(innerDiam) >= int(outerDiam):
+				print("Inner diameter larger than Outer diameter for " + refDes+"!")
+				outerDiam = str(int(innerDiam)+1)
+				
+			self.__spoolData += "<PARAMETER name=\"OUTER_DIAMETER\" value=\""+outerDiam+"\" />\n"
+
+# Sheath USER_PARAMETERS (Vendor and Vendor_pn) --------------------------------------------															
+			user_parameter = comp.getField("Vendor")
+			if user_parameter:
+				self.__spoolData += "<PARAMETER name=\"VENDOR\" value=\""+user_parameter+"\" />\n"
+			user_parameter = comp.getField("Vendor_pn")
+			if user_parameter:
+				self.__spoolData += "<PARAMETER name=\"VENDOR_PN\" value=\""+user_parameter+"\" />\n"
+			
+# Sheath USER_PARAMETERS (Specification) ---------------------------------------------------															
+			if description:
+				self.__spoolData += "<PARAMETER name=\"SPECIFICATION\" value=\""+description+"\" />\n"
+			
+# Sheath END SPOOL DEFINE ------------------------------------------------------------------																					
+			self.__spoolData += "</SPOOL>\n"
+						
