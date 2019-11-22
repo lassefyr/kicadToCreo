@@ -1,5 +1,26 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP 10pin_flat_round
+D 3M Round, Jacketed, Flat Cable 10pin, 3759/10
+K cable 22awg
+F ~
+$ENDCMP
+#
+$CMP 16awg_bk_1
+D 16 AWG Hook-Up Wire 26/30 Black 600V 30.5m
+K Wire 16awg
+$ENDCMP
+#
+$CMP 16awg_gy_1
+D 16 AWG Hook-Up Wire 26/30 Grn/Yel 600V 30.5m
+K Wire 16awg
+$ENDCMP
+#
+$CMP 16awg_yl_1
+D 16 AWG Hook-Up Wire 26/30 Yellow 600V 30.5m
+K Wire 16awg
+$ENDCMP
+#
 $CMP 18awg_bk_1
 D Hook-up Wire 18AWG 16/30 PVC
 K Wire 18awg
@@ -8,6 +29,33 @@ $ENDCMP
 $CMP 18awg_or_1
 D Hook-up Wire 18AWG 16/30 PVC
 K Wire 18awg
+$ENDCMP
+#
+$CMP 18awg_rd_1
+D Hook-up Wire 18AWG 16/30 PVC
+K Wire 18awg
+$ENDCMP
+#
+$CMP 18awgx4_u_6_1mm
+D 4 Conductor Multi-Conductor Cable Slate 18 AWG 30.5m
+K cable 18awg
+F ~
+$ENDCMP
+#
+$CMP 20awg_bk_1
+D Hook Up MIL-W-76B Type MW, PVC, Black, 20 AWG, 0.51 mm2, 30.5 m
+K Wire 20awg
+$ENDCMP
+#
+$CMP 20awg_or_1
+D Hook Up MIL-W-76B Type MW, PVC, Orange, 20 AWG, 0.51 mm2, 30.5 m
+K Wire 20awg
+$ENDCMP
+#
+$CMP 21awgx2_u_4_7mm
+D 028502 - Unitronic LiYY, Unscreened, 2 Core, 21 AWG, 0.5 mm2, 50 m
+K cable 21awg
+F ~
 $ENDCMP
 #
 $CMP 22awg_bk_1
@@ -73,6 +121,17 @@ K cable 22awg
 F ~
 $ENDCMP
 #
+$CMP 24awgx3_u_4_0mm
+D Lapp Multicore Cable, Unitronic  LiYY, Unscreened, 3 Core, 24 AWG, 0.25 mm2
+K cable 24awg
+F ~
+$ENDCMP
+#
+$CMP Audio_cable
+D Standard Stereo Audio  Cable
+K Audio Cable
+$ENDCMP
+#
 $CMP Conn_01x05_Female
 D Generic connector, single row, 01x05
 K connector
@@ -88,6 +147,22 @@ $ENDCMP
 $CMP Dc_barrel_712ah
 D DC Power Connectors HI-TEMP 2.5MM POWER 2.5mmx5.5mm
 K 712AH Barrel
+$ENDCMP
+#
+$CMP Dp_cable_b
+D Standard Displayport Video Cable
+K Dp Cable
+$ENDCMP
+#
+$CMP Dp_cable_w
+D Standard Displayport Video Cable White
+K Dp Cable
+$ENDCMP
+#
+$CMP Dp_male
+D Displayport male connector
+K connector Displayport
+F  ~
 $ENDCMP
 #
 $CMP Hiro_df1e-4s
@@ -126,50 +201,56 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Jst_phr-3
+D JST 3-Position  Housing Receptacle Natural 0.079" (2.00mm)
+K connector
+F ~
+$ENDCMP
+#
 $CMP Jst_smp-02v
-D 2 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
-K connector
-F ~
-$ENDCMP
-#
-$CMP Jst_smp-03v
-D 3 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
-K connector
-F ~
-$ENDCMP
-#
-$CMP Jst_smp-04v
-D 4 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
-K connector
-F ~
-$ENDCMP
-#
-$CMP Jst_smp-06v
-D 6 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
-K connector
-F ~
-$ENDCMP
-#
-$CMP Jst_smr-02v
 D 2 Position Rectangular Housing Connector Receptacle Black 0.098" (2.50mm)
 K connector
 F ~
 $ENDCMP
 #
-$CMP Jst_smr-03v
+$CMP Jst_smp-03v
 D 3 Position Rectangular Housing Connector Receptacle Black 0.098" (2.50mm)
 K connector
 F ~
 $ENDCMP
 #
-$CMP Jst_smr-04v
+$CMP Jst_smp-04v
 D 4 Position Rectangular Housing Connector Receptacle Black 0.098" (2.50mm)
 K connector
 F ~
 $ENDCMP
 #
-$CMP Jst_smr-06v
+$CMP Jst_smp-06v
 D 6 Position Rectangular Housing Connector Receptacle Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smr-02v
+D 2 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smr-03v
+D 3 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smr-04v
+D 4 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_smr-06v
+D 6 Position Rectangular Housing Connector Plug Black 0.098" (2.50mm)
 K connector
 F ~
 $ENDCMP
@@ -190,6 +271,18 @@ $CMP Jst_vhr-4n
 D Jst 4-Position Housing Connector Receptacle 3.96mm
 K connector
 F ~
+$ENDCMP
+#
+$CMP Kycon_kppx-4p
+D Kycon DC Power Connectors KPPX-4P
+K connector
+F ~
+$ENDCMP
+#
+$CMP Minidp_male
+D Displayport male connector
+K connector Displayport
+F  ~
 $ENDCMP
 #
 $CMP Mx_43025-02
@@ -276,6 +369,30 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Nk10_71600-610lf
+D 10 Position Receptacle Connector IDC Gold 28-30 AWG Latch Lock
+K Connector Nk10
+F ~
+$ENDCMP
+#
+$CMP Nk10_inline1
+D 10 Position Receptacle Connector IDC Gold 28-30 AWG Latch Lock
+K Connector Nk10
+F ~
+$ENDCMP
+#
+$CMP QC_22AWG_4_75X0_8
+D 4.75mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
+$CMP Qc_22awg_2_8x0_8
+D 2.79mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
 $CMP Qc_22awg_ra_6_3x0_8_h
 D 0.250" (6.35mm) Quick Connect Female 18-22 AWG RA Fully Insulated
 K Quick Connect Terminal
@@ -286,6 +403,35 @@ $CMP Qc_rcpt_6_3x0_8_h
 D 0.250" (6.35mm) Quick Connect Female 18-22 AWG Crimp Connector Fully Insulated
 K Quick Connect Terminal
 F ~
+$ENDCMP
+#
+$CMP Ring_trm_red_m4
+D TE Ring Terminal Connector 8 Stud Circular 16-22 AWG Crimp
+K Ring Terminal
+F ~
+$ENDCMP
+#
+$CMP Sharp_gp2y0a02yk0f
+D JST 3-Position  Housing Receptacle Natural 0.079" (2.00mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Stereo_plug3_5mm
+D 3.5 mm Cable Mount Stereo Jack
+K connector audio
+F  ~
+$ENDCMP
+#
+$CMP Stereo_plug3_5mm_ra
+D 3.5 mm Cable Mount Stereo Jack, Right Angle
+K connector audio
+F  ~
+$ENDCMP
+#
+$CMP Tube_6mm_yl
+D Farnell Acrylic Glass Sleeving
+K Tube 6mm
 $ENDCMP
 #
 $CMP Usb-a_plug
@@ -309,6 +455,12 @@ $ENDCMP
 $CMP Usb_cable
 D Standard USB 2.0 Cable
 K Usb Cable
+$ENDCMP
+#
+$CMP v1_pxc_mstbt_2-5_4-st
+D Phoenix, Pluggable Terminal Block, 5 mm, 4 Ways
+K connector
+F ~
 $ENDCMP
 #
 #End Doc Library

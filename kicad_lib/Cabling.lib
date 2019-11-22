@@ -1,6 +1,153 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
+# 10pin_flat_round
+#
+DEF 10pin_flat_round CBL 0 20 N N 1 F N
+F0 "CBL" 0 550 50 H V C CNN
+F1 "10pin_flat_round" 25 -575 50 H V C CNN
+F2 "" 150 200 50 H I C CNN
+F3 "" 0 450 50 V I C CNN
+F4 "10" 0 975 50 H I C CNN "Num_conductors"
+F5 "Black" 0 900 50 H I C CNN "Color"
+F6 "6.6" 0 1050 50 H I C CNN "Thickness"
+F7 "5.5e-05" 0 825 50 H I C CNN "Density"
+F8 "5" 0 1200 50 H I C CNN "Min_bend_radius"
+F9 "1.25" 0 1125 50 H I C CNN "Sub_thickness"
+F10 "Red" 0 450 50 H V C CNN "color1"
+F11 "Gray" 0 350 50 H V C CNN "color2"
+F12 "Gray" 0 250 50 H V C CNN "color3"
+F13 "Gray" 0 150 50 H V C CNN "color4"
+F14 "3M" 0 -675 50 H I C CNN "Vendor"
+F15 "3759/10" 0 -750 50 H I C CNN "Vendor_pn"
+F16 "xx mm" 0 750 50 H V C CNN "Length"
+F17 "Noname" 0 650 50 H V C CNN "Harness_name"
+F18 "prefab" 0 750 50 H I C CNN "Type"
+F19 "Gray" 0 50 50 H V C CNN "color5"
+F20 "Gray" 0 -50 50 H V C CNN "color6"
+F21 "Gray" 0 -150 50 H V C CNN "color7"
+F22 "Gray" 0 -250 50 H V C CNN "color8"
+F23 "Gray" 0 -350 50 H V C CNN "color9"
+F24 "Gray" 0 -450 50 H V C CNN "color10"
+$FPLIST
+ DIP*
+ SOIC*
+$ENDFPLIST
+DRAW
+A -50 450 50 901 -901 0 0 0 N -50 500 -50 400
+A -50 -450 50 901 -901 1 1 0 N -50 -400 -50 -500
+A -50 -350 50 901 -901 1 1 0 N -50 -300 -50 -400
+A -50 -250 50 901 -901 1 1 0 N -50 -200 -50 -300
+A -50 -150 50 901 -901 1 1 0 N -50 -100 -50 -200
+A -50 -50 50 901 -901 1 1 0 N -50 0 -50 -100
+A -50 50 50 901 -901 1 1 0 N -50 100 -50 0
+A -50 150 50 901 -901 1 1 0 N -50 200 -50 100
+A -50 250 50 901 -901 1 1 0 N -50 300 -50 200
+A -50 350 50 901 -901 1 1 0 N -50 400 -50 300
+A 50 -450 50 -899 899 1 1 0 N 50 -500 50 -400
+A 50 -350 50 -899 899 1 1 0 N 50 -400 50 -300
+A 50 -250 50 -899 899 1 1 0 N 50 -300 50 -200
+A 50 -150 50 -899 899 1 1 0 N 50 -200 50 -100
+A 50 -50 50 -899 899 1 1 0 N 50 -100 50 0
+A 50 50 50 -899 899 1 1 0 N 50 0 50 100
+A 50 150 50 -899 899 1 1 0 N 50 100 50 200
+A 50 250 50 -899 899 1 1 0 N 50 200 50 300
+A 50 350 50 -899 899 1 1 0 N 50 300 50 400
+A 50 450 50 -899 899 1 1 0 N 50 400 50 500
+P 2 0 0 0 -50 -500 50 -500 N
+P 2 0 0 0 -50 500 50 500 N
+X C6.2 12 200 -50 100 L 50 50 0 0 P
+X C7.1 13 -200 -150 100 R 50 50 0 0 P
+X C10.1 19 -200 -450 100 R 50 50 0 0 P
+X C10.2 20 200 -450 100 L 50 50 0 0 P
+X C1.1 1 -200 450 100 R 50 50 1 1 P
+X C5.2 10 200 50 100 L 50 50 1 1 P
+X C6.1 11 -200 -50 100 R 50 50 1 1 P
+X C7.2 14 200 -150 100 L 50 50 1 1 P
+X C8.1 15 -200 -250 100 R 50 50 1 1 P
+X C8.2 16 200 -250 100 L 50 50 1 1 P
+X C9.1 17 -200 -350 100 R 50 50 1 1 P
+X C9.2 18 200 -350 100 L 50 50 1 1 P
+X C1.2 2 200 450 100 L 50 50 1 1 P
+X C2.1 3 -200 350 100 R 50 50 1 1 P
+X C2.2 4 200 350 100 L 50 50 1 1 P
+X C3.1 5 -200 250 100 R 50 50 1 1 P
+X C3.2 6 200 250 100 L 50 50 1 1 P
+X C4.1 7 -200 150 100 R 50 50 1 1 P
+X C4.2 8 200 150 100 L 50 50 1 1 P
+X C5.1 9 -200 50 100 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# 16awg_bk_1
+#
+DEF 16awg_bk_1 W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "16awg_bk_1" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "Black" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "2.06" 750 50 50 H I C CNN "Thickness"
+F7 "2" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "16" 1100 50 50 H I C CNN "Gauge"
+F9 "1.9e-05" 850 50 50 H I C CNN "Density"
+F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
+F11 "6716 BK005" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# 16awg_gy_1
+#
+DEF 16awg_gy_1 W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "16awg_gy_1" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "Green" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "2.06" 750 50 50 H I C CNN "Thickness"
+F7 "2" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "16" 1100 50 50 H I C CNN "Gauge"
+F9 "1.9e-05" 850 50 50 H I C CNN "Density"
+F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
+F11 "6716 GY005" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# 16awg_yl_1
+#
+DEF 16awg_yl_1 W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "16awg_yl_1" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "Yellow" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "2.06" 750 50 50 H I C CNN "Thickness"
+F7 "2" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "16" 1100 50 50 H I C CNN "Gauge"
+F9 "1.9e-05" 850 50 50 H I C CNN "Density"
+F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
+F11 "6716 YL005" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
 # 18awg_bk_1
 #
 DEF 18awg_bk_1 W 0 0 N N 1 F N
@@ -44,6 +191,174 @@ F13 "Noname" 200 100 50 H I C CNN "Harness_name"
 DRAW
 X X 1 0 0 200 R 50 50 1 1 B
 X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# 18awg_rd_1
+#
+DEF 18awg_rd_1 W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "18awg_rd_1" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "Red" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "2.0" 750 50 50 H I C CNN "Thickness"
+F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "18" 1100 50 50 H I C CNN "Gauge"
+F9 "1.22e-05" 850 50 50 H I C CNN "Density"
+F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
+F11 "3055 RD005" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# 18awgx4_u_6_1mm
+#
+DEF 18awgx4_u_6_1mm CBL 0 20 N N 1 F N
+F0 "CBL" 0 300 50 H V C CNN
+F1 "18awgx4_u_6_1mm" 0 -350 50 H V C CNN
+F2 "" 150 -150 50 H I C CNN
+F3 "" 0 100 50 V I C CNN
+F4 "4" 0 0 50 H I C CNN "Num_conductors"
+F5 "gray" 0 0 50 H I C CNN "Color"
+F6 "5.9" 0 0 50 H I C CNN "Thickness"
+F7 "6.6e-05" 0 0 50 H I C CNN "Density"
+F8 "5" 0 0 50 H I C CNN "Min_bend_radius"
+F9 "2.0" 0 0 50 H I C CNN "Sub_thickness"
+F10 "black" 0 0 50 H I C CNN "color1"
+F11 "red" 0 0 50 H I C CNN "color2"
+F12 "white" 0 0 50 H I C CNN "color3"
+F13 "green" 0 0 50 H I C CNN "color4"
+F14 "Alpha Wire" 0 0 50 H I C CNN "Vendor"
+F15 "1898-4C SL005" 0 0 50 H I C CNN "Vendor_pn"
+F16 "xx mm" 275 175 50 H V C CNN "Length"
+F17 "Noname" 0 400 50 H V C CNN "Harness_name"
+F18 "prefab" 0 0 50 H I C CNN "Type"
+$FPLIST
+ DIP*
+ SOIC*
+$ENDFPLIST
+DRAW
+A 0 -175 146 -1490 -310 0 0 0 N -125 -250 125 -250
+A 0 100 135 218 1582 0 0 0 N 125 150 -125 150
+T 0 0 150 50 0 0 0 Black Normal 0 C C
+T 0 0 -150 50 0 0 0 Green Normal 0 C C
+T 0 0 50 50 0 0 0 Red Normal 0 C C
+T 0 0 -50 50 0 0 0 White Normal 0 C C
+P 2 0 0 0 -125 150 -125 -250 N
+P 2 0 0 0 -75 -100 75 -100 N
+P 2 0 0 0 -75 0 75 0 N
+P 2 0 0 0 -75 100 75 100 N
+P 2 0 0 0 125 150 125 -250 N
+P 2 0 1 0 -75 -100 -100 -100 N
+P 2 0 1 0 -75 0 -100 0 N
+P 2 0 1 0 -75 100 -100 100 N
+P 2 0 1 0 100 -100 75 -100 N
+P 2 0 1 0 100 0 75 0 N
+P 2 0 1 0 100 100 75 100 N
+X C4.1 7 -200 -200 200 R 50 50 0 0 P
+X C4.2 8 200 -200 200 L 50 50 0 0 P
+X C1.1 1 -200 100 100 R 50 50 1 1 P
+X C1.2 2 200 100 100 L 50 50 1 1 P
+X C2.1 3 -200 0 100 R 50 50 1 1 P
+X C2.2 4 200 0 100 L 50 50 1 1 P
+X C3.1 5 -200 -100 100 R 50 50 1 1 P
+X C3.2 6 200 -100 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# 20awg_bk_1
+#
+DEF 20awg_bk_1 W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "20awg_bk_1" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "Black" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "1.75" 750 50 50 H I C CNN "Thickness"
+F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "20" 1100 50 50 H I C CNN "Gauge"
+F9 "8.1e-06" 850 50 50 H I C CNN "Density"
+F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
+F11 "1553 BK005" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# 20awg_or_1
+#
+DEF 20awg_or_1 W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "20awg_or_1" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "Orange" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "1.75" 750 50 50 H I C CNN "Thickness"
+F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "20" 1100 50 50 H I C CNN "Gauge"
+F9 "8.1e-06" 850 50 50 H I C CNN "Density"
+F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
+F11 "1553 OR005" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# 21awgx2_u_4_7mm
+#
+DEF 21awgx2_u_4_7mm CBL 0 20 N N 1 F N
+F0 "CBL" 0 300 50 H V C CNN
+F1 "21awgx2_u_4_7mm" 0 -175 50 H V C CNN
+F2 "" 150 -150 50 H I C CNN
+F3 "" 0 100 50 V I C CNN
+F4 "2" 0 0 50 H I C CNN "Num_conductors"
+F5 "gray" 0 0 50 H I C CNN "Color"
+F6 "4.7" 0 0 50 H I C CNN "Thickness"
+F7 "3..0e-05" 0 0 50 H I C CNN "Density"
+F8 "5" 0 0 50 H I C CNN "Min_bend_radius"
+F9 "1.6" 0 0 50 H I C CNN "Sub_thickness"
+F10 "White" 0 0 50 H I C CNN "color1"
+F11 "Brown" 0 0 50 H I C CNN "color2"
+F12 "Lapp" 0 0 50 H I C CNN "Vendor"
+F13 "0028502" 0 0 50 H I C CNN "Vendor_pn"
+F14 "xx mm" 275 175 50 H V C CNN "Length"
+F15 "Noname" 0 400 50 H V C CNN "Harness_name"
+F16 "prefab" 0 0 50 H I C CNN "Type"
+$FPLIST
+ DIP*
+ SOIC*
+$ENDFPLIST
+DRAW
+A 0 25 146 -1490 -310 0 0 0 N -125 -50 125 -50
+A 0 100 135 218 1582 0 0 0 N 125 150 -125 150
+T 0 0 50 50 0 0 0 Brown Normal 0 C C
+T 0 0 150 50 0 0 0 White Normal 0 C C
+P 2 0 0 0 -125 150 -125 -50 N
+P 2 0 0 0 -75 0 75 0 N
+P 2 0 0 0 -75 100 75 100 N
+P 2 0 0 0 125 150 125 -50 N
+P 2 0 1 0 -75 0 -100 0 N
+P 2 0 1 0 -75 100 -100 100 N
+P 2 0 1 0 100 0 75 0 N
+P 2 0 1 0 100 100 75 100 N
+X C1.1 1 -200 100 100 R 50 50 1 1 P
+X C1.2 2 200 100 100 L 50 50 1 1 P
+X C2.1 3 -200 0 100 R 50 50 1 1 P
+X C2.2 4 200 0 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
@@ -404,6 +719,80 @@ X C3.2 6 200 -100 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
+# 24awgx3_u_4_0mm
+#
+DEF 24awgx3_u_4_0mm CBL 0 20 N N 1 F N
+F0 "CBL" 0 300 50 H V C CNN
+F1 "24awgx3_u_4_0mm" 0 -250 50 H V C CNN
+F2 "" 150 -150 50 H I C CNN
+F3 "" 0 100 50 V I C CNN
+F4 "3" 0 0 50 H I C CNN "Num_conductors"
+F5 "gray" 0 0 50 H I C CNN "Color"
+F6 "4.0" 0 0 50 H I C CNN "Thickness"
+F7 "2.2e-05" 0 0 50 H I C CNN "Density"
+F8 "5" 0 0 50 H I C CNN "Min_bend_radius"
+F9 "1.27" 0 0 50 H I C CNN "Sub_thickness"
+F10 "White" 0 0 50 H I C CNN "color1"
+F11 "Brown" 0 0 50 H I C CNN "color2"
+F12 "Green" 0 0 50 H I C CNN "color3"
+F13 "Lapp Kabel" 0 0 50 H I C CNN "Vendor"
+F14 "0028303" 0 0 50 H I C CNN "Vendor_pn"
+F15 "xx mm" 275 175 50 H V C CNN "Length"
+F16 "Noname" 0 375 50 H V C CNN "Harness_name"
+F17 "prefab" 0 0 50 H I C CNN "Type"
+$FPLIST
+ DIP*
+ SOIC*
+$ENDFPLIST
+DRAW
+A 0 -50 146 -1490 -310 0 0 0 N -125 -125 125 -125
+A 0 100 135 218 1582 0 0 0 N 125 150 -125 150
+T 0 0 50 50 0 0 0 Brown Normal 0 C C
+T 0 0 -50 50 0 0 0 Green Normal 0 C C
+T 0 0 150 50 0 0 0 White Normal 0 C C
+P 2 0 0 0 -125 150 -125 -125 N
+P 2 0 0 0 -75 -100 75 -100 N
+P 2 0 0 0 -75 0 75 0 N
+P 2 0 0 0 -75 100 75 100 N
+P 2 0 0 0 125 150 125 -125 N
+P 2 0 1 0 -75 -100 -100 -100 N
+P 2 0 1 0 -75 0 -100 0 N
+P 2 0 1 0 -75 100 -100 100 N
+P 2 0 1 0 100 -100 75 -100 N
+P 2 0 1 0 100 0 75 0 N
+P 2 0 1 0 100 100 75 100 N
+X C1.1 1 -200 100 100 R 50 50 1 1 P
+X C1.2 2 200 100 100 L 50 50 1 1 P
+X C2.1 3 -200 0 100 R 50 50 1 1 P
+X C2.2 4 200 0 100 L 50 50 1 1 P
+X C3.1 5 -200 -100 100 R 50 50 1 1 P
+X C3.2 6 200 -100 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Audio_cable
+#
+DEF Audio_cable W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "Audio_cable" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "Black" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "3.5" 750 50 50 H I C CNN "Thickness"
+F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "7" 1100 50 50 H I C CNN "Gauge"
+F9 "3.16e-06" 850 50 50 H I C CNN "Density"
+F10 "Any" 50 150 50 H I C CNN "Vendor"
+F11 "Standard cable" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
 # Conn_01x05_Female
 #
 DEF Conn_01x05_Female J 0 40 Y N 1 F N
@@ -474,6 +863,73 @@ P 5 0 1 0 -100 -100 -125 -100 -100 -150 -75 -100 -100 -100 N
 X Center 1 100 0 100 L 50 50 1 1 P
 X Sleeve 2 100 -200 100 L 50 50 1 1 P
 X Shunt 3 100 -100 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Dp_cable_b
+#
+DEF Dp_cable_b W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "Dp_cable_b" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "Black" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "6.5" 750 50 50 H I C CNN "Thickness"
+F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "2" 1100 50 50 H I C CNN "Gauge"
+F9 "0.000108" 850 50 50 H I C CNN "Density"
+F10 "Any" 50 150 50 H I C CNN "Vendor"
+F11 "Standard cable" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# Dp_cable_w
+#
+DEF Dp_cable_w W 0 0 N N 1 F N
+F0 "W" -75 50 50 H V R CNN
+F1 "Dp_cable_w" 200 50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "White" 450 50 50 H V L CNN "Color"
+F5 "mm" 550 50 50 H I C CNN "Units"
+F6 "6.5" 750 50 50 H I C CNN "Thickness"
+F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
+F8 "2" 1100 50 50 H I C CNN "Gauge"
+F9 "0.000108" 850 50 50 H I C CNN "Density"
+F10 "Any" 50 150 50 H I C CNN "Vendor"
+F11 "Standard cable" 0 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 750 50 50 H V L CNN "Length"
+F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+DRAW
+X X 1 0 0 200 R 50 50 1 1 B
+X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# Dp_male
+#
+DEF Dp_male J 0 40 Y N 1 F N
+F0 "J" -225 150 50 H V L CNN
+F1 "Dp_male" -350 -150 50 H V L CNN
+F2 "" 350 -250 50 H I C CNN
+F3 "" 350 -250 50 H I C CNN
+$FPLIST
+ USB*
+$ENDFPLIST
+DRAW
+S -400 -100 0 100 0 1 10 f
+S 0 -5 -30 5 0 1 0 N
+P 2 0 0 0 -305 55 -305 40 N
+P 2 0 0 0 -125 55 -125 40 N
+P 4 0 0 20 -305 -15 -305 10 -125 10 -125 -15 N
+P 6 0 0 0 -335 -40 -335 40 -85 40 -85 -5 -115 -40 -335 -40 N
+X Pin_1 1 100 0 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
@@ -651,6 +1107,30 @@ X Pin_3 3 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
+# Jst_phr-3
+#
+DEF Jst_phr-3 J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Jst_phr-3" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "sph-002t-p0_5l" 0 0 50 H I C CNN "Term_name"
+F5 "3" 0 0 50 H I C CNN "Internal_len"
+F6 "jst_phr-3" 0 0 50 H I C CNN "Modelname"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+A -25 -100 20 901 -901 1 1 0 N -25 -80 -25 -120
+A -25 0 20 901 -901 1 1 0 N -25 20 -25 -20
+A -25 100 20 901 -901 1 1 0 N -25 120 -25 80
+S -50 150 50 -150 1 1 10 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+X Pin_3 3 -200 -100 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # Jst_smp-02v
 #
 DEF Jst_smp-02v J 0 40 Y N 1 F N
@@ -664,8 +1144,8 @@ $FPLIST
  Connector*:*_1x??_*
 $ENDFPLIST
 DRAW
-S -50 5 0 -5 1 1 6 N
-S -50 105 0 95 1 1 6 N
+A -25 0 20 901 -901 1 1 0 N -25 20 -25 -20
+A -25 100 20 901 -901 1 1 0 N -25 120 -25 80
 S -50 150 50 -50 1 1 10 f
 X Pin_1 1 -200 100 150 R 50 50 1 1 P
 X Pin_2 2 -200 0 150 R 50 50 1 1 P
@@ -685,104 +1165,6 @@ $FPLIST
  Connector*:*_1x??_*
 $ENDFPLIST
 DRAW
-S -50 -95 0 -105 1 1 6 N
-S -50 5 0 -5 1 1 6 N
-S -50 105 0 95 1 1 6 N
-S -50 150 50 -150 1 1 10 f
-X Pin_1 1 -200 100 150 R 50 50 1 1 P
-X Pin_2 2 -200 0 150 R 50 50 1 1 P
-X Pin_3 3 -200 -100 150 R 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Jst_smp-04v
-#
-DEF Jst_smp-04v J 0 40 Y N 1 F N
-F0 "J" 0 200 50 H V C CNN
-F1 "Jst_smp-04v" 0 -275 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "SHF-001T-0_8BS" 0 0 50 H I C CNN "Term_name"
-F5 "5" 0 0 50 H I C CNN "Internal_len"
-$FPLIST
- Connector*:*_1x??_*
-$ENDFPLIST
-DRAW
-S -50 -195 0 -205 1 1 6 N
-S -50 -95 0 -105 1 1 6 N
-S -50 5 0 -5 1 1 6 N
-S -50 105 0 95 1 1 6 N
-S -50 150 50 -250 1 1 10 f
-X Pin_1 1 -200 100 150 R 50 50 1 1 P
-X Pin_2 2 -200 0 150 R 50 50 1 1 P
-X Pin_3 3 -200 -100 150 R 50 50 1 1 P
-X Pin_4 4 -200 -200 150 R 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Jst_smp-06v
-#
-DEF Jst_smp-06v J 0 40 Y N 1 F N
-F0 "J" 0 300 50 H V C CNN
-F1 "Jst_smp-06v" 0 -375 50 H V C CNN
-F2 "" 0 100 50 H I C CNN
-F3 "" 0 100 50 H I C CNN
-F4 "SHF-001T-0_8BS" 0 100 50 H I C CNN "Term_name"
-F5 "5" 0 100 50 H I C CNN "Internal_len"
-$FPLIST
- Connector*:*_1x??_*
-$ENDFPLIST
-DRAW
-S -50 -295 0 -305 1 1 6 N
-S -50 -195 0 -205 1 1 6 N
-S -50 -95 0 -105 1 1 6 N
-S -50 5 0 -5 1 1 6 N
-S -50 105 0 95 1 1 6 N
-S -50 205 0 195 1 1 6 N
-S -50 250 50 -350 1 1 10 f
-X Pin_1 1 -200 200 150 R 50 50 1 1 P
-X Pin_2 2 -200 100 150 R 50 50 1 1 P
-X Pin_3 3 -200 0 150 R 50 50 1 1 P
-X Pin_4 4 -200 -100 150 R 50 50 1 1 P
-X Pin_5 5 -200 -200 150 R 50 50 1 1 P
-X Pin_6 6 -200 -300 150 R 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Jst_smr-02v
-#
-DEF Jst_smr-02v J 0 40 Y N 1 F N
-F0 "J" 0 200 50 H V C CNN
-F1 "Jst_smr-02v" 0 -100 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "SYM-001T-P0_6_N" 0 0 50 H I C CNN "Term_name"
-F5 "5" 0 0 50 H I C CNN "Internal_len"
-$FPLIST
- Connector*:*_1x??_*
-$ENDFPLIST
-DRAW
-A -25 0 20 901 -901 1 1 0 N -25 20 -25 -20
-A -25 100 20 901 -901 1 1 0 N -25 120 -25 80
-S -50 150 50 -50 1 1 10 f
-X Pin_1 1 -200 100 150 R 50 50 1 1 P
-X Pin_2 2 -200 0 150 R 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Jst_smr-03v
-#
-DEF Jst_smr-03v J 0 40 Y N 1 F N
-F0 "J" 0 200 50 H V C CNN
-F1 "Jst_smr-03v" 0 -175 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "SYM-001T-P0_6_N" 0 0 50 H I C CNN "Term_name"
-F5 "5" 0 0 50 H I C CNN "Internal_len"
-$FPLIST
- Connector*:*_1x??_*
-$ENDFPLIST
-DRAW
 A -25 -100 20 901 -901 1 1 0 N -25 -80 -25 -120
 A -25 0 20 901 -901 1 1 0 N -25 20 -25 -20
 A -25 100 20 901 -901 1 1 0 N -25 120 -25 80
@@ -793,14 +1175,14 @@ X Pin_3 3 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Jst_smr-04v
+# Jst_smp-04v
 #
-DEF Jst_smr-04v J 0 40 Y N 1 F N
+DEF Jst_smp-04v J 0 40 Y N 1 F N
 F0 "J" 0 250 50 H V C CNN
-F1 "Jst_smr-04v" 0 -225 50 H V C CNN
+F1 "Jst_smp-04v" 0 -225 50 H V C CNN
 F2 "" 0 50 50 H I C CNN
 F3 "" 0 50 50 H I C CNN
-F4 "SYM-001T-P0_6_N" 0 50 50 H I C CNN "Term_name"
+F4 "SHF-001T-0_8BS" 0 50 50 H I C CNN "Term_name"
 F5 "5" 0 50 50 H I C CNN "Internal_len"
 $FPLIST
  Connector*:*_1x??_*
@@ -818,14 +1200,14 @@ X Pin_4 4 -200 -150 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Jst_smr-06v
+# Jst_smp-06v
 #
-DEF Jst_smr-06v J 0 40 Y N 1 F N
+DEF Jst_smp-06v J 0 40 Y N 1 F N
 F0 "J" 0 350 50 H V C CNN
-F1 "Jst_smr-06v" 0 -325 50 H V C CNN
+F1 "Jst_smp-06v" 0 -325 50 H V C CNN
 F2 "" 0 150 50 H I C CNN
 F3 "" 0 150 50 H I C CNN
-F4 "SYM-001T-P0_6_N" 0 150 50 H I C CNN "Term_name"
+F4 "SHF-001T-0_8BS" 0 150 50 H I C CNN "Term_name"
 F5 "5" 0 150 50 H I C CNN "Internal_len"
 $FPLIST
  Connector*:*_1x??_*
@@ -837,6 +1219,104 @@ A -25 -50 20 901 -901 1 1 0 N -25 -30 -25 -70
 A -25 50 20 901 -901 1 1 0 N -25 70 -25 30
 A -25 150 20 901 -901 1 1 0 N -25 170 -25 130
 A -25 250 20 901 -901 1 1 0 N -25 270 -25 230
+S -50 300 50 -300 1 1 10 f
+X Pin_1 1 -200 250 150 R 50 50 1 1 P
+X Pin_2 2 -200 150 150 R 50 50 1 1 P
+X Pin_3 3 -200 50 150 R 50 50 1 1 P
+X Pin_4 4 -200 -50 150 R 50 50 1 1 P
+X Pin_5 5 -200 -150 150 R 50 50 1 1 P
+X Pin_6 6 -200 -250 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Jst_smr-02v
+#
+DEF Jst_smr-02v J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Jst_smr-02v" 0 -100 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "SYM-001T-P0_6" 0 0 50 H I C CNN "Term_name"
+F5 "5" 0 0 50 H I C CNN "Internal_len"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 5 0 -5 1 1 6 N
+S -50 105 0 95 1 1 6 N
+S -50 150 50 -50 1 1 10 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Jst_smr-03v
+#
+DEF Jst_smr-03v J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Jst_smr-03v" 0 -175 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "SYM-001T-P0_6" 0 0 50 H I C CNN "Term_name"
+F5 "5" 0 0 50 H I C CNN "Internal_len"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 -95 0 -105 1 1 6 N
+S -50 5 0 -5 1 1 6 N
+S -50 105 0 95 1 1 6 N
+S -50 150 50 -150 1 1 10 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+X Pin_3 3 -200 -100 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Jst_smr-04v
+#
+DEF Jst_smr-04v J 0 40 Y N 1 F N
+F0 "J" 0 250 50 H V C CNN
+F1 "Jst_smr-04v" 0 -225 50 H V C CNN
+F2 "" 0 50 50 H I C CNN
+F3 "" 0 50 50 H I C CNN
+F4 "SYM-001T-P0_6" 0 50 50 H I C CNN "Term_name"
+F5 "5" 0 50 50 H I C CNN "Internal_len"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 -145 0 -155 1 1 6 N
+S -50 -45 0 -55 1 1 6 N
+S -50 55 0 45 1 1 6 N
+S -50 155 0 145 1 1 6 N
+S -50 200 50 -200 1 1 10 f
+X Pin_1 1 -200 150 150 R 50 50 1 1 P
+X Pin_2 2 -200 50 150 R 50 50 1 1 P
+X Pin_3 3 -200 -50 150 R 50 50 1 1 P
+X Pin_4 4 -200 -150 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Jst_smr-06v
+#
+DEF Jst_smr-06v J 0 40 Y N 1 F N
+F0 "J" 0 350 50 H V C CNN
+F1 "Jst_smr-06v" 0 -325 50 H V C CNN
+F2 "" 0 150 50 H I C CNN
+F3 "" 0 150 50 H I C CNN
+F4 "SYM-001T-P0_6" 0 150 50 H I C CNN "Term_name"
+F5 "5" 0 150 50 H I C CNN "Internal_len"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 -245 0 -255 1 1 6 N
+S -50 -145 0 -155 1 1 6 N
+S -50 -45 0 -55 1 1 6 N
+S -50 55 0 45 1 1 6 N
+S -50 155 0 145 1 1 6 N
+S -50 255 0 245 1 1 6 N
 S -50 300 50 -300 1 1 10 f
 X Pin_1 1 -200 250 150 R 50 50 1 1 P
 X Pin_2 2 -200 150 150 R 50 50 1 1 P
@@ -913,6 +1393,55 @@ X Pin_1 1 -200 100 150 R 50 50 1 1 P
 X Pin_2 2 -200 0 150 R 50 50 1 1 P
 X Pin_3 3 -200 -100 150 R 50 50 1 1 P
 X Pin_4 4 -200 -200 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Kycon_kppx-4p
+#
+DEF Kycon_kppx-4p J 0 40 Y N 1 F N
+F0 "J" 50 250 50 H V C CNN
+F1 "Kycon_kppx-4p" 50 -250 50 H V C CNN
+F2 "" 50 50 50 H I C CNN
+F3 "" 50 50 50 H I C CNN
+F4 "4" 50 50 50 H I C CNN "Internal_len"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+A 85 0 20 -899 899 0 0 10 N 85 -20 85 20
+C 215 0 135 0 0 10 N
+C 185 -50 21 1 1 10 N
+C 185 50 21 1 1 10 N
+C 265 -35 21 1 1 10 N
+C 265 35 21 1 1 10 N
+T 0 185 95 20 0 0 0 1 Normal 0 C C
+T 0 185 -95 20 0 0 0 2 Normal 0 C C
+T 0 265 80 20 0 0 0 3 Normal 0 C C
+T 0 265 -80 20 0 0 0 4 Normal 0 C C
+P 17 0 0 10 0 -200 0 200 205 200 260 190 315 165 355 125 385 75 400 20 400 -20 390 -65 370 -105 350 -135 320 -160 295 -175 260 -190 205 -200 0 -200 f
+X Pin_1 1 -150 150 150 R 50 50 1 1 P
+X Pin_2 2 -150 50 150 R 50 50 1 1 P
+X Pin_3 3 -150 -50 150 R 50 50 1 1 P
+X Pin_4 4 -150 -150 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Minidp_male
+#
+DEF Minidp_male J 0 40 Y N 1 F N
+F0 "J" -225 150 50 H V L CNN
+F1 "Minidp_male" -425 -150 50 H V L CNN
+F2 "" 350 -250 50 H I C CNN
+F3 "" 350 -250 50 H I C CNN
+$FPLIST
+ USB*
+$ENDFPLIST
+DRAW
+S -285 -10 -140 20 0 0 0 F
+S -400 -100 0 100 0 1 10 f
+S 0 -5 -30 5 0 1 0 N
+P 8 0 0 0 -285 -30 -285 -5 -285 50 -140 50 -140 -30 -165 -55 -260 -55 -285 -30 N
+X Pin_1 1 100 0 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
@@ -1412,6 +1941,134 @@ X Pin_9 9 -200 800 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
+# Nk10_71600-610lf
+#
+DEF Nk10_71600-610lf J 0 20 Y N 1 F N
+F0 "J" 0 550 50 H V C CNN
+F1 "Nk10_71600-610lf" 0 -550 50 H V C CNN
+F2 "" 175 200 50 H I C CNN
+F3 "" 25 400 50 V I C CNN
+F4 "5" 0 -200 50 H I C CNN "Internal_len"
+$FPLIST
+ DIP*
+ SOIC*
+$ENDFPLIST
+DRAW
+A -75 450 25 901 -901 0 1 0 N -75 475 -75 425
+A -75 -450 25 901 -901 1 1 0 N -75 -425 -75 -475
+A -75 -350 25 901 -901 1 1 0 N -75 -325 -75 -375
+A -75 -250 25 901 -901 1 1 0 N -75 -225 -75 -275
+A -75 -150 25 901 -901 1 1 0 N -75 -125 -75 -175
+A -75 -50 25 901 -901 1 1 0 N -75 -25 -75 -75
+A -75 50 25 901 -901 1 1 0 N -75 75 -75 25
+A -75 150 25 901 -901 1 1 0 N -75 175 -75 125
+A -75 250 25 901 -901 1 1 0 N -75 275 -75 225
+A -75 350 25 901 -901 1 1 0 N -75 375 -75 325
+S 100 50 125 -50 0 0 0 f
+P 5 0 1 0 -100 -500 -100 500 100 500 100 -500 -100 -500 f
+P 20 0 1 0 -10 305 -60 305 -35 230 -10 15 5 15 30 40 10 40 -10 225 10 225 40 225 40 30 55 30 55 225 100 225 100 300 100 305 10 305 10 250 -10 250 -10 305 N
+X Pin_10 10 -200 -450 100 R 50 50 0 0 P
+X Pin_7 7 -200 -150 100 R 50 50 0 0 P
+X Pin_8 8 -200 -250 100 R 50 50 0 0 P
+X Pin_9 9 -200 -350 100 R 50 50 0 0 P
+X Pin_1 1 -200 450 100 R 50 50 1 1 P
+X Pin_2 2 -200 350 100 R 50 50 1 1 P
+X Pin_3 3 -200 250 100 R 50 50 1 1 P
+X Pin_4 4 -200 150 100 R 50 50 1 1 P
+X Pin_5 5 -200 50 100 R 50 50 1 1 P
+X Pin_6 6 -200 -50 100 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Nk10_inline1
+#
+DEF Nk10_inline1 J 0 20 N N 1 F N
+F0 "J" 0 550 50 H V C CNN
+F1 "Nk10_inline1" 0 -550 50 H V C CNN
+F2 "" 150 200 50 H I C CNN
+F3 "" 0 450 50 V I C CNN
+F4 "5" 0 -200 50 H I C CNN "Internal_len"
+$FPLIST
+ DIP*
+ SOIC*
+$ENDFPLIST
+DRAW
+T 0 -50 450 50 0 0 0 1 Normal 0 C C
+T 0 -25 -450 50 0 0 0 10 Normal 0 C C
+T 0 -50 350 50 0 0 0 2 Normal 0 C C
+T 0 -50 250 50 0 0 0 3 Normal 0 C C
+T 0 -50 150 50 0 0 0 4 Normal 0 C C
+T 0 -50 50 50 0 0 0 5 Normal 0 C C
+T 0 -50 -50 50 0 0 0 6 Normal 0 C C
+T 0 -50 -150 50 0 0 0 7 Normal 0 C C
+T 0 -50 -250 50 0 0 0 8 Normal 0 C C
+T 0 -50 -350 50 0 0 0 9 Normal 0 C C
+T 0 -150 500 50 0 0 0 A Normal 0 C C
+T 0 150 500 50 0 0 0 B Normal 0 C C
+S -125 50 -100 -50 0 0 0 f
+P 5 0 1 0 -100 -500 -100 500 100 500 100 -500 -100 -500 f
+P 20 0 1 0 15 405 -35 405 -10 330 15 115 30 115 55 140 35 140 15 325 35 325 65 325 65 130 80 130 80 325 100 325 100 400 100 405 35 405 35 350 15 350 15 405 N
+X PIN10A 10 -200 -450 100 R 50 50 0 0 P
+X PIN1B 11 200 450 100 L 50 50 0 0 P
+X PIN2B 12 200 350 100 L 50 50 0 0 P
+X PIN3B 13 200 250 100 L 50 50 0 0 P
+X PIN4B 14 200 150 100 L 50 50 0 0 P
+X PIN5B 15 200 50 100 L 50 50 0 0 P
+X PIN6B 16 200 -50 100 L 50 50 0 0 P
+X PIN7B 17 200 -150 100 L 50 50 0 0 P
+X PIN8B 18 200 -250 100 L 50 50 0 0 P
+X PIN9B 19 200 -350 100 L 50 50 0 0 P
+X PIN10B 20 200 -450 100 L 50 50 0 0 P
+X PIN7A 7 -200 -150 100 R 50 50 0 0 P
+X PIN8A 8 -200 -250 100 R 50 50 0 0 P
+X PIN9A 9 -200 -350 100 R 50 50 0 0 P
+X PIN1A 1 -200 450 100 R 50 50 1 1 P
+X PIN2A 2 -200 350 100 R 50 50 1 1 P
+X PIN3A 3 -200 250 100 R 50 50 1 1 P
+X PIN4A 4 -200 150 100 R 50 50 1 1 P
+X PIN5A 5 -200 50 100 R 50 50 1 1 P
+X PIN6A 6 -200 -50 100 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# QC_22AWG_4_75X0_8
+#
+DEF QC_22AWG_4_75X0_8 J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "QC_22AWG_4_75X0_8" -25 -125 50 H V C CNN
+F2 "" 783 208 50 H I C CNN
+F3 "" 783 208 50 H I C CNN
+$FPLIST
+ TerminalBlock*:*
+$ENDFPLIST
+DRAW
+T 0 115 0 20 0 0 0 4.75x0.8 Normal 0 C C
+P 3 0 1 0 205 -25 65 -25 65 -65 N
+P 3 0 1 0 205 25 65 25 65 65 N
+P 20 0 1 0 180 65 65 65 45 35 30 25 -50 25 -60 35 -90 35 -90 -35 -60 -35 -50 -25 30 -25 45 -35 65 -65 180 -65 195 -60 205 -45 205 -30 205 45 195 60 180 65 f
+X Pin_1 1 -200 0 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Qc_22awg_2_8x0_8
+#
+DEF Qc_22awg_2_8x0_8 J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "Qc_22awg_2_8x0_8" -25 -125 50 H V C CNN
+F2 "" 783 208 50 H I C CNN
+F3 "" 783 208 50 H I C CNN
+$FPLIST
+ TerminalBlock*:*
+$ENDFPLIST
+DRAW
+T 0 115 0 20 0 0 0 2.8x0.8 Normal 0 C C
+P 3 0 1 0 205 -25 65 -25 65 -50 N
+P 3 0 1 0 205 25 65 25 65 50 N
+P 20 0 1 0 180 50 65 50 45 35 30 25 -50 25 -60 35 -90 35 -90 -35 -60 -35 -50 -25 30 -25 45 -35 65 -50 180 -50 195 -45 205 -35 205 -30 205 35 195 45 180 50 f
+X Pin_1 1 -200 0 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # Qc_22awg_ra_6_3x0_8_h
 #
 DEF Qc_22awg_ra_6_3x0_8_h J 0 40 Y N 1 F N
@@ -1445,6 +2102,123 @@ S -50 50 300 -50 1 1 10 f
 P 2 0 1 10 300 50 325 65 N
 P 5 0 1 10 -50 50 -25 65 325 65 325 -35 300 -50 N
 X Pin_1 1 -200 0 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Ring_trm_red_m4
+#
+DEF Ring_trm_red_m4 J 0 40 Y N 1 F N
+F0 "J" 375 0 50 H V C CNN
+F1 "Ring_trm_red_m4" -175 125 50 H V C CNN
+F2 "" 138 198 50 H I C CNN
+F3 "" 138 198 50 H I C CNN
+$FPLIST
+ TerminalBlock*:*
+$ENDFPLIST
+DRAW
+C 225 0 50 0 1 0 F
+C 225 0 112 0 1 10 f
+T 0 205 -160 50 0 0 0 "Te  320551 m4" Normal 0 C C
+P 8 0 1 10 125 50 115 25 110 0 115 -25 125 -50 -50 -50 -50 50 125 50 f
+X Pin_1 1 -200 0 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Sharp_gp2y0a02yk0f
+#
+DEF Sharp_gp2y0a02yk0f J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Sharp_gp2y0a02yk0f" 100 -475 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "sph-002t-p0_5l" 150 -100 50 H I C CNN "Term_name"
+F5 "3" 0 0 50 H I C CNN "Internal_len"
+F6 "jst_phr-3" 0 0 50 H I C CNN "Modelname"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+A -25 -100 20 901 -901 1 1 0 N -25 -80 -25 -120
+A -25 0 20 901 -901 1 1 0 N -25 20 -25 -20
+A -25 100 20 901 -901 1 1 0 N -25 120 -25 80
+C 100 -375 25 0 1 0 N
+C 100 375 25 0 1 0 N
+T 0 75 0 50 0 0 0 GND Normal 0 C C
+T 0 75 -100 50 0 0 0 Vcc Normal 0 C C
+T 0 50 100 50 0 0 0 Vo Normal 0 C C
+S 0 -150 200 -350 0 1 0 f
+S 0 350 200 150 0 1 0 f
+S 175 -325 25 -175 0 1 0 N
+S 175 175 25 325 0 1 0 N
+S -50 150 175 -150 1 1 10 f
+P 13 0 1 0 150 -350 150 -375 145 -395 135 -410 120 -420 105 -425 95 -425 80 -420 65 -410 55 -395 50 -380 50 -350 150 -350 f
+P 13 0 1 0 150 350 150 375 145 395 135 410 120 420 105 425 95 425 80 420 65 410 55 395 50 380 50 350 150 350 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+X Pin_3 3 -200 -100 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Stereo_plug3_5mm
+#
+DEF Stereo_plug3_5mm J 0 40 Y N 1 F N
+F0 "J" -125 125 50 H V L CNN
+F1 "Stereo_plug3_5mm" -500 -150 50 H V L CNN
+F2 "" 350 -250 50 H I C CNN
+F3 "" 350 -250 50 H I C CNN
+$FPLIST
+ USB*
+$ENDFPLIST
+DRAW
+S -420 35 -415 -35 0 1 10 N
+S -355 35 -350 -40 0 1 10 N
+P 16 0 1 10 0 85 -210 85 -225 35 -365 35 -435 35 -440 30 -500 40 -520 20 -520 -25 -500 -45 -440 -35 -435 -40 -225 -40 -210 -85 0 -85 0 85 f
+X Pin_1 1 100 0 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Stereo_plug3_5mm_ra
+#
+DEF Stereo_plug3_5mm_ra J 0 40 Y N 1 F N
+F0 "J" -100 150 50 H V L CNN
+F1 "Stereo_plug3_5mm_ra" -500 -150 50 H V L CNN
+F2 "" 350 -250 50 H I C CNN
+F3 "" 350 -250 50 H I C CNN
+$FPLIST
+ USB*
+$ENDFPLIST
+DRAW
+S -220 230 -155 235 0 1 10 N
+S -220 275 -155 280 0 1 10 N
+P 2 0 1 10 -100 70 -100 -70 N
+P 2 0 1 10 -50 55 -50 -55 N
+P 2 0 1 10 -25 45 -25 -45 N
+P 4 0 1 10 -75 60 -75 -65 -75 -60 -75 -65 N
+P 19 0 1 10 0 -40 0 40 -130 80 -150 80 -150 220 -150 290 -155 295 -145 355 -165 375 -210 375 -230 355 -220 295 -225 290 -225 80 -245 80 -245 -80 -230 -90 -150 -90 0 -40 f
+X Pin_1 1 100 0 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Tube_6mm_yl
+#
+DEF Tube_6mm_yl TUBE 0 0 N N 1 F N
+F0 "TUBE" 250 150 50 H V R CNN
+F1 "Tube_6mm_yl" 175 -150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 375 225 50 H I C CNN
+F4 "Tube" 0 0 50 H I C CNN "Sheath_type"
+F5 "Yellow" 125 0 50 H V L CNN "Color"
+F6 "mm" 375 225 50 H I C CNN "Units"
+F7 "2" 325 225 50 H I C CNN "Min_bend_radius"
+F8 "6" 400 225 50 H I C CNN "Preshrink_inner_diameter"
+F9 "7" 350 225 50 H I C CNN "Outer_Diameter"
+F10 "Farnell Pro-Pwer" 325 225 50 H I C CNN "Vendor"
+F11 "ACR-6-4-CL" 300 225 50 H I C CNN "Vendor_pn"
+DRAW
+A 301 0 103 -765 765 0 1 0 N 325 -100 325 100
+C 0 0 100 0 1 0 N
+P 2 0 1 0 325 -100 0 -100 N
+P 2 0 1 0 325 100 0 100 N
 ENDDRAW
 ENDDEF
 #
@@ -1542,6 +2316,35 @@ F13 "Noname" 200 150 50 H I C CNN "Harness_name"
 DRAW
 X X 1 0 0 200 R 50 50 1 1 B
 X Y 2 400 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# v1_pxc_mstbt_2-5_4-st
+#
+DEF v1_pxc_mstbt_2-5_4-st J 0 40 Y N 1 F N
+F0 "J" 50 200 50 H V C CNN
+F1 "v1_pxc_mstbt_2-5_4-st" 50 -300 50 H V C CNN
+F2 "" 50 0 50 H I C CNN
+F3 "" 50 0 50 H I C CNN
+F4 "9" 100 200 50 H I C CNN "Internal_len"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+C 95 0 40 0 1 0 N
+C 95 100 40 0 1 0 N
+C 95 -200 40 1 1 0 N
+C 95 -100 40 1 1 0 N
+S 0 150 350 -250 1 1 10 f
+P 6 0 1 0 65 -5 125 -5 125 5 120 5 65 5 65 -5 N
+P 6 0 1 0 65 95 125 95 125 105 120 105 65 105 65 95 N
+P 11 0 1 0 175 -250 175 -160 225 -160 245 -160 245 -140 175 -140 175 40 245 40 245 60 175 60 175 150 N
+P 6 1 1 0 65 -205 125 -205 125 -195 120 -195 65 -195 65 -205 N
+P 6 1 1 0 65 -105 125 -105 125 -95 120 -95 65 -95 65 -105 N
+X Pin_1 1 -150 100 150 R 50 50 1 1 P
+X Pin_2 2 -150 0 150 R 50 50 1 1 P
+X Pin_3 3 -150 -100 150 R 50 50 1 1 P
+X Pin_4 4 -150 -200 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
