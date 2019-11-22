@@ -42,19 +42,13 @@
     the component library and some images as how simple designs look in
     Creo.<br>
     <br>
-    Todo:<br>
-    1. Not generating tapes or sleeves yet. These are like other spools.
-    "SHEATH_TYPE" parameter is of type TUBE, TAPE, SHRINK.<br>
-    link to parameters
-http://support.ptc.com/help/archive/creo30/creo_pma/usascii/index.html#page/electrical_design%2Fcable%2Fsheath_spool_parameters.html%23wwconnect_header<br>
-    Perhaps pool symbols could be done without pins. Just to generate
-    the required spool. You could add these tube symbols to indicate
-    where tubes or tapes are needed?<br>
-    <br>
     <h1> 1. Spools</h1>
     &nbsp;&nbsp;&nbsp; _CBL_PARAMS =&nbsp;&nbsp;
     ["Value"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     ,"color","Num_conductors","Thickness","Density","Min_bend_radius","Sub_thickness","Vendor"&nbsp;&nbsp;
+
+
+
 
 
 
@@ -66,8 +60,14 @@ http://support.ptc.com/help/archive/creo30/creo_pma/usascii/index.html#page/elec
 
 
 
+
+
+
     ,"4.5"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ,"2.0e-5"
     ,"1"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
 
 
 
@@ -229,6 +229,52 @@ href="http://support.ptc.com/help/creo/creo_pma/usascii/index.html#page/electric
     Parameters with the name TYPE and OBJ_TYPE are ignored during the
     import, export, and compare operations. You may not use these
     parameters for user-defined parameters.<br>
+    <br>
+    <h2>1.2 Other Spool Types (TAPE, TUBE, and SHRINK)</h2>
+    <p>NOTE: These do not work for xml or nwf. Read PTC article<br>
+      <b>CS312099 Sheath type spools are exported to NWF as cable spool
+        and to XML as wire in Creo Parametric <br>
+        Applies to Creo Parametric 4.0 to 6.0.</b><br>
+    </p>
+    <p>So I decided not to use sheath spools for the moment. You can
+      create separate sheath spool files that you can read to creo.</p>
+    <p>Otherwise spools are the same as wires except that the
+      SHEATH_TYPE parameter specifies this special case.<br>
+      Lets make these a single pin type components with refdes SPOOL (or
+      should the refdes be TAPE, TUBE, and SHRINK).<br>
+      It seems that there is no connection parameters for these types of
+      components. Some key parameters are<br>
+    </p>
+    <ul>
+      <li> Num_conductors = 0</li>
+      <li> Sheath_type=TUBE, TAME, SHRINK</li>
+    </ul>
+    <p> Example of a sleeve type component<br>
+      &lt;SPOOL name="TUKKIMISANTURI" type="NORMAL_SPOOL"&gt;<br>
+      &lt;SYS_PARAMETER id="sp79" appID="8202" /&gt;<br>
+      &lt;PARAMETER name="SHEATH_TYPE" value="TUBE" /&gt;<br>
+      &lt;PARAMETER name="WALL_THICKNESS" value="0.5" /&gt;<br>
+      &lt;PARAMETER name="MIN_BEND_RADIUS" value="5" /&gt;<br>
+      &lt;PARAMETER name="UNITS" value="MM" /&gt;<br>
+      &lt;PARAMETER name="PRESHRINK_INNER_DIAMETER" value="6" /&gt;<br>
+      &lt;PARAMETER name="COLOR" value="YELLOW" /&gt;<br>
+      &lt;PARAMETER name="OUTER_DIAMETER" value="7" /&gt;<br>
+      &lt;PARAMETER name="VENDOR" value="Pro-Power" /&gt;<br>
+      &lt;PARAMETER name="VENDOR_PN" value="ACR-6-4-CL" /&gt;<br>
+      &lt;PARAMETER name="SPEC" value="Farnell Acrylic Glass Sleeving"
+      /&gt;<br>
+      &lt;PARAMETER name="SPECIFICATION" value="Farnell Acrylic Glass
+      Sleeving" /&gt;<br>
+    </p>
+    Required parameters<br>
+    Sheath_type = TAPE, TUBE or SHRINK<br>
+    Outer_diameter = Outer diameter of the tube<br>
+    Preshrink_inner_diameter = For SHRINK sheating. To check
+    interference.<br>
+    Wall_thickness = Thickness of the sheating.<br>
+    <br>
+    Use default wall_thickness = 0 if no wall thickness specifien on the
+    component.<br>
     <h1>2. Components</h1>
     <p>The table below shows the library symbol options and default
       values if no option is defined. <br>
@@ -243,8 +289,8 @@ href="http://support.ptc.com/help/creo/creo_pma/usascii/index.html#page/electric
         <tr>
           <th>Parameter<br>
           </th>
-          <td valign="top">Default Value<br>
-          </td>
+          <th valign="top">Default Value<br>
+          </th>
           <th valign="top">Parameters<br>
           </th>
         </tr>
