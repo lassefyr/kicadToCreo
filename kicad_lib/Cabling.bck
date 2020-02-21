@@ -1,5 +1,21 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP 10pin_flat_round
+D 3M Round, Jacketed, Flat Cable 10pin, 3759/10 (SO)
+K cable 22awg
+F ~
+$ENDCMP
+#
+$CMP 14awg_bk_1
+D 14AWG Hook-up Wire 41/30 PVC 100ft SPOOL BLACK
+K Wire 14awg
+$ENDCMP
+#
+$CMP 14awg_or_1
+D 14AWG Hook-up Wire 41/30 PVC 100ft SPOOL ORANGE
+K Wire 14awg Orange
+$ENDCMP
+#
 $CMP 16awg_bk_1
 D 16 AWG Hook-Up Wire 26/30 Black 600V 30.5m
 K Wire 16awg
@@ -15,7 +31,18 @@ D 16 AWG Hook-Up Wire 26/30 Yellow 600V 30.5m
 K Wire 16awg
 $ENDCMP
 #
+$CMP 16awgx4_u_7_3mm
+D 4 Conductor Multi-Conductor Cable White 16 AWG (30.5m
+K cable 16awg
+F ~
+$ENDCMP
+#
 $CMP 18awg_bk_1
+D Hook-up Wire 18AWG 16/30 PVC
+K Wire 18awg
+$ENDCMP
+#
+$CMP 18awg_bk_striped
 D Hook-up Wire 18AWG 16/30 PVC
 K Wire 18awg
 $ENDCMP
@@ -27,6 +54,11 @@ $ENDCMP
 #
 $CMP 18awg_rd_1
 D Hook-up Wire 18AWG 16/30 PVC
+K Wire 18awg
+$ENDCMP
+#
+$CMP 18awg_sl_1
+D Hook-up Wire 18AWG 16/30 PVC Grey
 K Wire 18awg
 $ENDCMP
 #
@@ -132,6 +164,12 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Cui_pp3-002b
+D Cui Power Barrel Connector Plug 2.50mm ID, 5.50mm OD Free Hanging
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
 $CMP Dc_2_5x5_5_plug
 D Cable Assy 2.5mm ID, 5.5mm OD Plug to Wire flat 18awg
 K DC power barrel Plug connector
@@ -157,6 +195,12 @@ $CMP Dp_male
 D Displayport male connector
 K connector Displayport
 F  ~
+$ENDCMP
+#
+$CMP Hdp24-24-23sn
+D Deutsch HDP20 Housing for female terminals, Wire-to-Wire, 23 Position, Sealable, Green, Power & Signal, Panel
+K connector
+F ~
 $ENDCMP
 #
 $CMP Hiro_df1e-4s
@@ -267,6 +311,12 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Keystone-pn229
+D Cui Power Barrel Connector Plug 2.50mm ID, 5.50mm OD Free Hanging
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
 $CMP Kycon_kppx-4p
 D Kycon DC Power Connectors KPPX-4P
 K connector
@@ -369,12 +419,6 @@ K Connector Nk10
 F ~
 $ENDCMP
 #
-$CMP Nk10_flat_piece
-D 10 Position Receptacle Connector IDC Gold 28-30 AWG Latch Lock
-K Connector Nk10
-F ~
-$ENDCMP
-#
 $CMP Nk10_inline1
 D 10 Position Receptacle Connector IDC Gold 28-30 AWG Latch Lock
 K Connector Nk10
@@ -396,6 +440,12 @@ $ENDCMP
 $CMP Qc_22awg_ra_6_3x0_8_h
 D 0.250" (6.35mm) Quick Connect Female 18-22 AWG RA Fully Insulated
 K Quick Connect Terminal
+F ~
+$ENDCMP
+#
+$CMP Qc_fork2_s6
+D Terminals Fork-typ cbl lug,blu 1.5 - 2.5 mm2 M4
+K Fork Terminal
 F ~
 $ENDCMP
 #
@@ -427,6 +477,18 @@ $CMP Stereo_plug3_5mm_ra
 D 3.5 mm Cable Mount Stereo Jack, Right Angle
 K connector audio
 F  ~
+$ENDCMP
+#
+$CMP Te_776427-1
+D AMPSEAL 16, Housing for female terminals, Wire-to-Wire, 2 Position, 4.5mm, Sealable, Red
+K connector
+F ~
+$ENDCMP
+#
+$CMP Te_776487-3
+D AMPSEAL 16, Housing for female terminals, Wire-to-Wire, 4 Position, 5.3mm, Sealable, Yellow
+K connector
+F ~
 $ENDCMP
 #
 $CMP Tube_6mm_yl
