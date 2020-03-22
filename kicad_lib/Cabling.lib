@@ -56,6 +56,7 @@ A 50 350 50 -899 899 1 1 0 N 50 300 50 400
 A 50 450 50 -899 899 1 1 0 N 50 400 50 500
 P 2 0 0 0 -50 -500 50 -500 N
 P 2 0 0 0 -50 500 50 500 N
+P 3 0 1 0 -125 475 -100 450 -125 425 N
 X C6.2 12 200 -50 100 L 50 50 0 0 P
 X C7.1 13 -200 -150 100 R 50 50 0 0 P
 X C10.1 19 -200 -450 100 R 50 50 0 0 P
@@ -82,115 +83,120 @@ ENDDEF
 # 14awg_bk_1
 #
 DEF 14awg_bk_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "14awg_bk_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Black" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "3.51" 750 50 50 H I C CNN "Thickness"
-F7 "3" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "14" 1100 50 50 H I C CNN "Gauge"
-F9 "3.2e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "3079 BK005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "14awg_bk_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Black" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "3.51" 550 50 50 H I C CNN "Thickness"
+F7 "3" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "14" 900 50 50 H I C CNN "Gauge"
+F9 "3.2e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "3079 BK005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 14awg_or_1
 #
 DEF 14awg_or_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "14awg_or_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Orange" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "3.51" 750 50 50 H I C CNN "Thickness"
-F7 "3" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "14" 1100 50 50 H I C CNN "Gauge"
-F9 "3.2e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "3079 OR005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "14awg_or_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Orange" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "3.51" 550 50 50 H I C CNN "Thickness"
+F7 "3" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "14" 900 50 50 H I C CNN "Gauge"
+F9 "3.2e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "3079 OR005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 16awg_bk_1
 #
 DEF 16awg_bk_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "16awg_bk_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Black" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "2.06" 750 50 50 H I C CNN "Thickness"
-F7 "2" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "16" 1100 50 50 H I C CNN "Gauge"
-F9 "1.9e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "6716 BK005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "16awg_bk_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Black" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "2.06" 550 50 50 H I C CNN "Thickness"
+F7 "2" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "16" 900 50 50 H I C CNN "Gauge"
+F9 "1.9e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "6716 BK005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 16awg_gy_1
 #
 DEF 16awg_gy_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "16awg_gy_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Green" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "2.06" 750 50 50 H I C CNN "Thickness"
-F7 "2" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "16" 1100 50 50 H I C CNN "Gauge"
-F9 "1.9e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "6716 GY005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "16awg_gy_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Green" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "2.06" 550 50 50 H I C CNN "Thickness"
+F7 "2" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "16" 900 50 50 H I C CNN "Gauge"
+F9 "1.9e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "6716 GY005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 16awg_yl_1
 #
 DEF 16awg_yl_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "16awg_yl_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Yellow" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "2.06" 750 50 50 H I C CNN "Thickness"
-F7 "2" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "16" 1100 50 50 H I C CNN "Gauge"
-F9 "1.9e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "6716 YL005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "16awg_yl_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Yellow" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "2.06" 550 50 50 H I C CNN "Thickness"
+F7 "2" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "16" 900 50 50 H I C CNN "Gauge"
+F9 "1.9e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "6716 YL005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
@@ -238,6 +244,7 @@ P 2 0 1 0 -75 100 -100 100 N
 P 2 0 1 0 100 -100 75 -100 N
 P 2 0 1 0 100 0 75 0 N
 P 2 0 1 0 100 100 75 100 N
+P 3 0 1 0 -150 125 -125 100 -150 75 N
 X C4.1 7 -200 -200 200 R 50 50 0 0 P
 X C4.2 8 200 -200 200 L 50 50 0 0 P
 X C1.1 1 -200 100 100 R 50 50 1 1 P
@@ -252,115 +259,120 @@ ENDDEF
 # 18awg_bk_1
 #
 DEF 18awg_bk_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "18awg_bk_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Black" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "2.0" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "18" 1100 50 50 H I C CNN "Gauge"
-F9 "1.22e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "3055 BK005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "18awg_bk_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Black" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "2.0" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "18" 900 50 50 H I C CNN "Gauge"
+F9 "1.22e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "3055 BK005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 18awg_bk_striped
 #
 DEF 18awg_bk_striped W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "18awg_bk_striped" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Black" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "2.0" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "18" 1100 50 50 H I C CNN "Gauge"
-F9 "1.22e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "3055 BK005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "18awg_bk_striped" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Black" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "2.0" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "18" 900 50 50 H I C CNN "Gauge"
+F9 "1.22e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "3055 BK005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 18awg_or_1
 #
 DEF 18awg_or_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "18awg_or_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Orange" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "2.0" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "18" 1100 50 50 H I C CNN "Gauge"
-F9 "1.22e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "3055 OR005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "18awg_or_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Orange" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "2.0" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "18" 900 50 50 H I C CNN "Gauge"
+F9 "1.22e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "3055 OR005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 18awg_rd_1
 #
 DEF 18awg_rd_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "18awg_rd_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Red" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "2.0" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "18" 1100 50 50 H I C CNN "Gauge"
-F9 "1.22e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "3055 RD005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "18awg_rd_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Red" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "2.0" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "18" 900 50 50 H I C CNN "Gauge"
+F9 "1.22e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "3055 RD005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 18awg_sl_1
 #
 DEF 18awg_sl_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "18awg_sl_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Ral7000" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "2.0" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "18" 1100 50 50 H I C CNN "Gauge"
-F9 "1.22e-05" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "3055 SL005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "18awg_sl_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Ral7000" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "2.0" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "18" 900 50 50 H I C CNN "Gauge"
+F9 "1.22e-05" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "3055 SL005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
@@ -408,6 +420,7 @@ P 2 0 1 0 -75 100 -100 100 N
 P 2 0 1 0 100 -100 75 -100 N
 P 2 0 1 0 100 0 75 0 N
 P 2 0 1 0 100 100 75 100 N
+P 3 0 1 0 -150 125 -125 100 -150 75 N
 X C4.1 7 -200 -200 200 R 50 50 0 0 P
 X C4.2 8 200 -200 200 L 50 50 0 0 P
 X C1.1 1 -200 100 100 R 50 50 1 1 P
@@ -422,46 +435,48 @@ ENDDEF
 # 20awg_bk_1
 #
 DEF 20awg_bk_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "20awg_bk_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Black" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.75" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "20" 1100 50 50 H I C CNN "Gauge"
-F9 "8.1e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "1553 BK005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "20awg_bk_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Black" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.75" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "20" 900 50 50 H I C CNN "Gauge"
+F9 "8.1e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "1553 BK005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 150 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 20awg_or_1
 #
 DEF 20awg_or_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "20awg_or_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Orange" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.75" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "20" 1100 50 50 H I C CNN "Gauge"
-F9 "8.1e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "1553 OR005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "20awg_or_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Orange" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.75" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "20" 900 50 50 H I C CNN "Gauge"
+F9 "8.1e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "1553 OR005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 150 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
@@ -502,6 +517,7 @@ P 2 0 1 0 -75 0 -100 0 N
 P 2 0 1 0 -75 100 -100 100 N
 P 2 0 1 0 100 0 75 0 N
 P 2 0 1 0 100 100 75 100 N
+P 3 0 1 0 -150 125 -125 100 -150 75 N
 X C1.1 1 -200 100 100 R 50 50 1 1 P
 X C1.2 2 200 100 100 L 50 50 1 1 P
 X C2.1 3 -200 0 100 R 50 50 1 1 P
@@ -512,207 +528,217 @@ ENDDEF
 # 22awg_bk_1
 #
 DEF 22awg_bk_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_bk_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Black" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "3251 BK005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_bk_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Black" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 900 50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "3251 BK005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 150 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 22awg_bl_1
 #
 DEF 22awg_bl_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_bl_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Blue" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire " 50 150 50 H I C CNN "Vendor"
-F11 "3251 BL005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 0 0 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_bl_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Blue" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 875 50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire " -150 150 50 H I C CNN "Vendor"
+F11 "3251 BL005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 450 50 50 H V L CNN "Length"
+F13 "Noname" -200 0 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 22awg_br_1
 #
 DEF 22awg_br_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_br_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Brown" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "3251 BR005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_br_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Brown" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 900 50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "3251 BR005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 2 0 1 0 -225 -25 -225 -25 N
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 22awg_gr_1
 #
 DEF 22awg_gr_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_gr_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Green" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "3251 GR005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_gr_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Green" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 900 50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "3251 GR005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 22awg_or_1
 #
 DEF 22awg_or_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_or_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Orange" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "3251 OR005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 0 0 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_or_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Orange" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 0 -50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "3251 OR005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" -200 0 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 22awg_rd_1
 #
 DEF 22awg_rd_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_rd_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Red" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "3251 RD005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 250 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_rd_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Red" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 900 50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "3251 RD005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 50 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 22awg_sl_1
 #
 DEF 22awg_sl_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_sl_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Gray" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "3251 SL005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 250 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_sl_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Gray" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 900 50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "3251 SL005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 50 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 22awg_wh_1
 #
 DEF 22awg_wh_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_wh_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "White" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "3251 WH005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 250 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_wh_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "White" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 900 50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "3251 WH005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 50 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # 22awg_yl_1
 #
 DEF 22awg_yl_1 W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "22awg_yl_1" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Yellow" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "1.27" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "4.46e-06" 850 50 50 H I C CNN "Density"
-F10 "Alpha Wire" 50 150 50 H I C CNN "Vendor"
-F11 "3251 YL005" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 100 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "22awg_yl_1" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Yellow" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "1.27" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 900 50 50 H I C CNN "Gauge"
+F9 "4.46e-06" 650 50 50 H I C CNN "Density"
+F10 "Alpha Wire" -150 150 50 H I C CNN "Vendor"
+F11 "3251 YL005" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 100 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
@@ -753,6 +779,7 @@ P 2 0 1 0 -75 0 -100 0 N
 P 2 0 1 0 -75 100 -100 100 N
 P 2 0 1 0 100 0 75 0 N
 P 2 0 1 0 100 100 75 100 N
+P 3 0 1 0 -150 125 -125 100 -150 75 N
 X C1.1 1 -200 100 100 R 50 50 1 1 P
 X C1.2 2 200 100 100 L 50 50 1 1 P
 X C2.1 3 -200 0 100 R 50 50 1 1 P
@@ -802,6 +829,7 @@ P 2 0 1 0 -75 100 -100 100 N
 P 2 0 1 0 100 -100 75 -100 N
 P 2 0 1 0 100 0 75 0 N
 P 2 0 1 0 100 100 75 100 N
+P 3 0 1 0 -150 125 -125 100 -150 75 N
 X C1.1 1 -200 100 100 R 50 50 1 1 P
 X C1.2 2 200 100 100 L 50 50 1 1 P
 X C2.1 3 -200 0 100 R 50 50 1 1 P
@@ -855,6 +883,7 @@ P 2 0 1 0 -75 100 -100 100 N
 P 2 0 1 0 100 -100 75 -100 N
 P 2 0 1 0 100 0 75 0 N
 P 2 0 1 0 100 100 75 100 N
+P 3 0 1 0 -150 125 -125 100 -150 75 N
 X C4.1 7 -200 -200 200 R 50 50 0 0 P
 X C4.2 8 200 -200 200 L 50 50 0 0 P
 X C1.1 1 -200 100 100 R 50 50 1 1 P
@@ -908,12 +937,57 @@ P 2 0 1 0 -75 100 -100 100 N
 P 2 0 1 0 100 -100 75 -100 N
 P 2 0 1 0 100 0 75 0 N
 P 2 0 1 0 100 100 75 100 N
+P 3 0 1 0 -150 125 -125 100 -150 75 N
 X C1.1 1 -200 100 100 R 50 50 1 1 P
 X C1.2 2 200 100 100 L 50 50 1 1 P
 X C2.1 3 -200 0 100 R 50 50 1 1 P
 X C2.2 4 200 0 100 L 50 50 1 1 P
 X C3.1 5 -200 -100 100 R 50 50 1 1 P
 X C3.2 6 200 -100 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# 3m_37103-a165
+#
+DEF 3m_37103-a165 J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "3m_37103-a165" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "7" 0 0 50 H I C CNN "Internal_len"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 -95 0 -105 1 1 6 N
+S -50 5 0 -5 1 1 6 N
+S -50 105 0 95 1 1 6 N
+S -50 150 50 -150 1 1 10 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+X Pin_3 3 -200 -100 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# 3m_37303-a165
+#
+DEF 3m_37303-a165 J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "3m_37303-a165" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "7" 0 0 50 H I C CNN "Internal_len"
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+A -25 -100 20 901 -901 1 1 0 N -25 -80 -25 -120
+A -25 0 20 901 -901 1 1 0 N -25 20 -25 -20
+A -25 100 20 901 -901 1 1 0 N -25 120 -25 80
+S -50 150 50 -150 1 1 10 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+X Pin_3 3 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
@@ -935,6 +1009,7 @@ F11 "Standard cable" 0 0 50 H I C CNN "Vendor_pn"
 F12 "xx mm" 750 50 50 H V L CNN "Length"
 F13 "Noname" 200 150 50 H I C CNN "Harness_name"
 DRAW
+P 3 0 1 0 -25 25 0 0 -25 -25 N
 X X 1 0 0 200 R 50 50 1 1 B
 X Y 2 400 0 200 L 50 50 1 1 B
 ENDDRAW
@@ -1037,46 +1112,48 @@ ENDDEF
 # Dp_cable_b
 #
 DEF Dp_cable_b W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "Dp_cable_b" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Black" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "6.5" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "2" 1100 50 50 H I C CNN "Gauge"
-F9 "0.000108" 850 50 50 H I C CNN "Density"
-F10 "Any" 50 150 50 H I C CNN "Vendor"
-F11 "Standard cable" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "Dp_cable_b" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Black" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "6.5" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "2" 900 50 50 H I C CNN "Gauge"
+F9 "0.000108" 650 50 50 H I C CNN "Density"
+F10 "Any" -150 150 50 H I C CNN "Vendor"
+F11 "Standard cable" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 150 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
 # Dp_cable_w
 #
 DEF Dp_cable_w W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "Dp_cable_w" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "White" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "6.5" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "2" 1100 50 50 H I C CNN "Gauge"
-F9 "0.000108" 850 50 50 H I C CNN "Density"
-F10 "Any" 50 150 50 H I C CNN "Vendor"
-F11 "Standard cable" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "Dp_cable_w" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "White" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "6.5" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "2" 900 50 50 H I C CNN "Gauge"
+F9 "0.000108" 650 50 50 H I C CNN "Density"
+F10 "Any" -150 150 50 H I C CNN "Vendor"
+F11 "Standard cable" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 150 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
@@ -2671,23 +2748,24 @@ ENDDEF
 # Usb_cable
 #
 DEF Usb_cable W 0 0 N N 1 F N
-F0 "W" -75 50 50 H V R CNN
-F1 "Usb_cable" 200 50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "Black" 450 50 50 H V L CNN "Color"
-F5 "mm" 550 50 50 H I C CNN "Units"
-F6 "4.8" 750 50 50 H I C CNN "Thickness"
-F7 "5" 700 50 50 H I C CNN "Min_bend_radius"
-F8 "22" 1100 50 50 H I C CNN "Gauge"
-F9 "0.000108" 850 50 50 H I C CNN "Density"
-F10 "Any" 50 150 50 H I C CNN "Vendor"
-F11 "Standard cable" 0 0 50 H I C CNN "Vendor_pn"
-F12 "xx mm" 750 50 50 H V L CNN "Length"
-F13 "Noname" 200 150 50 H I C CNN "Harness_name"
+F0 "W" -275 50 50 H V R CNN
+F1 "Usb_cable" 0 50 50 H V C CNN
+F2 "" -200 0 50 H I C CNN
+F3 "" -200 0 50 H I C CNN
+F4 "Black" 250 50 50 H V L CNN "Color"
+F5 "mm" 350 50 50 H I C CNN "Units"
+F6 "4.8" 550 50 50 H I C CNN "Thickness"
+F7 "5" 500 50 50 H I C CNN "Min_bend_radius"
+F8 "22" 900 50 50 H I C CNN "Gauge"
+F9 "0.000108" 650 50 50 H I C CNN "Density"
+F10 "Any" -150 150 50 H I C CNN "Vendor"
+F11 "Standard cable" -200 0 50 H I C CNN "Vendor_pn"
+F12 "xx mm" 550 50 50 H V L CNN "Length"
+F13 "Noname" 0 150 50 H I C CNN "Harness_name"
 DRAW
-X X 1 0 0 200 R 50 50 1 1 B
-X Y 2 400 0 200 L 50 50 1 1 B
+P 3 0 1 0 -225 25 -200 0 -225 -25 N
+X X 1 -200 0 200 R 50 50 1 1 B
+X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #

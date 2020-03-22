@@ -153,6 +153,18 @@ K cable 24awg
 F ~
 $ENDCMP
 #
+$CMP 3m_37103-a165
+D 3m 3 Position Rectangular Plug Connector IDC Gold 20-24 AWG
+K connector
+F ~
+$ENDCMP
+#
+$CMP 3m_37303-a165
+D 3m 3 Position Rectangular Receptacle Connector IDC Gold 20-24 AWG
+K connector
+F ~
+$ENDCMP
+#
 $CMP Audio_cable
 D Standard Stereo Audio  Cable
 K Audio Cable
