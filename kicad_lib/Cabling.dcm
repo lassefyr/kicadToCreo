@@ -26,6 +26,11 @@ D 16 AWG Hook-Up Wire 26/30 Grn/Yel 600V 30.5m
 K Wire 16awg
 $ENDCMP
 #
+$CMP 16awg_or_1
+D 16 AWG Hook-Up Wire 26/30 Orange 600V 30.5m
+K Wire 16awg
+$ENDCMP
+#
 $CMP 16awg_yl_1
 D 16 AWG Hook-Up Wire 26/30 Yellow 600V 30.5m
 K Wire 16awg
@@ -129,6 +134,12 @@ D Hook-up Wire 22AWG 7/30 SR-PVC
 K Wire 22awg
 $ENDCMP
 #
+$CMP 22awgx2_dc1
+D Tensility DC Locking plug 2.1x5.5mm with cable 915mm 22awg. UL2464
+K cable 22awg
+F ~
+$ENDCMP
+#
 $CMP 22awgx2_u_4_1mm
 D 2 Conductor 7/30 Cable 22 AWG Gray
 K cable 22awg
@@ -145,6 +156,21 @@ $CMP 22awgx4_u_4_8mm
 D 4 Conductor 7/30 Cable 22 AWG Gray
 K cable 22awg
 F ~
+$ENDCMP
+#
+$CMP 24awg_bk_1
+D 24 AWG Hook-Up Wire 7/32 Black 600V 30.5m
+K Wire 24awg
+$ENDCMP
+#
+$CMP 24awg_bl_1
+D 24 AWG Hook-Up Wire 7/32 Blue 600V 30.5m
+K Wire 24awg
+$ENDCMP
+#
+$CMP 24awg_rd_1
+D 24 AWG Hook-Up Wire 7/32 Red 600V 30.5m
+K Wire 24awg
 $ENDCMP
 #
 $CMP 24awgx3_u_4_0mm
@@ -182,6 +208,12 @@ K DC power barrel Plug connector
 F ~
 $ENDCMP
 #
+$CMP Dc_2_1x5_5_lockplug
+D Cable Assembly Twist Lock, 2.1mm ID, 5.5mm OD Plug 22awg, 915.00mm
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
 $CMP Dc_2_5x5_5_plug
 D Cable Assy 2.5mm ID, 5.5mm OD Plug to Wire flat 18awg
 K DC power barrel Plug connector
@@ -207,6 +239,46 @@ $CMP Dp_male
 D Displayport male connector
 K connector Displayport
 F  ~
+$ENDCMP
+#
+$CMP Dsub9_f_hooded
+D D-Sub Receptacle, 9 Position, Clinch Nut, 4-40 UNC
+K Dsub
+F https://www.te.com/global-en/product-1658643-1.datasheet.pdf
+$ENDCMP
+#
+$CMP Eth_cable_rd
+D Standard Cat5e Ethernet Cable Red
+K Ethernet Cable
+$ENDCMP
+#
+$CMP Eth_cable_sl
+D Standard Cat5e Ethernet Cable Gray
+K Ethernet Cable
+$ENDCMP
+#
+$CMP Eth_rj45_plug_1
+D RJ connector, 8P8C (8 positions 8 connected)
+K 8P8C RJ Male connector
+F ~
+$ENDCMP
+#
+$CMP H05rn-f_2x1_0
+D H05RN-F, HAR, power and control cable, rubber, 300/500V, class 5/flexible, oil-resistant, flame-retardant
+K cable 1.0mm
+F ~
+$ENDCMP
+#
+$CMP H05rn-f_3x1_0
+D H05RN-F, HAR, power and control cable, rubber, 300/500V, class 5/flexible, oil-resistant, flame-retardant
+K cable 1.0mm
+F ~
+$ENDCMP
+#
+$CMP H07rn-f_2x2_5
+D H07RN-F, HAR, power and control cable, rubber, 300/500V, class 5/flexible, oil-resistant, flame-retardant
+K cable 2.5mm2
+F ~
 $ENDCMP
 #
 $CMP Hdp24-24-23sn
@@ -235,6 +307,12 @@ $ENDCMP
 #
 $CMP Hiro_df1e-8s
 D Hirose  01x05 2.5mm df1e-5s-2.5c
+K connector
+F ~
+$ENDCMP
+#
+$CMP Iec_c14_suora
+D Power Entry Connector Plug, Male Blades IEC 320-2-2/E Free Hanging (In-Line)
 K connector
 F ~
 $ENDCMP
@@ -323,6 +401,18 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Jst_xhp-3
+D Jst xhp-3, Housings Receptacle Natural (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_xhp-4
+D Jst xhp-4, Housings Receptacle Natural (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
 $CMP Keystone-pn229
 D Cui Power Barrel Connector Plug 2.50mm ID, 5.50mm OD Free Hanging
 K DC power barrel Plug connector
@@ -332,6 +422,12 @@ $ENDCMP
 $CMP Kycon_kppx-4p
 D Kycon DC Power Connectors KPPX-4P
 K connector
+F ~
+$ENDCMP
+#
+$CMP Littelfuse_hall_1
+D Littelfuse Inc. Magnetic Hall Effect, South Pole Voltage Wire Leads 24awg
+K Sensor Hall
 F ~
 $ENDCMP
 #
@@ -437,14 +533,26 @@ K Connector Nk10
 F ~
 $ENDCMP
 #
-$CMP QC_22AWG_4_75X0_8
-D 4.75mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
+$CMP Omron_ee-sx770
+D Omron, Optical Sensor Through-Beam 5mm Module, Pre-Wired 
+K Sensor Hall
+F ~
+$ENDCMP
+#
+$CMP Qc_22-18awg_6_3x0_8
+D Conn QC rcpt 18-22awg 0.250 (6.3mmx0.8mm) Non-Insulated
 K Quick Connect Terminal
 F ~
 $ENDCMP
 #
 $CMP Qc_22awg_2_8x0_8
 D 2.79mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
+$CMP Qc_22awg_4_75x0_8
+D 4.75mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
 K Quick Connect Terminal
 F ~
 $ENDCMP
@@ -491,6 +599,12 @@ K connector audio
 F  ~
 $ENDCMP
 #
+$CMP Te_172162-1
+D MATE-N-LOK, Rectangular Connectors, Housing, Receptacle, 12 Position, 4.2mm
+K connector
+F ~
+$ENDCMP
+#
 $CMP Te_776427-1
 D AMPSEAL 16, Housing for female terminals, Wire-to-Wire, 2 Position, 4.5mm, Sealable, Red
 K connector
@@ -503,9 +617,21 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Te_ferrule_16awg
+D Terminals Ferrule 1.5mm BK 16AWG
+K Fork Terminal
+F ~
+$ENDCMP
+#
 $CMP Tube_6mm_yl
 D Farnell Acrylic Glass Sleeving
 K Tube 6mm
+$ENDCMP
+#
+$CMP Upowertek_bld-320
+D 320W, 100-277Vac Input, Constant Voltage LED Driver
+K Power Supply
+F ~
 $ENDCMP
 #
 $CMP Usb-a_plug
@@ -529,6 +655,12 @@ $ENDCMP
 $CMP Usb_cable
 D Standard USB 2.0 Cable
 K Usb Cable
+$ENDCMP
+#
+$CMP ee-sx770x3_u_2_4mm
+D 3 Conductor Omron EE-SX770 2M meters 28awg
+K cable 22awg
+F ~
 $ENDCMP
 #
 $CMP v1_pxc_mstbt_2-5_4-st
