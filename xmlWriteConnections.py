@@ -37,6 +37,8 @@ class xmlWriteConnections(xmlWriteSpools):
 		self.TERM_AUTO_ASSIGN = "TRUE"
 		self.idNum = 1				# This is the first component
 		self.spoolClass = spoolClass
+		self.__errorString = ""
+		self.__warningString=""	
         
 	def find_net(self, netlist, ref, pin):
 		for net in netlist.nets:
@@ -60,15 +62,15 @@ class xmlWriteConnections(xmlWriteSpools):
 	def writeConnections(self, netlist, outputFileName):
 		isOutputFileOpended = False
 		try:
-			fout=open(outputFileName, "a")
+			fout = open(outputFileName, "a")
 			isOutputFileOpended = True
 		except IOError:
-			print("Error opening file -- filename = \""+outputFileName+"\"", file=sys.stderr)
+			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
 		
 		components = netlist.getInterestingComponents()
 		
-		self.spoolClass.printCblSpoolNames()
+		# self.spoolClass.printCblSpoolNames()
 		
 		for comp in components:
 			refDes = comp.getRef()
@@ -80,7 +82,7 @@ class xmlWriteConnections(xmlWriteSpools):
 # Find first spool, Check both ends and net names where they are connected			
 			spoolName = comp.getField("Value")
 			if not spoolName:
-				print(refDes+ " no Spool name defined!")
+				self.writeWarningStr(refDes+ " no Spool name defined!")
 				spoolName = "NOT_DEFINED"
 				continue			
 				
@@ -89,6 +91,10 @@ class xmlWriteConnections(xmlWriteSpools):
 			pins = part.element.getChild('pins')
 			if pins:   # more than one
 				howManyPins = len(pins.getChildren())
+				# check if shielded cable
+				thisIsShielded = comp.getField("Shield")
+				if not thisIsShielded:
+					thisIsShielded = "None"
 #				print("Pins "+str(howManyPins))
 			else:		# no Pins continue	
 				continue
@@ -102,38 +108,49 @@ class xmlWriteConnections(xmlWriteSpools):
 				print("<PARAMETER name=\"UNIT\" value=\"MM\"/>", file = fout)
 				print("</CONNECTION>", file = fout)
 					
-			myCounter = 0						
+			myCounter = 0
+			lastWire = False
+			
 			for i in range(1, howManyPins, 2): #(each net has two counter parts)
 				connTableID = []
 				myCounter += 1
+				
+#				For shielded Cable the last wire is the shield wire.				
+				if (i+1) == howManyPins:
+					lastWire = True
+
+#				Find both ends of wire. Single ended wires are generally an error.
+#				Only Shielded cables can be single ended.					
 				tempNet = self.find_net(netlist, refDes, str(i))
 				wireNet1 = tempNet.get( "net", "name" )
 				tempNet = self.find_net(netlist, refDes, str(i+1))
 				wireNet2 = tempNet.get( "net", "name" )
-#				print("Scanning "+wireNet1+" and "+wireNet2)
 
 				scannedNode1 = self.find_matching_node(netlist, wireNet1)
 				scannedNode2 = self.find_matching_node(netlist, wireNet2)
-# Ignore nodes where both sides are not connected  
-				if  scannedNode1 and scannedNode2:
 				
-					if( thisIsCbl ):
-#						print("<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+spoolName+"_"+str(myCounter)+"\">", file = fout) #conductorName=\""+str(myCounter)+"\"
-						getSpoolIndex = self.spoolClass.getCblSpoolId(spoolName+"-"+str(myCounter))
-						if( getSpoolIndex<0 ):
-							print("No spoolIndex for "+spoolName+": pin:"+str(myCounter), file = sys.stderr)
-						else:
-							cblId = "sp"+str(getSpoolIndex+1)
-							print("<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+cblId+"\" type=\"SINGLE\">", file = fout) #conductorName=\""+str(myCounter)+"\"
+				if( thisIsCbl ):
+					getSpoolIndex = self.spoolClass.getCblSpoolId(spoolName+"-"+str(myCounter))
+					if( getSpoolIndex<0 ):
+						self.writeErrorStr("No spoolIndex for "+spoolName+": pin:"+str(myCounter))
 					else:
-						print("<CONNECTION name=\""+refDes+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"NONE\" spoolID=\"w_"+spoolName+"\" >", file = fout)
-				
-					if(  thisIsCbl ):
-						print("<SYS_PARAMETER id=\"conn_"+refDes+"_"+str(myCounter)+"\" />", file = fout)
-					else:	
-						print("<SYS_PARAMETER id=\"conn_"+refDes+"\" />", file = fout)
-					print("<PARAMETER name=\"LAYER\" value=\"DEF_LINES\"/>", file = fout)
+						cblId = "sp"+str(getSpoolIndex+1)
+						print("<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+cblId+"\" type=\"SINGLE\">", file = fout) #conductorName=\""+str(myCounter)+"\"
+				else:
+					print("<CONNECTION name=\""+refDes+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"NONE\" spoolID=\"w_"+spoolName+"\" >", file = fout)
+			
+				if(  thisIsCbl ):
+					print("<SYS_PARAMETER id=\"conn_"+refDes+"_"+str(myCounter)+"\" />", file = fout)
+# 					If this is shielded cable and the last connections
+					if lastWire and thisIsShielded!="None":					
+						print("<PARAMETER name=\"TYPE\" value=\"SHIELD\"/>", file = fout)
+					
+				else:	
+					print("<SYS_PARAMETER id=\"conn_"+refDes+"\" />", file = fout)
 
+				print("<PARAMETER name=\"LAYER\" value=\"DEF_LINES\"/>", file = fout)
+
+				if scannedNode1:
 					matchRef = scannedNode1.get("node", "ref")
 					matchPin = scannedNode1.get("node", "pin")
 					connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\"")
@@ -142,7 +159,18 @@ class xmlWriteConnections(xmlWriteSpools):
 					print("<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\" />", file = fout)
 					print("<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>", file = fout)
 					print("</NODE>", file = fout)
-
+				else:
+					self.writeErrorStr("Missing connection for nod "+refDes+": pin:"+str(i))					
+					matchRef = scannedNode2.get("node", "ref")
+					matchPin = scannedNode2.get("node", "pin")
+					
+					if( thisIsCbl and lastWire and thisIsShielded!="None" ):
+						connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\"")
+						print("<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"_SH\" type=\"POINT\" >", file = fout)
+						print("<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\" />", file = fout)
+						print("</NODE>", file = fout)
+						
+				if scannedNode2:
 					matchRef = scannedNode2.get("node", "ref")
 					matchPin = scannedNode2.get("node", "pin")
 					connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\"")
@@ -151,17 +179,60 @@ class xmlWriteConnections(xmlWriteSpools):
 					print("<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\" />", file = fout)
 					print("<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>", file = fout)
 					print("</NODE>", file = fout)
+				else:
+					self.writeErrorStr("Missing connection for nod "+refDes+": pin:"+str(i+1))
+					matchRef = scannedNode1.get("node", "ref")
+					matchPin = scannedNode1.get("node", "pin")
+
+					if( thisIsCbl and lastWire and thisIsShielded!="None" ):
+						connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\"")
+						print("<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"_SH\" type=\"POINT\" >", file = fout)
+						print("<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\" />", file = fout)
+						print("</NODE>", file = fout)						
 				
 # Component print Connection -------------------------------------------------------------											
-#				if (len(connTableID) >= 2):		
+				if (len(connTableID) >= 2):		
 					print("<SEGMENT name=\"seg_"+refDes+"_"+str(myCounter)+"\" >", file = fout)
 					print("<ATTACH node1ID="+connTableID[0]+" node2ID="+connTableID[1]+" />", file = fout)
 					print("</SEGMENT>", file = fout)		
-					print("</CONNECTION>", file = fout)
+
+				print("</CONNECTION>", file = fout)
 
 		if isOutputFileOpended == True:
 			fout.close()
 			isOutputFileOpended = False											
+
+
+#-----------------------------------------------------------------------------------------
+# String Logger functions
+#
+# These fuctions log the strings and outputs data to stdout and stderr
+#
+#-----------------------------------------------------------------------------------------		
+	def writeErrorStr( self, eStr ):
+		self.__errorString += eStr
+		
+	def getErrorStr( self ):
+		if self.__errorString == "":
+			self.__errorString="No Errors!"			
+		return self.__errorString 
+		
+	def clearErrorStr( self ):
+		self.__errorString=""
+
+	def writeWarningStr( self, wStr ):
+		#print( wStr )
+		self.__warningString += wStr
+		
+	def getWarningStr( self ):
+		if self.__warningString == "":
+			self.__warningString="No Warnigns!"
+		return self.__warningString 
+		
+	def clearWarningStr( self ):
+		self.__warningString=""		
+		
+		
 			
 '''			
 			for connector in components:

@@ -5,6 +5,14 @@ Target of this project is to produce Creo Schematic compatible output to Creo pa
 
 PTC Creo is one of the "big" 3d parametric design softwares. Other similar products are Solidworks, Catia, Autocad Inventor, Onshape etc. One advantage of these programs is that they let you model every detail of your product. You can import pcb's using the IDF format and you can also route cables to your end product. The cad program will give you the needed cable lengths and cable drawings.
 
+## Changes
+2021.01.08
+1. Added support for shielded cable.
+1. Added option for ktinker interface.
+1. Added support for hierarchical sheets. Mainly this means that backannotation goes through all sheets in design. If you use same schematic multiple times then the back annotation works only to the first instance of the sheet. Other sheets with the same name will have same wire lengths and part numbers as the first sheet. In creo, however, you can have totally different wire lengts and individual part numbers...  So don't use the same schematic multiple times unless you mean to use the same cables in all instances...
+
+Scripts may still contain lots of "Features"... but they are usually easily fixed encountered.
+
 ## Getting Started
 
 You can copy the entire repository to your PC.
@@ -37,5 +45,27 @@ Create an Schematic xml file from creo. Name it "Kicad design filename"+**_creoi
 2019-11 tried to add Sheath spools but failed. It seems that there is a bug in Creo. 
 Read the PTC article CS312099 "Sheath type spools are exported to NWF as cable spool and to XML as wire in Creo Parametric
 Applies to Creo Parametric 4.0 to 6.0."
+
+## Using with Kicad
+
+You can add the command to "Generate Bill of Materials". Add command with the "+" sign
+Create Creo Schematic xml-File
+* python "C:\directory_where_the_pythons_script_is/kicadToCreo.py" "%I" "%O"
+Back annotate Creo Schematic xml-file
+* python "C:\directory_where_the_pythons_script_is/xmlReadCreo.py" "%I" "%O"
+
+Note: For back annotation the filename must be same as the xxx.sch file except it must end with xxx_creoin.xml.
+
+You can add the command to "Generate Netlist". Add command with the "Add Plugin"-button.
+Add Netlist Command
+* python "C:\directory_where_the_pythons_script_is/kicadToCreo.py" "%I" "%O" "tkinter"
+
+With the graphical interface you can generate the xml with one button and back-annotate with another button.
+With the netlist option you can also generate the Creo Shematic file to any directory. Bom-button will generate the files to the directory where the schematic is.
+
+
+
+
+
 
 

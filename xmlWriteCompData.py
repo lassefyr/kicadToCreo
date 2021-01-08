@@ -38,6 +38,9 @@ class xmlWriteCompData:
 		self.INTERNAL_LEN = "5"
 		self.TERM_AUTO_ASSIGN = "TRUE"
 		self.idNum = 1				# This is the first component
+		self.__infoString = ""
+		self.__errorString = ""
+		self.__warningString = ""	
         
         
 	def writeCompData(self, netlist, outputFileName):
@@ -47,7 +50,7 @@ class xmlWriteCompData:
 			fout=open(outputFileName, "a")
 			isOutputFileOpended = True
 		except IOError:
-			print("Error opening file -- filename = \""+outputFileName+"\"", file=sys.stderr)
+			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
 		
 		components = netlist.getInterestingComponents()
@@ -56,10 +59,7 @@ class xmlWriteCompData:
 			refDes = comp.getRef()
 			part = comp.getLibPart()
 
-# Component currently only components starting with J are allowed 
-# This can be changed to e.g. all cabling components allowed (refdes starts with cbl_XX##
-# Where xx is the refdes (SPKR, J, BUTTON, SWITCH, etc 			
-#			if refDes[:1] != "J":
+# Currently only components that are not W or CBL are allowed... You can have BTNxx, Relayxx, etc
 			if refDes [:1] == "W" or refDes [:3] == "CBL":
 				continue
 
@@ -76,11 +76,12 @@ class xmlWriteCompData:
 # Component COMPONENT --------------------------------------------------------------------			
 			if not self.CMP_USEVAL[0]:						
 				creoModel = comp.getField("Value")
+				self.writeInfoStr("\""+refDes+"\" - Using Component Name as Modelname!\n")
 			else:
 				creoModel = self.CMP_USEVAL[0]
 				
 			if not creoModel:
-				print(refDes+ " no Creo model name found!")
+				self.writeWarningStr(refDes+ " no Creo model name found!\n")
 				creoModel = "NOT_DEFINED"
 					
 			print("<COMPONENT name=\""+refDes+"\" REFDES=\""+refDes+"\" subType=\"COMPONENT\" type=\"COMPONENT\" context=\"NONE\" modelName=\""+creoModel+"\" >", file = fout)
@@ -101,7 +102,7 @@ class xmlWriteCompData:
 				howManyPins = len(pins.getChildren())
 				print("<PARAMETER name=\"NUM_OF_PINS\" value=\""+str(howManyPins)+"\" />", file = fout)
 			else:
-				print(""+refDes+", no pins found!", file=sys.stderr)
+				self.writeErrorStr(""+refDes+", no pins found!")
 		
 # Component OBJ_TYPE Connector (Optional)-------------------------------------------------
 			print("<PARAMETER name=\"OBJ_TYPE\" value=\"connector\" />", file = fout)			
@@ -109,21 +110,28 @@ class xmlWriteCompData:
 #			print("<PARAMETER name=\"ATTACHED_TO_HARNESS value=\"TRUE\" />", file = fout)
 
 			if not self.CMP_USEVAL[7]:
-				print("\""+refDes+"\" - No termName (Crimp) found!")
+				self.writeInfoStr("\""+refDes+"\" - No termName (Crimp) found!\n")
 				#termName = "No terminal defined"
 		
 # Component PORT parameters for each pin  ------------------------------------------------
+			forbiddenchars = set('!\"#$%&\'()*+,-./:;<=>?@[\\]^`{|}~.')
 			for thisPin in pins.getChildren():
 				print("<PORT name=\""+thisPin.get("pin", "num")+"\" physicalName=\""+thisPin.get("pin", "num")+"\" >", file = fout)
 				print("<SYS_PARAMETER id=\"comp_"+refDes+"_"+thisPin.get("pin", "num")+"\" />", file = fout)
 				
 #				print("<PARAMETER name=\"PORT_TYPE\" value=\""+self.PORT_TYPE+"\" />", file = fout)	
-				myPinName = thisPin.get("pin", "name")
+				myPinName = (thisPin.get("pin", "name")).strip( )
 				myPinName = myPinName.upper( )
-				if ( myPinName == "" ):
+				validPinName = True
+				if ( any((c in forbiddenchars) for c in myPinName) ):
+					validPinName = False
+				if ( myPinName == "" or not validPinName ):
 					myPinName = self.CMP_USEVAL[6]+thisPin.get("pin", "num")
-								
-				print("<PARAMETER name=\"ENTRY_PORT\" value=\" "+myPinName+"\" />", file = fout)
+					if( not validPinName ):
+						self.writeWarningStr(refDes+ " Pin Name contains invalid characters: " + (thisPin.get("pin", "name")).strip( ) + " !\n" )
+						self.writeWarningStr("Using default pin Name = " + myPinName + "\n" )
+													
+				print("<PARAMETER name=\"ENTRY_PORT\" value=\""+myPinName+"\" />", file = fout)
 				print("<PARAMETER name=\"SIGNAL_VALUE\" value=\"X\" />", file = fout)
 				print("<PARAMETER name=\"GROUPING\" value=\""+self.CMP_USEVAL[5]+"\" />", file = fout)
 				print("<PARAMETER name=\"LAYER\" value=\"DEF_LINES\" />", file = fout)					
@@ -140,3 +148,38 @@ class xmlWriteCompData:
 		if isOutputFileOpended == True:
 			fout.close()
 			isOutputFileOpended = False
+
+#-----------------------------------------------------------------------------------------
+# String Logger functions
+#
+# These fuctions log the strings and outputs data to stdout and stderr
+#
+#-----------------------------------------------------------------------------------------		
+	def writeInfoStr( self, iStr ):
+		self.__infoString += iStr
+
+	def getInfoStr( self ):
+		return self.__infoString 
+
+	def writeErrorStr( self, eStr ):
+		self.__errorString += eStr
+		
+	def getErrorStr( self ):
+		if self.__errorString == "":
+			self.__errorString="No Errors!"		
+		return self.__errorString 
+		
+	def clearErrorStr( self ):
+		self.__errorString=""
+
+	def writeWarningStr( self, wStr ):
+		self.__warningString += wStr
+		
+	def getWarningStr( self ):
+		if self.__warningString == "":
+			self.__warningString="No Warnigns!"
+		return self.__warningString 
+		
+	def clearWarningStr( self ):
+		self.__warningString=""
+

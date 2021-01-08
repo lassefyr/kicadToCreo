@@ -38,6 +38,8 @@ class xmlWriteSpools:
 		self.__spoolData = ""
 		self.cblSpoolName = []
 		self.cblSpoolId = []
+		self.__errorString = ""
+		self.__warningString=""	
         
 	def writeSpoolData(self, netlist, outputFileName):
 		isOutputFileOpended = False
@@ -45,20 +47,21 @@ class xmlWriteSpools:
 			fout=open(outputFileName, "a")
 			isOutputFileOpended = True
 		except IOError:
-			print("Error opening file -- filename = \""+outputFileName+"\"", file=sys.stderr)
+			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
 		
 		components = netlist.getInterestingComponents()
 		
+		# Write individual spool data (single wires)
 		self.writeWireSpool(components)
 		print(self.__spoolData, file = fout)
 
-		# Zero the array before otherSpool
+		# Zero the array before otherSpool. Other spools are the tubes, shrinks and tape.
 		self.__spoolData = ""
 		self.writeOtherSpool(components)
 		print(self.__spoolData, file = fout)
 
-		# Zero the array before CblSpool
+		# Zero the array before CblSpool and write cables (multiple conductor cables with sheath)
 		self.__spoolData = ""
 		self.writeCblSpool(components)
 		print(self.__spoolData, file = fout)
@@ -84,9 +87,11 @@ class xmlWriteSpools:
 			spoolName = comp.getField("Value")
 			
 			if not spoolName:
-				print(refDes+ " no Spool name defined!", file=sys.stderr)
+				self.writeErrorStr(refDes+ " no Spool name defined!")
 				spoolName = "NOT_DEFINED"
 				continue
+
+#			self.writeWarningStr("writing " + refDes)
 
 # Check if Spool has been processed ------------------------------------------------------
 			exitCompInComponentsLoop = False			
@@ -116,7 +121,7 @@ class xmlWriteSpools:
 				
 			numOfCoductors = comp.getField("Num_conductors")
 			if int(numOfCoductors) != int(howManyPins/2):
-				print( "CBL_SPOOL: Num_conductors different from Numofpins/2 "+ numOfCoductors)
+				self.writeWarningStr( "CBL_SPOOL: Num_conductors different from Numofpins/2 "+ numOfCoductors)
 			
 			thickness = comp.getField("Thickness")
 			if not thickness:
@@ -191,7 +196,8 @@ class xmlWriteSpools:
 		self.cblSpoolId.append(spoolNumber)
 	
 	def printCblSpoolNames(self):
-		print(self.cblSpoolName)
+		# print(self.cblSpoolName)
+		return self.cblSpoolName
 
 	def getCblSpoolId(self, spoolName):
 		try:
@@ -219,7 +225,7 @@ class xmlWriteSpools:
 			
 			spoolName = comp.getField("Value")
 			if not spoolName:
-				print(refDes+ " no Spool name defined!")
+				self.writeWarningStr(refDes+ " no Spool name defined!")
 				spoolName = "NOT_DEFINED"
 				continue
 
@@ -239,13 +245,13 @@ class xmlWriteSpools:
 # Wire COLOR -----------------------------------------------------------------------------			
 			spoolColor = comp.getField("Color")
 			if not spoolColor:
-				print("No Spool color defined!")
+				self.writeWarningStr("No Spool color defined for "+spoolName)
 				spoolColor = self.DEF_COLOR
 			self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+spoolColor+"\" />\n"
 # Wire DENSITY ---------------------------------------------------------------------------			
 			density = comp.getField("Density")
 			if not density:
-				print("No Density for wire defined!")
+				self.writeWarningStr("No Density for wire "+spoolName+" defined!")
 			else:
 				self.__spoolData += "<PARAMETER name=\"DENSITY\" value=\""+density+"\" />\n"
 				self.__spoolData += "<PARAMETER name=\"MASS_UNITS\" value=\"KG\" />\n"
@@ -253,7 +259,7 @@ class xmlWriteSpools:
 # Wire MIN_BEND_RADIUS -------------------------------------------------------------------			
 			minBend = comp.getField("Min_bend_radius")
 			if not minBend:
-				print("No minimum bend radius defined!")
+				self.writeWarningStr("No minimum bend radius defined!")
 				minBend = self.MIN_BEND
 			self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBend+"\" />\n"
 
@@ -263,7 +269,7 @@ class xmlWriteSpools:
 # Wire THICKNESS -------------------------------------------------------------------------									
 			thickness = comp.getField("Thickness")
 			if not thickness:
-				print("No Thickness defined!")
+				self.writeWarningStr("No Thickness defined!")
 				thickness = self.MIN_THICKNESS
 			self.__spoolData += "<PARAMETER name=\"THICKNESS\" value=\""+thickness+"\" />\n"
 
@@ -273,7 +279,7 @@ class xmlWriteSpools:
 # Wire WIRE_GAUGE (Optional) -------------------------------------------------------------															
 			gauge = comp.getField("Gauge")
 			if not gauge:
-				print("No Gauge defined!")
+				self.writeWarningStr("No Gauge for "+spoolName+" defined!")
 			else:
 				self.__spoolData += "<PARAMETER name=\"WIRE_GAUGE\" value=\""+gauge+"\" />\n"
 
@@ -332,7 +338,7 @@ class xmlWriteSpools:
 			
 			spoolName = comp.getField("Value")
 			if not spoolName:
-				print(refDes+ " no Spool name defined!")
+				self.writeWarningStr(refDes+ " no Spool name defined!")
 				spoolName = "NOT_DEFINED"
 				continue
 
@@ -355,28 +361,28 @@ class xmlWriteSpools:
 			sheathType = comp.getField("Sheath_type")
 			sheathType = sheathType.upper()
 			if not sheathType:
-				print("No Sheath Type defined for " + refDes+"!")
+				self.writeWarningStr("No Sheath Type defined for "+refDes+"!")
 				sheathType = "TUBE"
 			self.__spoolData += "<PARAMETER name=\"SHEATH_TYPE\" value=\""+sheathType+"\" />\n"
 
 # Sheath WALL THICKNESS -------------------------------------------------------------------------									
 			thickness = comp.getField("Wall_Thickness")
 			if not thickness:
-				print("No Wall Thickness defined for "+refDes+"! Using default value = 1")
+				self.writeWarningStr("No Wall Thickness defined for "+refDes+"! Using default value = 1")
 				thickness = "1"
 			self.__spoolData += "<PARAMETER name=\"WALL_THICKNESS\" value=\""+thickness+"\" />\n"
 
 # Sheath COLOR -----------------------------------------------------------------------------			
 			spoolColor = comp.getField("Color")
 			if not spoolColor:
-				print("No Spool color defined!")
+				self.writeWarningStr("No Spool color defined for "+spoolName)
 				spoolColor = self.DEF_COLOR
 			self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+spoolColor+"\" />\n"
 
 # Sheath MIN_BEND_RADIUS -------------------------------------------------------------------			
 			minBend = comp.getField("Min_bend_radius")
 			if not minBend:
-				print("No minimum bend radius defined!")
+				self.writeWarningStr("No minimum bend radius defined for "+spoolName)
 				minBend = self.MIN_BEND
 			self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBend+"\" />\n"
 
@@ -386,17 +392,17 @@ class xmlWriteSpools:
 # Sheath Inner Diameter  -------------------------------------------------------------------
 			innerDiam = comp.getField("Preshrink_inner_diameter")
 			if not innerDiam:
-				print("No Inned Diameter defined for " + refDes+"!")
+				self.writeWarningStr("No Inned Diameter defined for " + refDes+"!")
 				innerDiam = "10"
 			self.__spoolData += "<PARAMETER name=\"PRESHRINK_INNER_DIAMETER\" value=\""+innerDiam+"\" />\n"
 
 # Sheath Outer Diameter  -------------------------------------------------------------------
 			outerDiam = comp.getField("Outer_Diameter")
 			if not outerDiam:
-				print("No Outer Diameter defined for " + refDes+"!")
+				self.writeWarningStr("No Outer Diameter defined for " + refDes+"!")
 				innerDiam = "11"
 			if int(innerDiam) >= int(outerDiam):
-				print("Inner diameter larger than Outer diameter for " + refDes+"!")
+				self.writeWarningStr("Inner diameter larger than Outer diameter for " + refDes+"!")
 				outerDiam = str(int(innerDiam)+1)
 				
 			self.__spoolData += "<PARAMETER name=\"OUTER_DIAMETER\" value=\""+outerDiam+"\" />\n"
@@ -413,6 +419,34 @@ class xmlWriteSpools:
 			if description:
 				self.__spoolData += "<PARAMETER name=\"SPECIFICATION\" value=\""+description+"\" />\n"
 			
-# Sheath END SPOOL DEFINE ------------------------------------------------------------------																					
+# Sheath END SPOOL DEFINE ------------------------------------------------------------------															
 			self.__spoolData += "</SPOOL>\n"
-						
+
+#-----------------------------------------------------------------------------------------
+# String Logger functions
+#
+# These fuctions log the strings and outputs data to stdout and stderr
+#
+#-----------------------------------------------------------------------------------------		
+	def writeErrorStr( self, eStr ):
+		self.__errorString += eStr
+		
+	def getErrorStr( self ):
+		if self.__errorString == "":
+			self.__errorString="No Errors!"
+		return self.__errorString 
+		
+	def clearErrorStr( self ):
+		self.__errorString=""
+
+	def writeWarningStr( self, wStr ):
+		self.__warningString += wStr
+		
+	def getWarningStr( self ):
+		if self.__warningString == "":
+			self.__warningString="No Warnigns!"
+		return self.__warningString 
+		
+	def clearWarningStr( self ):
+		self.__warningString=""						
+
