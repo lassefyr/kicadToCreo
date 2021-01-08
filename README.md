@@ -51,10 +51,11 @@ Applies to Creo Parametric 4.0 to 6.0."
 You can add the command to "Generate Bill of Materials". Add command with the "+" sign
 Create Creo Schematic xml-File
 * python "C:\directory_where_the_pythons_script_is/kicadToCreo.py" "%I" "%O"
-Back annotate Creo Schematic xml-file
+
+To back-annotate Creo Schematic xml-file
 * python "C:\directory_where_the_pythons_script_is/xmlReadCreo.py" "%I" "%O"
 
-Note: For back annotation the filename must be same as the xxx.sch file except it must end with xxx_creoin.xml.
+**Note:** For back annotation the filename must be same as is for the kicad schematic file(xxx.sch) except it must end with xxx_creoin.xml.
 
 You can add the command to "Generate Netlist". Add command with the "Add Plugin"-button.
 Add Netlist Command
