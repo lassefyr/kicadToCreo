@@ -1,5 +1,10 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP 10awg_yl_1
+D 10AWG, 6mm2, Class 5 Flexible, Stranded, PVC 100m, Yellow/Green
+K Wire 10awg
+$ENDCMP
+#
 $CMP 10pin_flat_round
 D 3M Round, Jacketed, Flat Cable 10pin, 3759/10 (SO)
 K cable 22awg
@@ -39,6 +44,12 @@ $ENDCMP
 $CMP 16awgx4_u_7_3mm
 D 4 Conductor Multi-Conductor Cable White 16 AWG (30.5m
 K cable 16awg
+F ~
+$ENDCMP
+#
+$CMP 17awgx3_u_7_0mm
+D Tasker C262-VA 3 x 1.0 mm2. Brown, Blue, Ye-Gn, OD=7.0mm
+K cable 17awg
 F ~
 $ENDCMP
 #
@@ -83,6 +94,12 @@ D Hook Up MIL-W-76B Type MW, PVC, Orange, 20 AWG, 0.51 mm2, 30.5 m
 K Wire 20awg
 $ENDCMP
 #
+$CMP 20awgx2_swcraft
+D Switchcraft DC-Plug With 2m 20awg Cable
+K cable 20awg
+F ~
+$ENDCMP
+#
 $CMP 21awgx2_u_4_7mm
 D 028502 - Unitronic LiYY, Unscreened, 2 Core, 21 AWG, 0.5 mm2, 50 m
 K cable 21awg
@@ -91,6 +108,11 @@ $ENDCMP
 #
 $CMP 22awg_bk_1
 D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_bk_2
+D Hook-up Wire 22AWG 7/30 UL1061, 1.27mm OD
 K Wire 22awg
 $ENDCMP
 #
@@ -119,6 +141,11 @@ D Hook-up Wire 22AWG 7/30 SR-PVC
 K Wire 22awg
 $ENDCMP
 #
+$CMP 22awg_rd_2
+D Hook-up Wire Red 22AWG 7/30 UL1061, 1.27mm OD
+K Wire 22awg
+$ENDCMP
+#
 $CMP 22awg_sl_1
 D Hook-up Wire 22AWG 7/30 SR-PVC
 K Wire 22awg
@@ -143,6 +170,12 @@ $ENDCMP
 $CMP 22awgx2_u_4_1mm
 D 2 Conductor 7/30 Cable 22 AWG Gray
 K cable 22awg
+F ~
+$ENDCMP
+#
+$CMP 22awgx3_s_4_5mm
+D 3 Conductor Shielded 7/30 Cable 22 AWG Gray
+K cable 22awg Shielded
 F ~
 $ENDCMP
 #
@@ -179,6 +212,32 @@ K cable 24awg
 F ~
 $ENDCMP
 #
+$CMP 24awgx4_u_4_3mm
+D 4 Conductor 7/32 Cable 24 AWG Gray
+K cable 24awg
+F ~
+$ENDCMP
+#
+$CMP 26awg_bk_1
+D 26 AWG Hook-Up Wire 7/32 Black 300V 30.5m, OD 0.89mm
+K Wire 26awg
+$ENDCMP
+#
+$CMP 26awg_rd_1
+D 26 AWG Hook-Up Wire 7/32 Red 300V 30.5m, OD 0.89mm
+K Wire 26awg
+$ENDCMP
+#
+$CMP 26awg_wh_1
+D 26 AWG Hook-Up Wire 7/32 White 300V 30.5m, OD 0.89mm
+K Wire 26awg
+$ENDCMP
+#
+$CMP 26awg_yl_1
+D 26 AWG Hook-Up Wire 7/32 Yellow 300V 30.5m, OD 0.89mm
+K Wire 26awg
+$ENDCMP
+#
 $CMP 3m_37103-a165
 D 3m 3 Position Rectangular Plug Connector IDC Gold 20-24 AWG
 K connector
@@ -191,9 +250,38 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Ant_u_fl
+D Antenna Connector U.FL a
+K U.FL Antenna
+F ~
+$ENDCMP
+#
 $CMP Audio_cable
 D Standard Stereo Audio  Cable
 K Audio Cable
+$ENDCMP
+#
+$CMP Ca760k07984
+D Switchcraft 760K Plug 2.5x5.5mm Solder, With Lockring. Barrel length 9.5mm
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Ca761k07984
+D Switchcraft 761K Plug 2.5x5.5mm, With Lockring. Barrel length 12.04mm, Thread 5/16-32
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Ca761k_ra
+D Switchcraft 761K Plug 2.5x5.5mm, RA, With Lockring. Barrel length 12.04mm, Thread 5/16-32
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Coax_1_13mm
+D Coaxial Cable 1.13mm
+K Coaxial
 $ENDCMP
 #
 $CMP Conn_01x05_Female
@@ -210,6 +298,24 @@ $ENDCMP
 #
 $CMP Dc_2_1x5_5_lockplug
 D Cable Assembly Twist Lock, 2.1mm ID, 5.5mm OD Plug 22awg, 915.00mm
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Dc_2_1x5_5_plug
+D Cable Assembly 2.1mm ID, 5.5mm OD Plug to Wire Leads Flat 1.83m, 18awg
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Dc_2_5x5_5_fitlet2
+D Cable Assembly Twist Lock, 2.5mm ID, 5.5mm OD Plug Fitlet
+K DC power barrel Plug connector Fitlet2
+F ~
+$ENDCMP
+#
+$CMP Dc_2_5x5_5_lockplug
+D Cable Assembly Twist Lock, 2.5mm ID, 5.5mm OD Plug 22awg, 915.00mm
 K DC power barrel Plug connector
 F ~
 $ENDCMP
@@ -281,6 +387,12 @@ K cable 2.5mm2
 F ~
 $ENDCMP
 #
+$CMP Hdmi_male
+D Hdmi male connector
+K connector Hdmi
+F  ~
+$ENDCMP
+#
 $CMP Hdp24-24-23sn
 D Deutsch HDP20 Housing for female terminals, Wire-to-Wire, 23 Position, Sealable, Green, Power & Signal, Panel
 K connector
@@ -325,6 +437,12 @@ $ENDCMP
 #
 $CMP Jae_il-g-3s
 D Jae 3 Position Housing Receptacle Brown 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_phdr-22vs
+D Jst 22-Pin Connectors - 2-Roe Housings Receptacle Natural 2.00mm
 K connector
 F ~
 $ENDCMP
@@ -437,6 +555,24 @@ K connector Displayport
 F  ~
 $ENDCMP
 #
+$CMP Motor_dc
+D 2 Terminal DC motor
+K Motor
+F ~
+$ENDCMP
+#
+$CMP Mw_lrs-100-24
+D Meanwell LRS-100W, 65-264Vac Input, 24Vdc Output PSU, M3.5 Terminal Screws
+K Power Supply
+F ~
+$ENDCMP
+#
+$CMP Mx_39012-04
+D Molex Mini-Fit Jr. Receptacle Housing, Dual Row, 4 Circuits
+K connector Mini-Fit
+F ~
+$ENDCMP
+#
 $CMP Mx_43025-02
 D Generic connector, double row, 02x01, this symbol is compatible with counter-clockwise, top-bottom and odd-even numbering schemes., script generated (kicad-library-utils/schlib/autogen/connector/)
 K connector
@@ -491,6 +627,18 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Mx_51021-07
+D Molex 7-pin PicoBlade Receptacle, Single Row, 1.25mm Pitch
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_51021-12
+D Molex 12-pin PicoBlade Receptacle, Single Row, 1.25mm Pitch
+K connector
+F ~
+$ENDCMP
+#
 $CMP Mx_510210800
 D Molex 1.25mm Pitch, PicoBlade Receptacle Crimp Housing
 K connector
@@ -505,6 +653,12 @@ $ENDCMP
 #
 $CMP Mx_5264-03
 D 2.50mm Pitch, Mini-SPOX Receptacle Crimp Housing
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_5264-04
+D 2.50mm Pitch, 4-pin Mini-SPOX Receptacle Crimp Housing
 K connector
 F ~
 $ENDCMP
@@ -534,8 +688,20 @@ F ~
 $ENDCMP
 #
 $CMP Omron_ee-sx770
-D Omron, Optical Sensor Through-Beam 5mm Module, Pre-Wired 
+D Omron, Optical Sensor Through-Beam 5mm Module, Pre-Wired
 K Sensor Hall
+F ~
+$ENDCMP
+#
+$CMP Opb100-ez
+D TT Electronics Infrared LED emitter 880nm
+K Optical Emitter
+F ~
+$ENDCMP
+#
+$CMP Opb100-sz
+D TT Electronics Silicon Phototransistor Sensor
+K Phototransistor Sensor
 F ~
 $ENDCMP
 #
@@ -553,6 +719,12 @@ $ENDCMP
 #
 $CMP Qc_22awg_4_75x0_8
 D 4.75mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
+$CMP Qc_22awg_5_2x0_8
+D 5.21mmx0.81mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
 K Quick Connect Terminal
 F ~
 $ENDCMP
@@ -575,14 +747,44 @@ K Quick Connect Terminal
 F ~
 $ENDCMP
 #
+$CMP Qc_rcpt_6_3x0_8_piggy
+D Conn QC Terminals 6.35mm x 0.81mm RCPT AWG 18-14 Piggy-Back
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
+$CMP Qc_red_6_3x0_8_pb
+D Molex SD-19013-001 Piggyback, .250X.032 Tab, Insulkrimp
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
 $CMP Ring_trm_red_m4
 D TE Ring Terminal Connector 8 Stud Circular 16-22 AWG Crimp
 K Ring Terminal
 F ~
 $ENDCMP
 #
+$CMP Ring_trm_yel_m5
+D TE Ring Terminal Connector M5 Stud Circular 10-12 AWG Crimp
+K Ring Terminal
+F ~
+$ENDCMP
+#
 $CMP Sharp_gp2y0a02yk0f
 D JST 3-Position  Housing Receptacle Natural 0.079" (2.00mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Sii_capm347
+D Seiko Instruments Capm347g/H/E Autocutter Integrated Thermal Printer Mechanism
+K Ticket Printer
+F ~
+$ENDCMP
+#
+$CMP Sol_2-wires
+D 2 Wire Solenoid
 K connector
 F ~
 $ENDCMP
@@ -599,8 +801,20 @@ K connector audio
 F  ~
 $ENDCMP
 #
+$CMP Te_164531-4
+D D-Sub Receptacle, 9 Position
+K Dsub
+F https://www.te.com/global-en/product-164531-4.html
+$ENDCMP
+#
 $CMP Te_172162-1
 D MATE-N-LOK, Rectangular Connectors, Housing, Receptacle, 12 Position, 4.2mm
+K connector
+F ~
+$ENDCMP
+#
+$CMP Te_180907-x
+D TE 2 Way Fastin-Faston Receptacle Housing .250 Series 18-22awg Terminal
 K connector
 F ~
 $ENDCMP
@@ -640,8 +854,20 @@ K connector USB
 F  ~
 $ENDCMP
 #
+$CMP Usb-a_pnl_mnt
+D USB Type A Panel Mount Connector
+K connector USB
+F  ~
+$ENDCMP
+#
 $CMP Usb-b_plug
 D USB Type B connector Plug
+K connector USB
+F  ~
+$ENDCMP
+#
+$CMP Usb-c_plug
+D USB Type C connector
 K connector USB
 F  ~
 $ENDCMP
@@ -657,9 +883,27 @@ D Standard USB 2.0 Cable
 K Usb Cable
 $ENDCMP
 #
+$CMP Ws2812b_19pcs
+D Ws2812b 60 LEDs/meter Strip cut to length
+K LED Strip
+F ~
+$ENDCMP
+#
+$CMP e_sw_lp1
+D E-Switch Pushbutton Switch SPST-NO Standard, Illuminated Panel Mount, Snap-In
+K Pushbutton Illuminated
+F ~
+$ENDCMP
+#
 $CMP ee-sx770x3_u_2_4mm
 D 3 Conductor Omron EE-SX770 2M meters 28awg
 K cable 22awg
+F ~
+$ENDCMP
+#
+$CMP luxeon_1w_star
+D Luxeon 1W Star LED lamp.
+K LED Star
 F ~
 $ENDCMP
 #

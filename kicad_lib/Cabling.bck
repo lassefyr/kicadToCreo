@@ -1,5 +1,10 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP 10awg_yl_1
+D 10AWG, 6mm2, Class 5 Flexible, Stranded, PVC 100m, Yellow/Green
+K Wire 10awg
+$ENDCMP
+#
 $CMP 10pin_flat_round
 D 3M Round, Jacketed, Flat Cable 10pin, 3759/10 (SO)
 K cable 22awg
@@ -94,6 +99,11 @@ D Hook-up Wire 22AWG 7/30 SR-PVC
 K Wire 22awg
 $ENDCMP
 #
+$CMP 22awg_bk_2
+D Hook-up Wire 22AWG 7/30 UL1061, 1.27mm OD
+K Wire 22awg
+$ENDCMP
+#
 $CMP 22awg_bl_1
 D Hook-up Wire 22AWG 7/30 SR-PVC
 K Wire 22awg
@@ -116,6 +126,11 @@ $ENDCMP
 #
 $CMP 22awg_rd_1
 D Hook-up Wire 22AWG 7/30 SR-PVC
+K Wire 22awg
+$ENDCMP
+#
+$CMP 22awg_rd_2
+D Hook-up Wire Red 22AWG 7/30 UL1061, 1.27mm OD
 K Wire 22awg
 $ENDCMP
 #
@@ -158,10 +173,51 @@ K cable 22awg
 F ~
 $ENDCMP
 #
+$CMP 24awg_bk_1
+D 24 AWG Hook-Up Wire 7/32 Black 600V 30.5m
+K Wire 24awg
+$ENDCMP
+#
+$CMP 24awg_bl_1
+D 24 AWG Hook-Up Wire 7/32 Blue 600V 30.5m
+K Wire 24awg
+$ENDCMP
+#
+$CMP 24awg_rd_1
+D 24 AWG Hook-Up Wire 7/32 Red 600V 30.5m
+K Wire 24awg
+$ENDCMP
+#
 $CMP 24awgx3_u_4_0mm
 D Lapp Multicore Cable, Unitronic  LiYY, Unscreened, 3 Core, 24 AWG, 0.25 mm2
 K cable 24awg
 F ~
+$ENDCMP
+#
+$CMP 24awgx4_u_4_3mm
+D 4 Conductor 7/32 Cable 24 AWG Gray
+K cable 24awg
+F ~
+$ENDCMP
+#
+$CMP 26awg_bk_1
+D 26 AWG Hook-Up Wire 7/32 Black 300V 30.5m, OD 0.89mm
+K Wire 26awg
+$ENDCMP
+#
+$CMP 26awg_rd_1
+D 26 AWG Hook-Up Wire 7/32 Red 300V 30.5m, OD 0.89mm
+K Wire 26awg
+$ENDCMP
+#
+$CMP 26awg_wh_1
+D 26 AWG Hook-Up Wire 7/32 White 300V 30.5m, OD 0.89mm
+K Wire 26awg
+$ENDCMP
+#
+$CMP 26awg_yl_1
+D 26 AWG Hook-Up Wire 7/32 Yellow 300V 30.5m, OD 0.89mm
+K Wire 26awg
 $ENDCMP
 #
 $CMP 3m_37103-a165
@@ -176,9 +232,20 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Ant_u_fl
+D Antenna Connector U.FL a
+K U.FL Antenna
+F ~
+$ENDCMP
+#
 $CMP Audio_cable
 D Standard Stereo Audio  Cable
 K Audio Cable
+$ENDCMP
+#
+$CMP Coax_1_13mm
+D Coaxial Cable 1.13mm
+K Coaxial
 $ENDCMP
 #
 $CMP Conn_01x05_Female
@@ -195,6 +262,18 @@ $ENDCMP
 #
 $CMP Dc_2_1x5_5_lockplug
 D Cable Assembly Twist Lock, 2.1mm ID, 5.5mm OD Plug 22awg, 915.00mm
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Dc_2_1x5_5_plug
+D Cable Assembly 2.1mm ID, 5.5mm OD Plug to Wire Leads Flat 1.83m, 18awg
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Dc_2_5x5_5_lockplug
+D Cable Assembly Twist Lock, 2.5mm ID, 5.5mm OD Plug 22awg, 915.00mm
 K DC power barrel Plug connector
 F ~
 $ENDCMP
@@ -266,6 +345,12 @@ K cable 2.5mm2
 F ~
 $ENDCMP
 #
+$CMP Hdmi_male
+D Hdmi male connector
+K connector Hdmi
+F  ~
+$ENDCMP
+#
 $CMP Hdp24-24-23sn
 D Deutsch HDP20 Housing for female terminals, Wire-to-Wire, 23 Position, Sealable, Green, Power & Signal, Panel
 K connector
@@ -310,6 +395,12 @@ $ENDCMP
 #
 $CMP Jae_il-g-3s
 D Jae 3 Position Housing Receptacle Brown 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_phdr-22vs
+D Jst 22-Pin Connectors - 2-Roe Housings Receptacle Natural 2.00mm
 K connector
 F ~
 $ENDCMP
@@ -386,6 +477,18 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Jst_xhp-3
+D Jst xhp-3, Housings Receptacle Natural (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_xhp-4
+D Jst xhp-4, Housings Receptacle Natural (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
 $CMP Keystone-pn229
 D Cui Power Barrel Connector Plug 2.50mm ID, 5.50mm OD Free Hanging
 K DC power barrel Plug connector
@@ -395,6 +498,12 @@ $ENDCMP
 $CMP Kycon_kppx-4p
 D Kycon DC Power Connectors KPPX-4P
 K connector
+F ~
+$ENDCMP
+#
+$CMP Littelfuse_hall_1
+D Littelfuse Inc. Magnetic Hall Effect, South Pole Voltage Wire Leads 24awg
+K Sensor Hall
 F ~
 $ENDCMP
 #
@@ -458,6 +567,18 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Mx_51021-07
+D Molex 7-pin PicoBlade Receptacle, Single Row, 1.25mm Pitch
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_51021-12
+D Molex 12-pin PicoBlade Receptacle, Single Row, 1.25mm Pitch
+K connector
+F ~
+$ENDCMP
+#
 $CMP Mx_510210800
 D Molex 1.25mm Pitch, PicoBlade Receptacle Crimp Housing
 K connector
@@ -472,6 +593,12 @@ $ENDCMP
 #
 $CMP Mx_5264-03
 D 2.50mm Pitch, Mini-SPOX Receptacle Crimp Housing
+K connector
+F ~
+$ENDCMP
+#
+$CMP Mx_5264-04
+D 2.50mm Pitch, 4-pin Mini-SPOX Receptacle Crimp Housing
 K connector
 F ~
 $ENDCMP
@@ -500,6 +627,12 @@ K Connector Nk10
 F ~
 $ENDCMP
 #
+$CMP Omron_ee-sx770
+D Omron, Optical Sensor Through-Beam 5mm Module, Pre-Wired
+K Sensor Hall
+F ~
+$ENDCMP
+#
 $CMP Qc_22-18awg_6_3x0_8
 D Conn QC rcpt 18-22awg 0.250 (6.3mmx0.8mm) Non-Insulated
 K Quick Connect Terminal
@@ -514,6 +647,12 @@ $ENDCMP
 #
 $CMP Qc_22awg_4_75x0_8
 D 4.75mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
+K Quick Connect Terminal
+F ~
+$ENDCMP
+#
+$CMP Qc_22awg_5_2x0_8
+D 5.21mmx0.81mm Quick Connect Female 18-22 AWG Crimp Connector Non-Insulated
 K Quick Connect Terminal
 F ~
 $ENDCMP
@@ -542,9 +681,21 @@ K Ring Terminal
 F ~
 $ENDCMP
 #
+$CMP Ring_trm_yel_m5
+D TE Ring Terminal Connector M5 Stud Circular 10-12 AWG Crimp
+K Ring Terminal
+F ~
+$ENDCMP
+#
 $CMP Sharp_gp2y0a02yk0f
 D JST 3-Position  Housing Receptacle Natural 0.079" (2.00mm)
 K connector
+F ~
+$ENDCMP
+#
+$CMP Sii_capm347
+D Seiko Instruments Capm347g/H/E Autocutter Integrated Thermal Printer Mechanism
+K Ticket Printer
 F ~
 $ENDCMP
 #
@@ -562,6 +713,12 @@ $ENDCMP
 #
 $CMP Te_172162-1
 D MATE-N-LOK, Rectangular Connectors, Housing, Receptacle, 12 Position, 4.2mm
+K connector
+F ~
+$ENDCMP
+#
+$CMP Te_180907-x
+D TE 2 Way Fastin-Faston Receptacle Housing .250 Series 18-22awg Terminal
 K connector
 F ~
 $ENDCMP
@@ -601,8 +758,20 @@ K connector USB
 F  ~
 $ENDCMP
 #
+$CMP Usb-a_pnl_mnt
+D USB Type A Panel Mount Connector
+K connector USB
+F  ~
+$ENDCMP
+#
 $CMP Usb-b_plug
 D USB Type B connector Plug
+K connector USB
+F  ~
+$ENDCMP
+#
+$CMP Usb-c_plug
+D USB Type C connector
 K connector USB
 F  ~
 $ENDCMP
@@ -616,6 +785,30 @@ $ENDCMP
 $CMP Usb_cable
 D Standard USB 2.0 Cable
 K Usb Cable
+$ENDCMP
+#
+$CMP Ws2812b_19pcs
+D Ws2812b 60 LEDs/meter Strip cut to length
+K LED Strip
+F ~
+$ENDCMP
+#
+$CMP e_sw_lp1
+D E-Switch Pushbutton Switch SPST-NO Standard, Illuminated Panel Mount, Snap-In
+K Pushbutton Illuminated
+F ~
+$ENDCMP
+#
+$CMP ee-sx770x3_u_2_4mm
+D 3 Conductor Omron EE-SX770 2M meters 28awg
+K cable 22awg
+F ~
+$ENDCMP
+#
+$CMP luxeon_1w_star
+D Luxeon 1W Star LED lamp.
+K LED Star
+F ~
 $ENDCMP
 #
 $CMP v1_pxc_mstbt_2-5_4-st
