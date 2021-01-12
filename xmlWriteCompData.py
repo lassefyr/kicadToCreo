@@ -45,10 +45,13 @@ class xmlWriteCompData:
         
 	def writeCompData(self, netlist, outputFileName):
 
-		isOutputFileOpended = False
+		isOutputFileOpen = False
 		try:
-			fout=open(outputFileName, "a")
-			isOutputFileOpended = True
+			if sys.version_info.major < 3:		
+				fout = open(outputFileName, "a")
+			else:
+				fout = open(outputFileName, "a", encoding='utf-8')					
+			isOutputFileOpen = True
 		except IOError:
 			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
@@ -145,9 +148,9 @@ class xmlWriteCompData:
 			
 			print("</COMPONENT>", file = fout)
 		
-		if isOutputFileOpended == True:
+		if isOutputFileOpen == True:
 			fout.close()
-			isOutputFileOpended = False
+			isOutputFileOpen = False
 
 #-----------------------------------------------------------------------------------------
 # String Logger functions
@@ -166,7 +169,7 @@ class xmlWriteCompData:
 		
 	def getErrorStr( self ):
 		if self.__errorString == "":
-			self.__errorString="No Errors!"		
+			self.__errorString="Components: No Errors!"		
 		return self.__errorString 
 		
 	def clearErrorStr( self ):
@@ -177,7 +180,7 @@ class xmlWriteCompData:
 		
 	def getWarningStr( self ):
 		if self.__warningString == "":
-			self.__warningString="No Warnigns!"
+			self.__warningString="Components: Warnigns!"
 		return self.__warningString 
 		
 	def clearWarningStr( self ):

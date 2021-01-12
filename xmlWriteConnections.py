@@ -60,10 +60,13 @@ class xmlWriteConnections(xmlWriteSpools):
 		return None 
 		            
 	def writeConnections(self, netlist, outputFileName):
-		isOutputFileOpended = False
+		isOutputFileOpen = False
 		try:
-			fout = open(outputFileName, "a")
-			isOutputFileOpended = True
+			if sys.version_info.major < 3:		
+				fout = open(outputFileName, "a")
+			else:
+				fout = open(outputFileName, "a", encoding='utf-8')					
+			isOutputFileOpen = True
 		except IOError:
 			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
@@ -122,9 +125,11 @@ class xmlWriteConnections(xmlWriteSpools):
 #				Find both ends of wire. Single ended wires are generally an error.
 #				Only Shielded cables can be single ended.					
 				tempNet = self.find_net(netlist, refDes, str(i))
-				wireNet1 = tempNet.get( "net", "name" )
+				if ( tempNet ):
+					wireNet1 = tempNet.get( "net", "name" )
 				tempNet = self.find_net(netlist, refDes, str(i+1))
-				wireNet2 = tempNet.get( "net", "name" )
+				if ( tempNet ):
+					wireNet2 = tempNet.get( "net", "name" )
 
 				scannedNode1 = self.find_matching_node(netlist, wireNet1)
 				scannedNode2 = self.find_matching_node(netlist, wireNet2)
@@ -198,9 +203,9 @@ class xmlWriteConnections(xmlWriteSpools):
 
 				print("</CONNECTION>", file = fout)
 
-		if isOutputFileOpended == True:
+		if isOutputFileOpen == True:
 			fout.close()
-			isOutputFileOpended = False											
+			isOutputFileOpen = False											
 
 
 #-----------------------------------------------------------------------------------------
@@ -214,7 +219,7 @@ class xmlWriteConnections(xmlWriteSpools):
 		
 	def getErrorStr( self ):
 		if self.__errorString == "":
-			self.__errorString="No Errors!"			
+			self.__errorString="Connections: No Errors!"			
 		return self.__errorString 
 		
 	def clearErrorStr( self ):
@@ -226,7 +231,7 @@ class xmlWriteConnections(xmlWriteSpools):
 		
 	def getWarningStr( self ):
 		if self.__warningString == "":
-			self.__warningString="No Warnigns!"
+			self.__warningString="Connections: No Warnigns!"
 		return self.__warningString 
 		
 	def clearWarningStr( self ):

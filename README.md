@@ -6,7 +6,11 @@ Target of this project is to produce Creo Schematic compatible output to Creo pa
 PTC Creo is one of the "big" 3d parametric design softwares. Other similar products are Solidworks, Catia, Autocad Inventor, Onshape etc. One advantage of these programs is that they let you model every detail of your product. You can import pcb's using the IDF format and you can also route cables to your end product. The cad program will give you the needed cable lengths and cable drawings.
 
 ## Changes
-2021.01.08
+**2021.01.12**
+1. Added a check for utf-8 validity. Creo gave some strange line errors when the xml file was not in utf-8 format (generated with python3)
+1. Added optional parameters for having different gauge and thickness wires on a cable. With individual gauge value for each wire you can change the crimp by using the terminator table option in Creo. It would be easy to add this feature to Kicad also... but we don't need it yet.
+
+**2021.01.08**
 1. Added support for shielded cable.
 1. Added option for ktinker interface.
 1. Added support for hierarchical sheets. Mainly this means that backannotation goes through all sheets in design. If you use same schematic multiple times then the back annotation works only to the first instance of the sheet. Other sheets with the same name will have same wire lengths and part numbers as the first sheet. In creo, however, you can have totally different wire lengts and individual part numbers...  So don't use the same schematic multiple times unless you mean to use the same cables in all instances...

@@ -42,10 +42,13 @@ class xmlWriteSpools:
 		self.__warningString=""	
         
 	def writeSpoolData(self, netlist, outputFileName):
-		isOutputFileOpended = False
+		isOutputFileOpen = False
 		try:
-			fout=open(outputFileName, "a")
-			isOutputFileOpended = True
+			if sys.version_info.major < 3:		
+				fout = open(outputFileName, "a")
+			else:
+				fout = open(outputFileName, "a", encoding='utf-8')								
+			isOutputFileOpen = True
 		except IOError:
 			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
@@ -65,7 +68,10 @@ class xmlWriteSpools:
 		self.__spoolData = ""
 		self.writeCblSpool(components)
 		print(self.__spoolData, file = fout)
-					
+		
+		if isOutputFileOpen == True:
+			fout.close()
+			isOutputFileOpen = False						
 				
 #-----------------------------------------------------------------------------------------
 # def writeCblSpool(self, components ):
@@ -110,18 +116,38 @@ class xmlWriteSpools:
 			else:		# no Pins continue	
 				continue
 
-			colorTable = []
-			for i in range(1, int(howManyPins/2+1)): #(each net has two counter parts)
+			colorTable  = []
+			awgTable    = []
+			thicknessTable = []			
+			
+			for i in range(1, int(howManyPins/2+1)):	#(each net has two counter parts)
+				spoolColor = ""				
+				spoolAwg = comp.getField("Gauge")		# Returns empty string if filed does not exist				
+				spoolThickness = ""
+								
 				wireColor = comp.getField("color"+str(i))
-				if not wireColor:
-					wireColor = "Gray"
-				colorTable.append( wireColor )
+				wireColor = wireColor.replace(" ", "") 	# Remove Spaces
+				splitWireColor = wireColor.split(",")	# Split string comma separated							
+				splitLen = len( splitWireColor )		# How Many Strings
 				
-			#print (colorTable)
+				if splitLen == 0:  
+					spoolColor		= "Gray"
+				if splitLen >= 1: 
+					spoolColor 		= splitWireColor[0]
+				if splitLen >= 2:
+					if splitWireColor[1]:
+						spoolAwg 	= splitWireColor[1]	# If this exists then use this new Gauge
+				if splitLen >= 3: 
+					spoolThickness 	= splitWireColor[2]
+				
+				colorTable.append( spoolColor )
+				awgTable.append( spoolAwg )
+				thicknessTable.append( spoolThickness )														
 				
 			numOfCoductors = comp.getField("Num_conductors")
 			if int(numOfCoductors) != int(howManyPins/2):
-				self.writeWarningStr( "CBL_SPOOL: Num_conductors different from Numofpins/2 "+ numOfCoductors)
+				self.writeErrorStr( "FATAL: Spool = " + refDes + "\n" )
+				self.writeErrorStr( "Num_conductors different from Numofpins/2 Pin="+ numOfCoductors+ "\n")
 			
 			thickness = comp.getField("Thickness")
 			if not thickness:
@@ -184,9 +210,14 @@ class xmlWriteSpools:
 				self.__spoolData += "<SYS_PARAMETER id=\"sp"+str(firstSpoolIndex)+"\" />\n"	
 				self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+colorTable[(i-1)]+"\" />\n"
 				self.__spoolData += "<PARAMETER name=\"COND_ID\" value=\""+str(i)+"\" />\n"
-				self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBendRadius+"\" />\n"												
+				self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBendRadius+"\" />\n"				
 				self.__spoolData += "<PARAMETER name=\"UNITS\" value=\"MM\" />\n"
-				self.__spoolData += "<PARAMETER name=\"THICKNESS\" value=\""+subThickness+"\" />\n"
+				if( thicknessTable[(i-1)] ):
+					self.__spoolData += "<PARAMETER name=\"THICKNESS\" value=\""+thicknessTable[(i-1)]+"\" />\n"
+				else:
+					self.__spoolData += "<PARAMETER name=\"THICKNESS\" value=\""+subThickness+"\" />\n"
+				if( awgTable[(i-1)] ):
+					self.__spoolData += "<PARAMETER name=\"WIRE_GAUGE\" value=\""+awgTable[(i-1)]+"\" />\n"
 				self.__spoolData += "</SPOOL>\n"
 				firstSpoolIndex+=1
 												
@@ -433,7 +464,7 @@ class xmlWriteSpools:
 		
 	def getErrorStr( self ):
 		if self.__errorString == "":
-			self.__errorString="No Errors!"
+			self.__errorString="Spools: No Errors!"
 		return self.__errorString 
 		
 	def clearErrorStr( self ):
@@ -444,7 +475,7 @@ class xmlWriteSpools:
 		
 	def getWarningStr( self ):
 		if self.__warningString == "":
-			self.__warningString="No Warnigns!"
+			self.__warningString="Spools: No Warnigns!"
 		return self.__warningString 
 		
 	def clearWarningStr( self ):

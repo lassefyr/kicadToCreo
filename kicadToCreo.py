@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # https://github.com/latefyr/kicadcreo.git
 # MIT license
 #
@@ -98,7 +99,10 @@ def writeFileHeader( outputFileName ):
 	actualFileOpened = False
 	if len(outputFileName) > 2:
 		try:
-			fout = open(outputFileName, 'w')
+			if sys.version_info.major < 3:		
+				fout = open(outputFileName, "w")
+			else:
+				fout = open(outputFileName, "w", encoding='utf-8')
 			actualFileOpened = True
 		except IOError:
 			e = "Can't open output file for writing: " + outputFileName
@@ -129,8 +133,11 @@ def writeFileHeader( outputFileName ):
 def writeFileEnd( outputFileName ):
 	actualFileOpened = False
 	if len(outputFileName) > 2:
-		try:		
-			fout = open(outputFileName, 'a')
+		try:
+			if sys.version_info.major < 3:		
+				fout = open(outputFileName, "a")
+			else:
+				fout = open(outputFileName, "a", encoding='utf-8')				
 			actualFileOpened = True
 		except IOError:
 			e = "Can't open output file for writing: " + outputFileName
@@ -144,6 +151,22 @@ def writeFileEnd( outputFileName ):
 	# Individual functions will open the outputfile as needed	
 	if actualFileOpened == True:
 		fout.close( )
+	import codecs
+	try:
+		f = codecs.open(outputFileName, encoding='utf-8', errors='strict')
+		for line in f:
+			pass
+		if(tKinterWin):
+			logger.info( "Valid utf-8" )
+		else:
+			print("Valid utf-8", file = sys.stdout)
+		f.close()
+	except UnicodeDecodeError:
+		f.close()			
+		if(tKinterWin):
+			logger.error( "Invalid utf-8" )			
+		else:
+			print("invalid utf-8", file = sys.stderr)
 		
 #------------------------------------------------------------------------------
 #	Progress Bar for the tKinter interface
@@ -306,9 +329,7 @@ if tKinterWin:
 
 	window.update()
 	window.mainloop()
-
-
-
+	
 else:
 	writeFileHeader( creoLogicalFileName )
 	#------------------------------------------------------------------------------
