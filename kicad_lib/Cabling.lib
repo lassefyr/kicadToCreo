@@ -935,6 +935,88 @@ X Y 2 200 0 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
+# 22awgx10_u_6_8mm
+#
+DEF 22awgx10_u_6_8mm CBL 0 20 N N 1 F N
+F0 "CBL" 0 650 50 H V C CNN
+F1 "22awgx10_u_6_8mm" 0 -650 50 H V C CNN
+F2 "" 200 200 50 H I C CNN
+F3 "" 0 450 50 V I C CNN
+F4 "10" 0 350 50 H I C CNN "Num_conductors"
+F5 "gray" 0 350 50 H I C CNN "Color"
+F6 "6.81" 0 350 50 H I C CNN "Thickness"
+F7 "8.0e-05" 50 350 50 H I C CNN "Density"
+F8 "5" 0 350 50 H I C CNN "Min_bend_radius"
+F9 "1.27" 0 350 50 H I C CNN "Sub_thickness"
+F10 "black" 0 350 50 H I C CNN "color1"
+F11 "brown" 0 350 50 H I C CNN "color2"
+F12 "red" 0 350 50 H I C CNN "color3"
+F13 "orange" 0 350 50 H I C CNN "color4"
+F14 "yellow" 0 350 50 H I C CNN "color5"
+F15 "green" 0 350 50 H I C CNN "color6"
+F16 "blue" 0 350 50 H I C CNN "color7"
+F17 "ral4002" 0 350 50 H I C CNN "color8"
+F18 "gray" 0 350 50 H I C CNN "color9"
+F19 "white" 0 350 50 H I C CNN "color10"
+F20 "Alpha Wire" 50 350 50 H I C CNN "Vendor"
+F21 "5010C SL005" 0 350 50 H I C CNN "Vendor_pn"
+F22 "xx mm" 300 650 50 H V C CNN "Length"
+F23 "Noname" 0 750 50 H V C CNN "Harness_name"
+F24 "prefab" 0 350 50 H I C CNN "Type"
+F25 "22" 0 350 50 H I C CNN "Gauge"
+$FPLIST
+ DIP*
+ SOIC*
+$ENDFPLIST
+DRAW
+A 0 -425 146 -1490 -310 0 0 0 N -125 -500 125 -500
+A 0 450 135 218 1582 0 0 0 N 125 500 -125 500
+T 0 0 500 50 0 0 0 Black Normal 0 C C
+T 0 0 400 50 0 0 0 Brown Normal 0 C C
+T 0 0 200 50 0 0 0 Orang Normal 0 C C
+T 0 0 300 50 0 0 0 Red Normal 0 C C
+T 0 0 -100 50 0 1 1 Blue Normal 0 C C
+T 0 0 0 50 0 1 1 Green Normal 0 C C
+T 0 0 -300 50 0 1 1 Slate Normal 0 C C
+T 0 0 -200 50 0 1 1 Violet Normal 0 C C
+T 0 0 -400 50 0 1 1 White Normal 0 C C
+T 0 0 100 50 0 1 1 Yel Normal 0 C C
+P 2 0 0 0 -125 500 -125 -500 N
+P 2 0 0 0 125 500 125 -500 N
+P 3 0 1 0 -175 475 -125 450 -175 425 N
+P 2 1 1 0 -150 -450 150 -450 N
+P 2 1 1 0 -150 -350 150 -350 N
+P 2 1 1 0 -150 -250 150 -250 N
+P 2 1 1 0 -150 -150 150 -150 N
+P 2 1 1 0 -150 -50 150 -50 N
+P 2 1 1 0 -150 50 150 50 N
+P 2 1 1 0 -150 150 150 150 N
+P 2 1 1 0 -150 250 150 250 N
+P 2 1 1 0 -150 350 150 350 N
+P 2 1 1 0 -150 450 150 450 N
+X C4.1 7 -250 150 100 R 50 50 0 0 P
+X C4.2 8 250 150 100 L 50 50 0 0 P
+X C1.1 1 -250 450 100 R 50 50 1 1 P
+X C5.2 10 250 50 100 L 50 50 1 1 P
+X C6.1 11 -250 -50 100 R 50 50 1 1 P
+X C6.2 12 250 -50 100 L 50 50 1 1 P
+X C7.1 13 -250 -150 100 R 50 50 1 1 P
+X C7.2 14 250 -150 100 L 50 50 1 1 P
+X C8.1 15 -250 -250 100 R 50 50 1 1 P
+X C8.2 16 250 -250 100 L 50 50 1 1 P
+X C9.1 17 -250 -350 100 R 50 50 1 1 P
+X C9.2 18 250 -350 100 L 50 50 1 1 P
+X C10.1 19 -250 -450 100 R 50 50 1 1 P
+X C1.2 2 250 450 100 L 50 50 1 1 P
+X C10.2 20 250 -450 100 L 50 50 1 1 P
+X C2.1 3 -250 350 100 R 50 50 1 1 P
+X C2.2 4 250 350 100 L 50 50 1 1 P
+X C3.1 5 -250 250 100 R 50 50 1 1 P
+X C3.2 6 250 250 100 L 50 50 1 1 P
+X C5.1 9 -250 50 100 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # 22awgx2_dc1
 #
 DEF 22awgx2_dc1 CBL 0 20 N N 1 F N
@@ -1454,6 +1536,46 @@ DRAW
 P 3 0 1 0 -225 25 -200 0 -225 -25 N
 X X 1 -200 0 200 R 50 50 1 1 B
 X Y 2 200 0 200 L 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# 26awgcoax_50ohm
+#
+DEF 26awgcoax_50ohm CBL 0 20 N N 1 F N
+F0 "CBL" 0 350 50 H V C CNN
+F1 "26awgcoax_50ohm" 0 -150 50 H V C CNN
+F2 "" 150 -100 50 H I C CNN
+F3 "" 0 150 50 V I C CNN
+F4 "2" 0 50 50 H I C CNN "Num_conductors"
+F5 "black" 0 50 50 H I C CNN "Color"
+F6 "2,59" 0 50 50 H I C CNN "Thickness"
+F7 "4.0e-05" 0 50 50 H I C CNN "Density"
+F8 "5" 0 50 50 H I C CNN "Min_bend_radius"
+F9 "1.524" 0 50 50 H I C CNN "Sub_thickness"
+F10 "white" 0 50 50 H I C CNN "color1"
+F11 "gray" 0 50 50 H I C CNN "color2"
+F12 "Alpha Wire" 0 50 50 H I C CNN "Vendor"
+F13 "9174 BK005" 0 50 50 H I C CNN "Vendor_pn"
+F14 "xx mm" 275 225 50 H V C CNN "Length"
+F15 "Noname" 0 425 50 H V C CNN "Harness_name"
+F16 "prefab" 0 50 50 H I C CNN "Type"
+F17 "26" 0 0 50 H I C CNN "Individual_Gauge"
+F18 "Braid" 0 50 50 H I C CNN "Shield"
+$FPLIST
+ DIP*
+ SOIC*
+$ENDFPLIST
+DRAW
+A 0 50 135 -218 -1582 1 1 0 N 125 0 -125 0
+T 0 0 200 50 0 0 0 Cond Normal 0 C C
+T 0 0 50 50 0 1 1 Shield Normal 0 C C
+P 2 0 0 0 -125 150 125 150 N
+P 29 0 0 0 125 0 125 200 115 220 90 250 60 270 35 280 10 285 -10 285 -35 280 -50 275 -70 265 -85 255 -100 240 -115 220 -125 200 -125 0 -110 -30 -90 -50 -70 -65 -50 -75 -35 -80 -5 -85 15 -85 50 -75 70 -65 90 -50 105 -35 115 -20 125 0 f
+P 3 0 1 0 -150 175 -125 150 -150 125 N
+X C1.1 1 -200 150 75 R 50 50 1 1 P
+X C1.2 2 200 150 75 L 50 50 1 1 P
+X C2.1 3 -200 50 75 R 50 50 1 1 P
+X C2.2 4 200 50 75 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #

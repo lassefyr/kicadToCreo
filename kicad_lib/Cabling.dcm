@@ -161,6 +161,12 @@ D Hook-up Wire 22AWG 7/30 SR-PVC
 K Wire 22awg
 $ENDCMP
 #
+$CMP 22awgx10_u_6_8mm
+D Alpha Wire 10 Conductor Multi-Conductor Cable Gray 22 AWG 30.5m
+K cable 22awg
+F ~
+$ENDCMP
+#
 $CMP 22awgx2_dc1
 D Tensility DC Locking plug 2.1x5.5mm with cable 915mm 22awg. UL2464
 K cable 22awg
@@ -236,6 +242,12 @@ $ENDCMP
 $CMP 26awg_yl_1
 D 26 AWG Hook-Up Wire 7/32 Yellow 300V 30.5m, OD 0.89mm
 K Wire 26awg
+$ENDCMP
+#
+$CMP 26awgcoax_50ohm
+D Alpha Wire Coaxial Cable 26 AWG (0.14mm²) RG-174 100.0' (30.48m) 50 Ohms
+K Cable 26awg Coaxial
+F ~
 $ENDCMP
 #
 $CMP 3m_37103-a165
