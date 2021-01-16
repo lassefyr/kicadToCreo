@@ -52,6 +52,7 @@ class xmlWriteSpools:
 		except IOError:
 			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
+		print("\n<!--Spools-->\n", file = fout)		
 		
 		components = netlist.getInterestingComponents()
 		

@@ -55,7 +55,8 @@ class xmlWriteCompData:
 		except IOError:
 			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
-		
+		print("\n<!--Components-->\n", file = fout)		
+
 		components = netlist.getInterestingComponents()
 		
 		for comp in components:

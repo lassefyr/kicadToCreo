@@ -230,6 +230,9 @@ class xmlReadCreo:
 #-----------------------------------------------------------------------------------------				
 if __name__ == '__main__':      
 	fileToProcess = sys.argv[1]    				# unpack 2 command line arguments  
+	
+	# Split the file extension away if it exists
+	fileToProcess = os.path.splitext(fileToProcess)[0]	
 	creoCablelengths = xmlReadCreo( )
 	creoCablelengths.backAnnotate( fileToProcess )
 	print("Info", file=sys.stdout)
@@ -240,6 +243,7 @@ if __name__ == '__main__':
 
 	print("Errors", file=sys.stderr)
 	print( creoCablelengths.getErrorStr(), file=sys.stderr )
+	print( "Please Reload the Kicad Schematic", file=sys.stdout )
 	
 	
 	

@@ -70,6 +70,7 @@ class xmlWriteConnections(xmlWriteSpools):
 		except IOError:
 			self.writeErrorStr("Error opening file -- filename = \""+outputFileName+"\"")
 			fout = sys.stdout
+		print("\n<!--Wires and cables-->\n", file = fout)		
 		
 		components = netlist.getInterestingComponents()
 		
@@ -94,17 +95,19 @@ class xmlWriteConnections(xmlWriteSpools):
 			pins = part.element.getChild('pins')
 			if pins:   # more than one
 				howManyPins = len(pins.getChildren())
-				# check if shielded cable
-				thisIsShielded = comp.getField("Shield")
-				if not thisIsShielded:
-					thisIsShielded = "None"
 #				print("Pins "+str(howManyPins))
 			else:		# no Pins continue	
 				continue
 			
 			thisIsCbl = False
+			thisIsShielded = ""
+			__myCblHeader = ""				# Write Header if Exists
+
 			if refDes[:3] == "CBL":
 				thisIsCbl = True
+
+				# check if cable is a shielded cable
+				thisIsShielded = comp.getField("Shield")
 				print("<CONNECTION name=\""+refDes+"\" context=\"NONE\" spoolID=\"cbl_"+spoolName+"\" type=\"ASSEMBLY\">", file = fout)
 				print("<SYS_PARAMETER id=\"cbl_"+refDes+"\" />", file = fout)
 				print("<PARAMETER name=\"LAYER\" value=\"DEF_LINES\"/>", file = fout)
@@ -117,6 +120,7 @@ class xmlWriteConnections(xmlWriteSpools):
 			for i in range(1, howManyPins, 2): #(each net has two counter parts)
 				connTableID = []
 				myCounter += 1
+				__myCblHeader = ""
 				
 #				For shielded Cable the last wire is the shield wire.				
 				if (i+1) == howManyPins:
@@ -137,71 +141,71 @@ class xmlWriteConnections(xmlWriteSpools):
 				if( thisIsCbl ):
 					getSpoolIndex = self.spoolClass.getCblSpoolId(spoolName+"-"+str(myCounter))
 					if( getSpoolIndex<0 ):
-						self.writeErrorStr("No spoolIndex for "+spoolName+": pin:"+str(myCounter))
+						self.writeErrorStr("No spoolIndex for "+spoolName+": pin:"+str(myCounter)+ "\n")
 					else:
 						cblId = "sp"+str(getSpoolIndex+1)
-						print("<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+cblId+"\" type=\"SINGLE\">", file = fout) #conductorName=\""+str(myCounter)+"\"
+						__myCblHeader = __myCblHeader + "<CONNECTION name=\""+refDes+"_"+str(myCounter)+"\" context=\"CONNECTION\" parentID=\"cbl_"+refDes+"\" spoolID=\""+cblId+"\" type=\"SINGLE\">\n"
 				else:
-					print("<CONNECTION name=\""+refDes+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"NONE\" spoolID=\"w_"+spoolName+"\" >", file = fout)
+					__myCblHeader = __myCblHeader + "<CONNECTION name=\""+refDes+"\" type=\"SINGLE\" subType=\"WIRING_WIRE\" context=\"NONE\" spoolID=\"w_"+spoolName+"\" >\n"					
 			
 				if(  thisIsCbl ):
-					print("<SYS_PARAMETER id=\"conn_"+refDes+"_"+str(myCounter)+"\" />", file = fout)
+					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"conn_"+refDes+"_"+str(myCounter)+"\" />\n"
 # 					If this is shielded cable and the last connections
-					if lastWire and thisIsShielded!="None":					
-						print("<PARAMETER name=\"TYPE\" value=\"SHIELD\"/>", file = fout)
-					
-				else:	
-					print("<SYS_PARAMETER id=\"conn_"+refDes+"\" />", file = fout)
-
-				print("<PARAMETER name=\"LAYER\" value=\"DEF_LINES\"/>", file = fout)
+					if (lastWire and thisIsShielded ):
+						__myCblHeader = __myCblHeader + "<PARAMETER name=\"TYPE\" value=\"SHIELD\"/>\n"
+				else:
+					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"conn_"+refDes+"\" />\n"
+				
+				__myCblHeader = __myCblHeader + "<PARAMETER name=\"LAYER\" value=\"DEF_LINES\"/>\n"
 
 				if scannedNode1:
 					matchRef = scannedNode1.get("node", "ref")
 					matchPin = scannedNode1.get("node", "pin")
 					connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\"")
 					
-					print("<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"\" type=\"COMPONENT\" >", file = fout)
-					print("<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\" />", file = fout)
-					print("<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>", file = fout)
-					print("</NODE>", file = fout)
+					__myCblHeader = __myCblHeader + "<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"\" type=\"COMPONENT\" >\n"
+					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\" />\n"
+					__myCblHeader = __myCblHeader + "<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>\n"
+					__myCblHeader = __myCblHeader + "</NODE>\n"
 				else:
-					self.writeErrorStr("Missing connection for nod "+refDes+": pin:"+str(i))					
-					matchRef = scannedNode2.get("node", "ref")
-					matchPin = scannedNode2.get("node", "pin")
-					
-					if( thisIsCbl and lastWire and thisIsShielded!="None" ):
-						connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\"")
-						print("<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"_SH\" type=\"POINT\" >", file = fout)
-						print("<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\" />", file = fout)
-						print("</NODE>", file = fout)
+					self.writeErrorStr("Missing connection for nod "+refDes+": pin:"+str(i)+ "\n")										
+					if( thisIsCbl and lastWire and thisIsShielded and scannedNode1 ):
+						matchRef = scannedNode2.get("node", "ref")
+						matchPin = scannedNode2.get("node", "pin")
+						self.writeErrorStr("Not allowed for SHIELD Exit\n")
+						# connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\"\n")
+						__myCblHeader = __myCblHeader + "<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"_SH\" type=\"POINT\" >\n"
+						__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\" />\n"
+						__myCblHeader = __myCblHeader + "</NODE>\n"
 						
 				if scannedNode2:
 					matchRef = scannedNode2.get("node", "ref")
 					matchPin = scannedNode2.get("node", "pin")
 					connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\"")
 
-					print("<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"\" type=\"COMPONENT\" >", file = fout)
-					print("<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\" />", file = fout)
-					print("<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>", file = fout)
-					print("</NODE>", file = fout)
+					__myCblHeader = __myCblHeader + "<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"\" type=\"COMPONENT\" >\n"
+					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\" />\n"
+					__myCblHeader = __myCblHeader + "<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>\n"
+					__myCblHeader = __myCblHeader + "</NODE>\n"
 				else:
-					self.writeErrorStr("Missing connection for nod "+refDes+": pin:"+str(i+1))
-					matchRef = scannedNode1.get("node", "ref")
-					matchPin = scannedNode1.get("node", "pin")
-
-					if( thisIsCbl and lastWire and thisIsShielded!="None" ):
+					self.writeErrorStr("Missing connection for nod "+refDes+": pin:"+str(i+1)+ "\n")
+					if( thisIsCbl and lastWire and thisIsShielded and scannedNode1 ):
+						matchRef = scannedNode1.get("node", "ref")
+						matchPin = scannedNode1.get("node", "pin")
+						self.writeErrorStr("Connection allowed for SHIELD entry\n")
 						connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\"")
-						print("<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"_SH\" type=\"POINT\" >", file = fout)
-						print("<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\" />", file = fout)
-						print("</NODE>", file = fout)						
+						__myCblHeader = __myCblHeader + "<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"_SH\" type=\"POINT\" >\n"
+						__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\" />\n"
+						__myCblHeader = __myCblHeader + "</NODE>\n"
 				
 # Component print Connection -------------------------------------------------------------											
-				if (len(connTableID) >= 2):		
+				if (len(connTableID) >= 2):					
+					print( __myCblHeader,  end ="", file = fout )
+					__myCblHeader = ""
 					print("<SEGMENT name=\"seg_"+refDes+"_"+str(myCounter)+"\" >", file = fout)
 					print("<ATTACH node1ID="+connTableID[0]+" node2ID="+connTableID[1]+" />", file = fout)
 					print("</SEGMENT>", file = fout)		
-
-				print("</CONNECTION>", file = fout)
+					print("</CONNECTION>", file = fout)
 
 		if isOutputFileOpen == True:
 			fout.close()

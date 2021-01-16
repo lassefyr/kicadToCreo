@@ -246,7 +246,7 @@ def BackAnn():
 	
 	logger.error( "Back Annotate Errors" )
 	logger.error( creoCablelengths.getErrorStr())
-	
+	logger.info( "Please Reload the Kicad Schematic" )	
 
 #------------------------------------------------------------------------------
 # Create the tKinter window if needed
