@@ -41,6 +41,8 @@ class xmlWriteCompData:
 		self.__infoString = ""
 		self.__errorString = ""
 		self.__warningString = ""	
+		self.__termPinNumber = []
+		self.__terminatorTable = []
         
         
 	def writeCompData(self, netlist, outputFileName):
@@ -58,6 +60,8 @@ class xmlWriteCompData:
 		print("\n<!--Components-->\n", file = fout)		
 
 		components = netlist.getInterestingComponents()
+		self.__termPinNumber = []
+		self.__terminatorTable = []
 		
 		for comp in components:
 			refDes = comp.getRef()
@@ -110,12 +114,13 @@ class xmlWriteCompData:
 		
 # Component OBJ_TYPE Connector (Optional)-------------------------------------------------
 			print("<PARAMETER name=\"OBJ_TYPE\" value=\"connector\" />", file = fout)			
-# Component ATTACHED_TO_HARNESS don't know ------------------------------------------------
-#			print("<PARAMETER name=\"ATTACHED_TO_HARNESS value=\"TRUE\" />", file = fout)
 
+# Check Component Terminators ------------------------------------------------------------
 			if not self.CMP_USEVAL[7]:
 				self.writeInfoStr("\""+refDes+"\" - No termName (Crimp) found!\n")
-				#termName = "No terminal defined"
+			else:						#Check Special terminator values for Pins
+				self.writeSpecialTerminators( comp )
+						
 		
 # Component PORT parameters for each pin  ------------------------------------------------
 			forbiddenchars = set('!\"#$%&\'()*+,-./:;<=>?@[\\]^`{|}~.')
@@ -142,7 +147,13 @@ class xmlWriteCompData:
 				print("<PARAMETER name=\"INTERNAL_LEN\" value=\""+self.CMP_USEVAL[4]+"\" />", file = fout)
 			
 				if self.CMP_USEVAL[7]:
-					print("<PARAMETER name=\"TERM_NAME\" value=\""+self.CMP_USEVAL[7]+"\" />", file = fout)
+					myTerminaltor = self.CMP_USEVAL[7]
+					tempTerm = self.getSpecialTerminator( thisPin.get("pin", "num") )
+					if( tempTerm ):
+						myTerminaltor = tempTerm
+						self.writeInfoStr("\""+refDes+"\" Pin=" + thisPin.get("pin", "num") + " - Special Terminator "+tempTerm+"\n")						
+					
+					print("<PARAMETER name=\"TERM_NAME\" value=\""+myTerminaltor+"\" />", file = fout)
 					print("<PARAMETER name=\"TERM_AUTO_ASSIGN\" value=\"TRUE\" />", file = fout)
 				print("</PORT>", file = fout)
 # Component end PORT parameters for each pin  ------------------------------------------------
@@ -152,7 +163,41 @@ class xmlWriteCompData:
 		if isOutputFileOpen == True:
 			fout.close()
 			isOutputFileOpen = False
-
+		
+#-----------------------------------------------------------------------------------------
+# Set Special Terminator for a Specific Connector Pin
+#
+# These fuctions log the strings and outputs data to stdout and stderr
+#
+#-----------------------------------------------------------------------------------------
+	def writeSpecialTerminators( self, termString ):
+		self.__terminatorTable = []							# These are filled once for each connector
+		self.__termPinNumber = []
+		
+		for x in range(2, 6):
+			tempStr =  termString.getField("Term_name_"+str(x))			
+			
+			if tempStr:
+				# self.CMP_USEVAL[listIndex] =	tempStr			
+				tempStr = tempStr.replace(" ", "") 	# Remove Spaces
+				splitTermString = tempStr.split(",")		# Split string comma separated										
+				splitLen = len( splitTermString )			# How Many Strings
+				if ( splitLen	 >= 1 ):					# At least one pin has new terminator
+					for i in range (1, splitLen):
+						if( unicode(splitTermString[i]).isnumeric() ):
+							self.__terminatorTable.append(splitTermString[0])
+							self.__termPinNumber.append(splitTermString[i])
+			else:
+				break			
+		
+	def getSpecialTerminator( self, pinNum ):
+		try:
+			myIndex = self.__termPinNumber.index(str(pinNum))			
+			return self.__terminatorTable[myIndex]
+			
+		except ValueError:
+			return ""
+			
 #-----------------------------------------------------------------------------------------
 # String Logger functions
 #

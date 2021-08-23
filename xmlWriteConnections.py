@@ -157,14 +157,15 @@ class xmlWriteConnections(xmlWriteSpools):
 					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"conn_"+refDes+"\" />\n"
 				
 				__myCblHeader = __myCblHeader + "<PARAMETER name=\"LAYER\" value=\"DEF_LINES\"/>\n"
-
+				
 				if scannedNode1:
 					matchRef = scannedNode1.get("node", "ref")
 					matchPin = scannedNode1.get("node", "pin")
-					connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\"")
+					__nodeIDName = matchRef+"_"+matchPin+"_"+refDes+"_"+str(myCounter)  					#This is the node ID for the currently handled object. Must be unique.
+					connTableID.append("\"comp_"+__nodeIDName+"\"")
 					
-					__myCblHeader = __myCblHeader + "<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"\" type=\"COMPONENT\" >\n"
-					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\" />\n"
+					__myCblHeader = __myCblHeader + "<NODE name=\""+__nodeIDName+"\" type=\"COMPONENT\" >\n"
+					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+__nodeIDName+"\" />\n"
 					__myCblHeader = __myCblHeader + "<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>\n"
 					__myCblHeader = __myCblHeader + "</NODE>\n"
 				else:
@@ -172,19 +173,21 @@ class xmlWriteConnections(xmlWriteSpools):
 					if( thisIsCbl and lastWire and thisIsShielded and scannedNode1 ):
 						matchRef = scannedNode2.get("node", "ref")
 						matchPin = scannedNode2.get("node", "pin")
+						__nodeIDName = matchRef+"_"+matchPin+"_"+refDes+"_"+str(myCounter)  				#This is the node ID for the currently handled object. Must be unique.
 						self.writeErrorStr("Not allowed for SHIELD Exit\n")
 						# connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\"\n")
-						__myCblHeader = __myCblHeader + "<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"_SH\" type=\"POINT\" >\n"
-						__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\" />\n"
+						__myCblHeader = __myCblHeader + "<NODE name=\""+__nodeIDName+"_SH\" type=\"POINT\" >\n"
+						__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+__nodeIDName+"_SH\" />\n"
 						__myCblHeader = __myCblHeader + "</NODE>\n"
 						
 				if scannedNode2:
 					matchRef = scannedNode2.get("node", "ref")
 					matchPin = scannedNode2.get("node", "pin")
-					connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\"")
+					__nodeIDName = matchRef+"_"+matchPin+"_"+refDes+"_"+str(myCounter)  					#This is the node ID for the currently handled object. Must be unique.
+					connTableID.append("\"comp_"+__nodeIDName+"\"")
 
-					__myCblHeader = __myCblHeader + "<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"\" type=\"COMPONENT\" >\n"
-					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"\" />\n"
+					__myCblHeader = __myCblHeader + "<NODE name=\""+__nodeIDName+"\" type=\"COMPONENT\" >\n"
+					__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+__nodeIDName+"\" />\n"
 					__myCblHeader = __myCblHeader + "<ATTACH_TO compORconnID=\"comp_"+matchRef+"\" nodeORportID=\"comp_"+matchRef+"_"+matchPin+"\"/>\n"
 					__myCblHeader = __myCblHeader + "</NODE>\n"
 				else:
@@ -192,10 +195,11 @@ class xmlWriteConnections(xmlWriteSpools):
 					if( thisIsCbl and lastWire and thisIsShielded and scannedNode1 ):
 						matchRef = scannedNode1.get("node", "ref")
 						matchPin = scannedNode1.get("node", "pin")
+						__nodeIDName = matchRef+"_"+matchPin+"_"+refDes+"_"+str(myCounter)  				#This is the node ID for the currently handled object. Must be unique.
 						self.writeErrorStr("Connection allowed for SHIELD entry\n")
-						connTableID.append("\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\"")
-						__myCblHeader = __myCblHeader + "<NODE name=\""+matchRef+"_"+matchPin+"_"+refDes+"_SH\" type=\"POINT\" >\n"
-						__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+matchRef+"_"+matchPin+"_"+refDes+"_SH\" />\n"
+						connTableID.append("\"comp_"+__nodeIDName+"_SH\"")
+						__myCblHeader = __myCblHeader + "<NODE name=\""+__nodeIDName+"_SH\" type=\"POINT\" >\n"
+						__myCblHeader = __myCblHeader + "<SYS_PARAMETER id=\"comp_"+__nodeIDName+"_SH\" />\n"
 						__myCblHeader = __myCblHeader + "</NODE>\n"
 				
 # Component print Connection -------------------------------------------------------------											

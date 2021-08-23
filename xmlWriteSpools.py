@@ -181,8 +181,11 @@ class xmlWriteSpools:
 			type  = comp.getField("Type")
 			if not type:
 				type = "prefab"
-							
-			self.__spoolData += "<SPOOL name=\""+spoolName+"\" type=\"NORMAL_SPOOL\" subType=\"CABLE_SPOOL\" >\n"
+			spoolSubType = "\"CABLE_SPOOL\""
+			if type.lower() == "ribbon":
+				spoolSubType = "\"RIBBON_SPOOL\""
+			
+			self.__spoolData += "<SPOOL name=\""+spoolName+"\" type=\"NORMAL_SPOOL\" subType="+spoolSubType+" >\n"
 			self.__spoolData += "<SYS_PARAMETER id=\"cbl_"+spoolName+"\" />\n"									
 			self.__spoolData += "<PARAMETER name=\"UNITS\" value=\"MM\" />\n"
 			self.__spoolData += "<PARAMETER name=\"OBJ_TYPE\" value=\"CABLE\" />\n"			
