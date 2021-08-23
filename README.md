@@ -6,6 +6,13 @@ Target of this project is to produce Creo Schematic compatible output to Creo pa
 PTC Creo is one of the "big" 3d parametric design softwares. Other similar products are Solidworks, Catia, Autocad Inventor, Onshape etc. One advantage of these programs is that they let you model every detail of your product. You can import pcb's using the IDF format and you can also route cables to your end product. The cad program will give you the needed cable lengths and cable drawings.
 
 ## Changes
+**2021.08.23**
+1. Added Support for ribbon cables. This was a simple single spool parameter change.
+1. Added possibility to use multiple terminators on a connector. This is done by first adding the normal terminator name that is used for all pins and then by adding an override terminator name and pin numbers where that specific terminator is used... e.g.
+    1. "Term_name" "43030-0012" // Default terminator for all pins
+    2. "Term_name_2" "43030-0001,4,8". // Override terminator for pins 4 and 8
+1. FIxed ID not being unique problem. This problem surfaced when I connected all Cable wires to s single connector pin. Creo complained that the ID was not unique. This was fixed by appending the CBL pin number onto the ID.
+
 **2021.01.12**
 1. Added a check for utf-8 validity. Creo gave some strange line errors when the xml file was not in utf-8 format (generated with python3)
 1. Added optional parameters for having different gauge and thickness wires on a cable. With individual gauge value for each wire you can change the crimp by using the terminator table option in Creo. It would be easy to add this feature to Kicad also... but we don't need it yet.
