@@ -24,6 +24,7 @@ import sys
 import sch
 import os
 import shutil
+import math
 
 class xmlReadCreo:
 	def __init__(self):
@@ -82,7 +83,8 @@ class xmlReadCreo:
 								except ValueError:
 									self.writeErrorStr( "Refdes \""+refDes+"\" does not exist! Not routed yet?\n" )
 									continue
-								roundedWireLen = self.wireLength[myindex].split('.')[0]
+								roundedIntLen = math.ceil(float(self.wireLength[myindex]))
+								roundedWireLen = str(roundedIntLen).split('.')[0] 				# Round up and no decimal places
 								self.writeInfoStr("Name: " + "{0:<6}".format(refDes) + " Harness Name: " + "{0:<15}".format(self.harnessNum[myindex]) + " lenght: " +roundedWireLen + "\n")
 								field['ref'] = "\""+roundedWireLen+"mm\""
 							if field[key] == "\"Harness_name\"":
