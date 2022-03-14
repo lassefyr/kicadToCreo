@@ -5,15 +5,22 @@ D 10AWG, 6mm2, Class 5 Flexible, Stranded, PVC 100m, Yellow/Green
 K Wire 10awg
 $ENDCMP
 #
+$CMP 10pin_flat
+D Wurth  Flat Ribbon Cable 10pin, 1.27mm
+K IDC Flat Ribbon
+F https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/63911015521CAB/8324551?s=N4IgTCBcDaIDoBcAEB2AzGAtARmwDgAZtMA5AERAF0BfIA
+$ENDCMP
+#
 $CMP 10pin_flat_round
 D 3M Round, Jacketed, Flat Cable 10pin, 3759/10 (SO)
 K cable 22awg
-F ~
+F http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=3M157970-100-ND
 $ENDCMP
 #
 $CMP 14awg_bk_1
 D 14AWG Hook-up Wire 41/30 PVC 100ft SPOOL BLACK
 K Wire 14awg
+F http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=A3079B-100-ND
 $ENDCMP
 #
 $CMP 14awg_or_1
@@ -53,6 +60,12 @@ K cable 17awg
 F ~
 $ENDCMP
 #
+$CMP 18awg_2pin_flat
+D 3M Round, Jacketed, Flat Cable 10pin, 3759/10 (SO)
+K cable 22awg
+F http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=10-00124
+$ENDCMP
+#
 $CMP 18awg_bk_1
 D Hook-up Wire 18AWG 16/30 PVC
 K Wire 18awg
@@ -83,6 +96,12 @@ D Alpha Wire 18 AWG Hook-Up Wire 16/30 Brown 600V 30.5m
 K Wire 18awg
 $ENDCMP
 #
+$CMP 18awg_gr_1
+D 18 AWG Hook-Up Wire 16/30 Green 300V (30.5m)
+K Wire 18awg
+F https://www.digikey.fi/product-detail/en/alpha-wire/3055-GR005/A2064G-100-ND/204413
+$ENDCMP
+#
 $CMP 18awg_gy_1
 D 18 AWG Hook-Up Wire 16/30 Green, Yellow Stripe 300V 30.5m
 K Wire 18awg Green
@@ -98,6 +117,12 @@ D Hook-up Wire 18AWG 16/30 PVC
 K Wire 18awg
 $ENDCMP
 #
+$CMP 18awg_pk_1
+D 18 AWG Hook-Up Wire 16/30 Pink 300V (30.5m)
+K Wire 18awg
+F https://www.digikey.fi/products/en?keywords=3055%20PK005
+$ENDCMP
+#
 $CMP 18awg_rd_1
 D Hook-up Wire 18AWG 16/30 PVC
 K Wire 18awg
@@ -106,6 +131,29 @@ $ENDCMP
 $CMP 18awg_sl_1
 D Hook-up Wire 18AWG 16/30 PVC Grey
 K Wire 18awg
+$ENDCMP
+#
+$CMP 18awg_vi_1
+D 18 AWG Hook-Up Wire 16/30 Violet 300V (30.5m)
+K Wire 18awg
+$ENDCMP
+#
+$CMP 18awg_wh_1
+D 18 AWG Hook-Up Wire 16/30 White 300V (30.5m)
+K Wire 18awg
+F https://www.digikey.fi/product-detail/en/alpha-wire/3055-WH005/A2064W-100-ND/204411
+$ENDCMP
+#
+$CMP 18awg_yl_1
+D 18 AWG Hook-Up Wire 16/30 Yellow 300V (30.5m)
+K Wire 18awg
+F https://www.digikey.fi/product-detail/en/alpha-wire/3055-YL005/A2064Y-100-ND/204415
+$ENDCMP
+#
+$CMP 18awgx2_tens
+D Tensility Wire, 18 AWG, UL2468, 300V, 80C, 4.4 mm, VW-1, PVC
+K cable 18awg
+F ~
 $ENDCMP
 #
 $CMP 18awgx4_u_6_1mm
@@ -224,7 +272,7 @@ $ENDCMP
 $CMP 22awgx3_u_4_3mm
 D 3 Conductor 7/30 Cable 22 AWG Gray
 K cable 22awg
-F ~
+F https://www.digikey.fi/products/en?keywords=1173L%20SL005
 $ENDCMP
 #
 $CMP 22awgx4_u_4_8mm
@@ -245,6 +293,11 @@ $ENDCMP
 #
 $CMP 24awg_rd_1
 D 24 AWG Hook-Up Wire 7/32 Red 600V 30.5m
+K Wire 24awg
+$ENDCMP
+#
+$CMP 24awg_yl_1
+D 24 AWG Hook-Up Wire 7/32 Yellow 600V 30.5m
 K Wire 24awg
 $ENDCMP
 #
@@ -304,7 +357,7 @@ $ENDCMP
 $CMP 3m_37103-a165
 D 3m 3 Position Rectangular Plug Connector IDC Gold 20-24 AWG
 K connector
-F ~
+F https://www.digikey.fi/products/en?keywords=37103-a165
 $ENDCMP
 #
 $CMP 3m_37104-a165
@@ -316,13 +369,19 @@ $ENDCMP
 $CMP 3m_37303-a165
 D 3m 3 Position Rectangular Receptacle Connector IDC Gold 20-24 AWG
 K connector
-F ~
+F https://www.digikey.fi/products/en?keywords=37303-A165-00E
 $ENDCMP
 #
 $CMP 3m_37304-a165
 D 3m 4 Position Rectangular Receptacle Connector IDC Gold 20-24 AWG, OD 1.2-1.6mm
 K Connector
 F https://multimedia.3m.com/mws/media/277003O/3mtm-mini-clamp-socket-wiremount-ts2094.pdf
+$ENDCMP
+#
+$CMP 9pin_flat
+D Wurth  Flat Ribbon Cable 9pin, 1.27mm
+K IDC Flat Ribbon
+F https://www.digikey.fi/products/en?keywords=MC09FG-100-ND
 $ENDCMP
 #
 $CMP Ant_u_fl
@@ -360,6 +419,12 @@ K DC power barrel Plug connector
 F ~
 $ENDCMP
 #
+$CMP Cnc_410m0-09
+D D-Sub 9 Position Plug, Male Pins IDC Connector
+K Dsub IDC
+F https://www.digikey.fi/products/en?keywords=LMU09H-ND
+$ENDCMP
+#
 $CMP Coax_1_13mm
 D Coaxial Cable 1.13mm
 K Coaxial
@@ -374,6 +439,12 @@ $ENDCMP
 $CMP Cui_pp3-002b
 D Cui Power Barrel Connector Plug 2.50mm ID, 5.50mm OD Free Hanging
 K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Cui_sdi65w
+D Cui 65 Watt External Desktop Power 5.5x2.1mm
+K Power Supply
 F ~
 $ENDCMP
 #
@@ -410,6 +481,12 @@ $ENDCMP
 $CMP Dc_barrel_712ah
 D DC Power Connectors HI-TEMP 2.5MM POWER 2.5mmx5.5mm
 K 712AH Barrel
+$ENDCMP
+#
+$CMP Delta_fan_80x25
+D Fan, tacho output, 3-pin connector
+K Fan Motor tacho
+F https://www.digikey.com/en/products/detail/delta-electronics/AFB0812HH-F00/1014383
 $ENDCMP
 #
 $CMP Dp_cable_b
@@ -450,6 +527,12 @@ K 8P8C RJ Male connector
 F ~
 $ENDCMP
 #
+$CMP Fan_Tacho
+D Fan, tacho output, 3-pin connector
+K Fan Motor tacho
+F http://www.hardwarecanucks.com/forum/attachments/new-builds/16287d1330775095-help-chassis-power-fan-connectors-motherboard-asus_p8z68.jpg
+$ENDCMP
+#
 $CMP H05rn-f_2x1_0
 D H05RN-F, HAR, power and control cable, rubber, 300/500V, class 5/flexible, oil-resistant, flame-retardant
 K cable 1.0mm
@@ -478,6 +561,12 @@ $CMP Hdp24-24-23sn
 D Deutsch HDP20 Housing for female terminals, Wire-to-Wire, 23 Position, Sealable, Green, Power & Signal, Panel
 K connector
 F ~
+$ENDCMP
+#
+$CMP Hdplex_200w
+D Hdplex 200W DC-ATX 16-24VDC Input
+K Power Supply
+F https://hdplex.com/hdplex-200w-dc-atx-power-supply-16v-24v-wide-range-voltage-input.html
 $ENDCMP
 #
 $CMP Hiro_df1e-4s
@@ -518,6 +607,12 @@ $ENDCMP
 #
 $CMP Jae_il-g-3s
 D Jae 3 Position Housing Receptacle Brown 0.098" (2.50mm)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Jst_ghr-03v-s
+D Jst ghr-3, Housings Receptacle Natural (1.25mm)
 K connector
 F ~
 $ENDCMP
@@ -609,7 +704,7 @@ $ENDCMP
 $CMP Jst_xhp-4
 D Jst xhp-4, Housings Receptacle Natural (2.50mm)
 K connector
-F ~
+F https://www.digikey.com/en/products/detail/jst-sales-america-inc/XHP-4/683353
 $ENDCMP
 #
 $CMP Keystone-pn229
@@ -672,6 +767,12 @@ K Connector Mini-Fit
 F ~
 $ENDCMP
 #
+$CMP Mx_2695-3rp
+D Molex 2.54mm Pitch, KK-Receptacle Crimp Housing
+K connector
+F https://www.digikey.fi/products/en?keywords=22-01-3037
+$ENDCMP
+#
 $CMP Mx_39012-04
 D Molex Mini-Fit Jr. Receptacle Housing, Dual Row, 4 Circuits
 K connector Mini-Fit
@@ -702,10 +803,28 @@ K connector Mini-Fit
 F ~
 $ENDCMP
 #
+$CMP Mx_39012-20
+D Molex Mini-Fit Jr. Receptacle Housing, Dual Row, 20 Circuits
+K connector Mini-Fit
+F https://www.molex.com/molex/products/part-detail/crimp_housings/0039012205
+$ENDCMP
+#
+$CMP Mx_39012-20_il
+D Molex Mini-Fit Jr. Receptacle Housing, Dual Row, 20 Circuits
+K connector Mini-Fit
+F https://www.molex.com/molex/products/part-detail/crimp_housings/0039012205
+$ENDCMP
+#
 $CMP Mx_39012-24
 D Molex Mini-Fit Jr. Receptacle Housing, Dual Row, 24 Circuits
 K connector Mini-Fit
-F ~
+F https://www.molex.com/molex/products/part-detail/crimp_housings/0039012245
+$ENDCMP
+#
+$CMP Mx_39012-24_il
+D Molex Mini-Fit Jr. Receptacle Housing, Dual Row, 24 Circuits
+K connector Mini-Fit
+F https://www.molex.com/molex/products/part-detail/crimp_housings/0039012245
 $ENDCMP
 #
 $CMP Mx_43025-02
@@ -750,6 +869,12 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Mx_43030-0012
+D Molex Micro-Fit 3.0 Crimp, Female, PBr, 26-30 AWG, Bag
+K Molex Crimp Terminal
+F https://www.molex.com/molex/products/part-detail/crimp_terminals/0430300012
+$ENDCMP
+#
 $CMP Mx_43645-02
 D Molex Micro-Fit 3.0 Receptacle Housing, Single Row, 2 Circuits, Black
 K connector
@@ -760,6 +885,12 @@ $CMP Mx_44441-02
 D MX Sabre 2 Position Blade Type Power Housing Black 0.295" (7.50mm)
 K connector
 F ~
+$ENDCMP
+#
+$CMP Mx_46993-06
+D Molex Mini-Fit Jr. Housings Plug, Dual Row, 6-pin
+K connector Mini-Fit
+F https://www.digikey.fi/products/en?keywords=0469930610
 $ENDCMP
 #
 $CMP Mx_51021-07
@@ -780,6 +911,12 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Mx_51110-10
+D Milli-Grid, 2mm Pitch Receptacle Housing, Dual Row, 10 Circuits
+K connector
+F https://www.digikey.fi/products/en?keywords=WM18033-ND%20
+$ENDCMP
+#
 $CMP Mx_5264-02
 D 2.50mm Pitch, Mini-SPOX Receptacle Crimp Housing
 K connector
@@ -789,7 +926,7 @@ $ENDCMP
 $CMP Mx_5264-03
 D 2.50mm Pitch, Mini-SPOX Receptacle Crimp Housing
 K connector
-F ~
+F https://www.molex.com/molex/products/part-detail/crimp_housings/0050375033
 $ENDCMP
 #
 $CMP Mx_5264-04
@@ -820,6 +957,12 @@ $CMP Mx_901600150
 D 2.54mm Pitch C-Grid III Crimp Housing Dual Row, 50 Circuits
 K connector
 F ~
+$ENDCMP
+#
+$CMP Nk10_2mm_pitch
+D Molex 10 Pos  Rectangular Receptacle,  IDC Gold 28 AWG, 2mm Pitch
+K Connector Nk10
+F https://www.digikey.fi/products/en?keywords=0875681073
 $ENDCMP
 #
 $CMP Nk10_71600-610lf
@@ -864,10 +1007,28 @@ K Phototransistor Sensor
 F ~
 $ENDCMP
 #
+$CMP Pan_dnf14-110
+D 2.79 x 0.8mm Quick Connect Female 16-14 AWG Connector Half-Insulated
+K Quick Connect Terminal
+F http://www.panduit.com/heiler/PartDrawings/A4131006.pdf
+$ENDCMP
+#
+$CMP Pan_pm-f45-c3
+D Panasonic, Optical Sensor Through-Beam 6mm Module, Pre-Wired
+K Sensor Hall
+F ~
+$ENDCMP
+#
 $CMP Pnl_mnt_fuse
 D Panel Mount Fuse Schurter 3101.0225
 K Tab Fuse
 F ~
+$ENDCMP
+#
+$CMP Pxc_4pin_pnl
+D Phoenix, Terminal Block Header, Pnl Mount, 5 mm, 4 Ways
+K connector
+F https://www.digikey.fi/products/en?keywords=0707264
 $ENDCMP
 #
 $CMP Qc_22-18awg_6_3x0_8
@@ -984,6 +1145,29 @@ K Ring Terminal
 F https://www.te.com/global-en/product-130205.html?q=130205&source=header
 $ENDCMP
 #
+$CMP Sata_cable
+D Standard Sata Cable
+K Sata Cable
+$ENDCMP
+#
+$CMP Sata_cbl
+D Sata connector for standard cable
+K connector Sata
+F  ~
+$ENDCMP
+#
+$CMP Sata_combo
+D Sata connector for standard cable
+K connector Sata
+F  ~
+$ENDCMP
+#
+$CMP Satap_cbl
+D Sata Power Connector. Standard Cable
+K Connector Sata
+F  ~
+$ENDCMP
+#
 $CMP Sch_kfb8_1
 D Schurter 4302.5311 IEC Inlet C14, Filter, Switch 2-pole
 K connector iec c14
@@ -1056,6 +1240,12 @@ K connector
 F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Catalog+Section%7F82004_FASTIN_FASTON_Product_Line%7F0311%7Fpdf%7FEnglish%7FENG_CS_82004_FASTIN_FASTON_Product_Line_0311.pdf%7F60295-2
 $ENDCMP
 #
+$CMP Te_520963-2
+D QC Female 6.35x0.8mm, 14-18AWG, Ins. 2.79-4.31mm, Fully Insulated
+K Quick Connect Terminal
+F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=520963&DocType=Customer+Drawing&DocLang=English
+$ENDCMP
+#
 $CMP Te_776427-1
 D AMPSEAL 16, Housing for female terminals, Wire-to-Wire, 2 Position, 4.5mm, Sealable, Red
 K connector
@@ -1090,6 +1280,18 @@ $CMP Ten_54-00080
 D Conn Jack Mono 3.5MM Panel mount
 K Audio Mono
 F https://tensility.com/connectors/54-00080
+$ENDCMP
+#
+$CMP Tens_10-00120
+D Tensility 10-00120 Cable, 2m, 5.5x2.5x7.5mm locking dc plug, 18 AWG, Thread 5/16-32
+K DC power barrel Plug connector
+F ~
+$ENDCMP
+#
+$CMP Tens_10-00124
+D Tensility 10-00124 Cable, 2m, 5.5x2.5x7.5mm RA locking dc plug, 18 AWG, Thread 5/16-32
+K DC power barrel Plug Right Angle connector
+F https://tensility.com/cable-assemblies/10-00124
 $ENDCMP
 #
 $CMP Tube_6mm_yl
@@ -1160,6 +1362,12 @@ $CMP luxeon_1w_star
 D Luxeon 1W Star LED lamp.
 K LED Star
 F ~
+$ENDCMP
+#
+$CMP pan_pmx4_u__2_5mm
+D 4 Conductor Panasonic PM-F45-C3 2M meters 28awg
+K cable 28awg
+F https://www3.panasonic.biz/ac/ae/dl/catalog/index.jsp?series_cd=3351&part_no=PM-F45-C3
 $ENDCMP
 #
 $CMP v1_pxc_mstbt_2-5_4-st

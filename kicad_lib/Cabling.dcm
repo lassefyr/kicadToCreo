@@ -281,6 +281,18 @@ K cable 22awg
 F ~
 $ENDCMP
 #
+$CMP 22awgx6_u_5_8mm
+D Lapp 6 Conductor Multi-Conductor Cable Gray 22 AWG
+K cable 22awg
+F https://www.digikey.fi/en/products/detail/lapp/302206/12148470
+$ENDCMP
+#
+$CMP 22awgx6_u_6_0mm
+D Tensility 6 Conductor Unshielded Cable Black 22 AWG
+K cable 22awg
+F https://www.digikey.fi/en/products/detail/tensility-international-corp/30-01292/10292914
+$ENDCMP
+#
 $CMP 24awg_bk_1
 D 24 AWG Hook-Up Wire 7/32 Black 600V 30.5m
 K Wire 24awg
@@ -611,6 +623,12 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Jst_ghr-03v-s
+D Jst ghr-3, Housings Receptacle Natural (1.25mm)
+K connector
+F ~
+$ENDCMP
+#
 $CMP Jst_phdr-22vs
 D Jst 22-Pin Connectors - 2-Roe Housings Receptacle Natural 2.00mm
 K connector
@@ -761,6 +779,12 @@ K Connector Mini-Fit
 F ~
 $ENDCMP
 #
+$CMP Mx_22011-06
+D Molex 2.50mm KK Wire-to-Board Housing, Female, for 2759/5159 Crimp Terminals, 6 Circuits
+K connector
+F https://www.molex.com/molex/products/part-detail/crimp_housings/0022011062
+$ENDCMP
+#
 $CMP Mx_2695-3rp
 D Molex 2.54mm Pitch, KK-Receptacle Crimp Housing
 K connector
@@ -854,13 +878,13 @@ $ENDCMP
 $CMP Mx_43025-12
 D Micro-Fit 3.0 Receptacle Housing, Dual Row, 12 Circuits
 K connector
-F ~
+F https://www.digikey.fi/en/products/detail/molex/0430251200/252501
 $ENDCMP
 #
 $CMP Mx_43025-16
 D Micro-Fit 3.0 Receptacle Housing, Dual Row, 16 Circuits
 K connector
-F ~
+F https://www.digikey.fi/en/products/detail/molex/0430251600/531406
 $ENDCMP
 #
 $CMP Mx_43030-0012
@@ -935,6 +959,12 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Mx_90142-10
+D 2.54mm Pitch C-Grid III Crimp Housing Dual Row, 10 Circuits, Black
+K connector Mini-Fit
+F https://www.molex.com/molex/products/part-detail/crimp_housings/0901420010
+$ENDCMP
+#
 $CMP Mx_90142-14
 D 2.54mm Pitch C-Grid III Crimp Housing Dual Row, 14 Circuits, Black
 K connector Mini-Fit
@@ -981,6 +1011,12 @@ $CMP Nk10_inline2
 D 3M 10-Pin Rectangular Ribbon Cable Conn. IDC Gold 26-28AWG
 K Connector Nk10
 F ~
+$ENDCMP
+#
+$CMP Ntr_nc3md-lx
+D Neutrik XLR Conn. 3P Male Nickel/Silver Duplex With Gnd
+K xlr connector
+F https://www.switchcraft.com/Product.aspx?ID=2046
 $ENDCMP
 #
 $CMP Omron_ee-sx770
@@ -1115,6 +1151,12 @@ K Quick Connect Terminal
 F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=156666&DocType=Customer+Drawing&DocLang=English
 $ENDCMP
 #
+$CMP Qc_te-41274
+D Quick Connect 6.35mmx0.8mm Female 14-18 AWG Crimp Non-Insulated, Tin
+K Quick Connect Terminal
+F https://www.te.com/usa-en/product-41274.html
+$ENDCMP
+#
 $CMP Qc_te-520963-2
 D 6.35mm Quick Connect Female 14-18 AWG Crimp Connector Fully Insulated
 K Quick Connect Terminal
@@ -1153,6 +1195,12 @@ $ENDCMP
 $CMP Sata_combo
 D Sata connector for standard cable
 K connector Sata
+F  ~
+$ENDCMP
+#
+$CMP Satap_cbl
+D Sata Power Connector. Standard Cable
+K Connector Sata
 F  ~
 $ENDCMP
 #
@@ -1262,6 +1310,12 @@ $CMP Te_ferrule_22awg
 D Terminals Ferrule d1=0.8mm Gray 22AWG
 K Ferrule Terminal
 F ~
+$ENDCMP
+#
+$CMP Te_ferrule_2x20awg
+D Terminals Ferrule d1=1.4mm White Two x 20 AWG
+K Ferrule Terminal
+F https://www.digikey.fi/en/products/detail/te-connectivity-amp-connectors/966144-1/966795
 $ENDCMP
 #
 $CMP Ten_54-00080
