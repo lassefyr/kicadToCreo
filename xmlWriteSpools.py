@@ -63,12 +63,14 @@ class xmlWriteSpools:
 		# Zero the array before otherSpool. Other spools are the tubes, shrinks and tape.
 		self.__spoolData = ""
 		self.writeOtherSpool(components)
-		print(self.__spoolData, file = fout)
+		#print(self.__spoolData, file = fout)
+		fout.write(self.__spoolData)
 
 		# Zero the array before CblSpool and write cables (multiple conductor cables with sheath)
 		self.__spoolData = ""
 		self.writeCblSpool(components)
-		print(self.__spoolData, file = fout)
+		#print(self.__spoolData, file = fout)
+		fout.write(self.__spoolData)
 		
 		if isOutputFileOpen == True:
 			fout.close()
@@ -189,7 +191,9 @@ class xmlWriteSpools:
 			self.__spoolData += "<SYS_PARAMETER id=\"cbl_"+spoolName+"\" />\n"									
 			self.__spoolData += "<PARAMETER name=\"UNITS\" value=\"MM\" />\n"
 			self.__spoolData += "<PARAMETER name=\"OBJ_TYPE\" value=\"CABLE\" />\n"			
-			self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBendRadius+"\" />\n"												
+			self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBendRadius+"\" />\n"	
+			if type.lower() == "ribbon":
+				self.__spoolData += "<PARAMETER name=\"BEND_RADIUS\" value=\"\" />\n" # This was added to Ribbon spools so that the Creo Compare won't give an error
 			self.__spoolData += "<PARAMETER name=\"THICKNESS\" value=\""+thickness+"\" />\n"
 			self.__spoolData += "<PARAMETER name=\"NUM_COND\" value=\""+numOfCoductors+"\" />\n"	
 			self.__spoolData += "<PARAMETER name=\"DENSITY\" value=\""+density+"\" />\n"					
@@ -212,7 +216,7 @@ class xmlWriteSpools:
 			for i in range(1, int(howManyPins/2+1)): #(each net has two counter parts)
 				self.__spoolData += "<SPOOL name=\""+spoolName+":"+str(i)+"\" type=\"INLINE_SPOOL\" subType=\"WIRE_SPOOL\" >\n"
 				self.__spoolData += "<SYS_PARAMETER id=\"sp"+str(firstSpoolIndex)+"\" />\n"	
-				self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+colorTable[(i-1)]+"\" />\n"
+				self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+(colorTable[(i-1)].lower())+"\" />\n"		# lowercase Just in case CS172530
 				self.__spoolData += "<PARAMETER name=\"COND_ID\" value=\""+str(i)+"\" />\n"
 				self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBendRadius+"\" />\n"				
 				self.__spoolData += "<PARAMETER name=\"UNITS\" value=\"MM\" />\n"
@@ -232,6 +236,8 @@ class xmlWriteSpools:
 	
 	def printCblSpoolNames(self):
 		# print(self.cblSpoolName)
+		if not self.cblSpoolName:
+			return( "No Multi-Conductor Cable Spools" )
 		return self.cblSpoolName
 
 	def getCblSpoolId(self, spoolName):
@@ -278,10 +284,10 @@ class xmlWriteSpools:
 			self.__spoolData += "<SYS_PARAMETER id=\"w_"+spoolName+"\" />\n"
 
 # Wire COLOR -----------------------------------------------------------------------------			
-			spoolColor = comp.getField("Color")
+			spoolColor = comp.getField("Color").lower()
 			if not spoolColor:
 				self.writeWarningStr("No Spool color defined for "+spoolName)
-				spoolColor = self.DEF_COLOR
+				spoolColor = self.DEF_COLOR.lower()
 			self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+spoolColor+"\" />\n"
 # Wire DENSITY ---------------------------------------------------------------------------			
 			density = comp.getField("Density")
@@ -408,10 +414,10 @@ class xmlWriteSpools:
 			self.__spoolData += "<PARAMETER name=\"WALL_THICKNESS\" value=\""+thickness+"\" />\n"
 
 # Sheath COLOR -----------------------------------------------------------------------------			
-			spoolColor = comp.getField("Color")
+			spoolColor = comp.getField("Color").lower()
 			if not spoolColor:
 				self.writeWarningStr("No Spool color defined for "+spoolName)
-				spoolColor = self.DEF_COLOR
+				spoolColor = self.DEF_COLOR.lower()
 			self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+spoolColor+"\" />\n"
 
 # Sheath MIN_BEND_RADIUS -------------------------------------------------------------------			

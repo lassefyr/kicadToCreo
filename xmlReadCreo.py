@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # https://github.com/latefyr/kicadcreo.git
 # MIT license
 #
@@ -16,6 +17,10 @@
 
     Command line: 
     Run from Kicad eeschema with default parameters "%I" "%O"
+	
+	Changes:
+	2022.03.01	Previous update broke V5 operation. Fixed.
+	2022.01.01	added preliminary support for KicadV6
 """
 
 from __future__ import print_function
@@ -25,6 +30,7 @@ import sch
 import os
 import shutil
 import math
+#import sexpdata
 
 class xmlReadCreo:
 	def __init__(self):
@@ -34,8 +40,10 @@ class xmlReadCreo:
 		self.refDesVals = []
 		self.harnessNum = []
 		self.wireLength = []
+		self.sheets = []
 		self.alreadyProsessed = []
 		self.prosessedSheets = []
+		self.kiCadSch = object()
 
 #-----------------------------------------------------------------------------------------
 # Create backup files of the schematic first
@@ -101,6 +109,109 @@ class xmlReadCreo:
 #		print( self.wireLength )
 #		print( self.harnessNum )
 
+#-----------------------------------------------------------------------------------------
+# Write Kicad V6 Schematic Sheet Data
+#
+#-----------------------------------------------------------------------------------------				
+	def writeKicadSch_v6( self ):
+		from sexpdata import Symbol, car, cdr
+		for i, x in enumerate(self.kiCadSch):
+			if ( car(x) == Symbol('symbol') ): 
+				refDes = ""
+				for j, y in enumerate(x):		
+				#---------------------------------------------------
+				# Check if this item is a cable or a wire. If not then continue
+				#---------------------------------------------------
+					if ( (car(y) == Symbol('property')) and  ( cdr(y)[0]== "Reference" )): 
+						if( (cdr(y)[1][:1] == 'W') or (cdr(y)[1][:3]=="CBL")):							
+							refDes = cdr(y)[1]							
+						else:
+							continue	
+					
+				#---------------------------------------------------
+				# Process the lengths and the Part Numbers
+				#---------------------------------------------------
+				# Update the Harness Name String if it exists
+					if ( car(y) == Symbol('property') ):
+						if( cdr(y)[0].lower() == "harness_name" ):		#note - lower case
+							try:
+								myindex = self.refDesVals.index(refDes)						
+							except ValueError:
+								self.writeErrorStr( "Refdes \""+refDes+"\" does not exist! Not routed yet?\n" )
+								continue						
+							harnessName = self.harnessNum[myindex]
+							y[2] = harnessName										
+					#---------------------------------------------------
+					# Update the Harness Length String if it exists
+						if( cdr(y)[0].lower() == "length" ):
+							try:
+								myindex = self.refDesVals.index(refDes)
+							except ValueError:
+								self.writeErrorStr( "Refdes \""+refDes+"\" does not exist! Not routed yet?\n" )
+								continue
+							roundedIntLen = math.ceil(float(self.wireLength[myindex]))
+							roundedWireLen = str(roundedIntLen).split('.')[0] 				# Round up and no decimal places
+							self.writeInfoStr( "Name: " + "{0:<6}".format(refDes) + " Harness Name: " + "{0:<15}".format(self.harnessNum[myindex]) + " lenght: " +roundedWireLen + "\n" )
+							y[2] = (roundedWireLen+"mm")
+
+
+#-----------------------------------------------------------------------------------------
+# Read data from Creo xml and store the read lengths, part numbers, and refdes values.
+#
+#-----------------------------------------------------------------------------------------
+	def readCreoPartNumsAndLengths( self, fileName ):
+		self.creoSchXmlName = os.path.splitext(fileName)[0] +"_creoin.xml"
+			
+		self.writeInfoStr( "Creo Back Annotation - Lengths and Harness Names\n" )								
+		self.writeInfoStr( "------------------------------------------------\n" )								
+
+		if( os.path.isfile(self.creoSchXmlName) ):
+			self.writeInfoStr( "Creo Schematic Xml-file OK: " + self.creoSchXmlName + "\n" )								
+		else:
+			self.writeErrorStr( "Creo Schematic Inputfile NOT FOUND: " + self.creoSchXmlName + "\n" )
+			self.writeInfoStr( "NOTE:You need to export Creo Schematic xml file with name: " + self.creoSchXmlName + "\n" )			
+			self.writeInfoStr( "(Cabling -> Logical Data -> Export -> Creo Schematic)\n" )			
+			return False
+									
+		creoXml = minidom.parse( self.creoSchXmlName )
+		connections = creoXml.getElementsByTagName("CONNECTION")
+		self.refDesVals = []
+		self.harnessNum = []
+		self.wireLength = []
+		for connection in connections:
+			wireName = connection.getAttribute("name")
+			type = connection.getAttribute("type")
+			varName = ""
+			varValue = ""
+			if wireName[:1] =="W" or type == "ASSEMBLY":
+				self.refDesVals.append(wireName)
+				parameters = connection.getElementsByTagName('PARAMETER')
+				for param in parameters:
+					varName = param.getAttribute('name')
+					varValue = param.getAttribute('value')
+					if( varName == "LENGTH" ):
+						self.wireLength.append(varValue)
+					if( varName == "HARNESS_NAME"):
+						self.harnessNum.append(varValue)
+
+
+#-----------------------------------------------------------------------------------------
+# Read existing sheetnames in the design
+#
+#-----------------------------------------------------------------------------------------
+	def readCreoSheetNames( self, fileName ):
+		self.creoSchXmlName = fileName +".xml"
+		
+		creoXml = minidom.parse( self.creoSchXmlName )		
+		sheetNames = creoXml.getElementsByTagName("sheet")
+		
+		self.sheets = []
+		for mysheet in sheetNames:
+			x = mysheet.getElementsByTagName("source")[0]
+			y =x.childNodes[0];		
+			self.sheets.append( y.nodeValue )
+		
+		del creoXml
 
 
 #-----------------------------------------------------------------------------------------
@@ -190,6 +301,79 @@ class xmlReadCreo:
 						self.writeErrorStr( "File does not exist!: " + subSheetFilename + "\n" )																			
 		return True
 	
+	
+#-----------------------------------------------------------------------------------------
+# Read data from Creo Schematic file (Created with Creo)
+# and write the cable lengths and part numbers to Kicad V6 Schematic file
+# 
+#
+#-----------------------------------------------------------------------------------------
+	def backAnnotateV6( self, fileName ):
+		from sexpdata import loads, dumps
+		
+		# Put lenghts to Kicad Schematic
+		# Do not overwrite the original file
+		self.writeInfoStr( "\nProcessing wires and cables:\n" )								
+		self.writeInfoStr( "----------------------------\n" )								
+		self.writeInfoStr( str(self.refDesVals) + "\n\n" )								
+		
+
+		self.prosessedSheets = []	
+		currentDirectory = os.path.dirname( fileName )
+		for myfilename in self.sheets:
+			#------------------------------------------------------------------
+			# Error Cheking
+			myfilename = os.path.join( currentDirectory, myfilename )
+			if( os.path.exists( myfilename ) ):
+				if( myfilename in self.prosessedSheets ):
+					self.writeWarningStr( "Child .sch already processed: " + myfilename + "!\n" )
+					self.writeWarningStr( "NOTE: Reusing schematic shows the same wire\n" )							
+					self.writeWarningStr( "lengths and partnames in all instances of the file.\n" )
+					self.writeWarningStr( "Copy the .sch to a new name if you need\n" )								
+					self.writeWarningStr( "to have unique names and wire lengths!\n" )
+					continue
+				elif ( self.backUpFile( myfilename ) ):
+					self.writeInfoStr( "\nBacking up " + myfilename + " OK\n" )
+				else:
+					self.writeErrorStr( "\nBacking up " + myfilename + " FAILED\n" )
+					continue
+			#------------------------------------------------------------------
+			# Process sheet for partnumbers and lengths								
+				try:
+					f = open((myfilename+".bak"),"r")
+					self.line = f.read()
+				except:
+					self.writeErrorStr( "Could not read file: " + myfilename +".bak !\n" )
+					continue
+				finally:
+					self.kiCadSch = loads( self.line )
+					self.writeKicadSch_v6( )
+					f.close( )					
+				try:
+					f = open( myfilename, "w" )
+					f.write(dumps( self.kiCadSch ))
+				except:
+					self.writeErrorStr( "Could not write file: " + myfilename + "!\n" )
+				finally:
+					self.writeInfoStr( "Updated file: " + myfilename + " succesfully.\n" )
+					f.close( )
+				self.prosessedSheets.append( myfilename )
+				
+			else:
+				self.writeErrorStr( "File does not exist!: " + myfilename + "\n" )
+		return True
+
+#-----------------------------------------------------------------------------------------
+# Read the correct filename from the .xml file
+#
+#-----------------------------------------------------------------------------------------				
+	def getSourceFilenameFromXml( self, xmlFileName ):
+		tmpObject = minidom.parse(xmlFileName)
+		currentFileName = tmpObject.getElementsByTagName("source")
+		del tmpObject
+		return( currentFileName[0].firstChild.nodeValue )
+		
+		
 #-----------------------------------------------------------------------------------------
 # String Logger functions
 #
@@ -233,10 +417,30 @@ class xmlReadCreo:
 if __name__ == '__main__':      
 	fileToProcess = sys.argv[1]    				# unpack 2 command line arguments  
 	
-	# Split the file extension away if it exists
-	fileToProcess = os.path.splitext(fileToProcess)[0]	
+	# Split the file extension away if it exists. This comes from command line
+	# fileNameToProcess = os.path.splitext(fileToProcess)[0]
+
+	# Initialize the function instance
 	creoCablelengths = xmlReadCreo( )
-	creoCablelengths.backAnnotate( fileToProcess )
+	
+	# Get the filename from the xml-File
+	tempFileName = creoCablelengths.getSourceFilenameFromXml( fileToProcess )
+	fileNameToProcess = os.path.splitext(tempFileName)[0]
+	fileExtension = os.path.splitext(tempFileName)[1]
+	
+	if( fileExtension == ".sch" ):
+		creoCablelengths.writeInfoStr( "\nProsess Kicad V5 file.\n")
+		creoCablelengths.readCreoPartNumsAndLengths( fileToProcess )
+		creoCablelengths.readCreoSheetNames( fileNameToProcess )
+		creoCablelengths.backAnnotate( fileNameToProcess )
+	elif( fileExtension == ".kicad_sch" ):
+		creoCablelengths.writeInfoStr( "\nProsess Kicad V6 file.\n")
+		creoCablelengths.readCreoPartNumsAndLengths( fileToProcess )
+		creoCablelengths.readCreoSheetNames( fileNameToProcess )
+		creoCablelengths.backAnnotateV6( fileNameToProcess )	
+	else:
+		creoCablelengths.writeInfoStr( "\nNo Valid Filename found " + fileToProcess + "\n" )
+	
 	print("Info", file=sys.stdout)
 	print( creoCablelengths.getInfoStr(), file=sys.stdout )
 
@@ -245,7 +449,7 @@ if __name__ == '__main__':
 
 	print("Errors", file=sys.stderr)
 	print( creoCablelengths.getErrorStr(), file=sys.stderr )
-	print( "Please Reload the Kicad Schematic", file=sys.stdout )
+	print( "Please Reload the Kicad Schematic if Operation was Successful", file=sys.stdout )
 	
 	
 	

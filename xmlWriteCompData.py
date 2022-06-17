@@ -27,14 +27,14 @@ import sys
 class xmlWriteCompData:
 #   index               0           1              2             3              4             5            6             7
 	CMP_PARAMS =   ["Modelname" ,"Layer"     ,"Num_of_pins" ,"Obj_type" , "Internal_len" ,"Grouping" ,"Entry_port" ,"Term_name" ]
-	CMP_DEFAULTS = [""          ,"DEF_LINES" ,"0"           ,"connector", "5"            ,"round"    ,"PIN_"       ,""]
+	CMP_DEFAULTS = [""          ,"DEF_LINES" ,"0"           ,"CONNECTOR", "5"            ,"ROUND"    ,"PIN_"       ,""]
 	
 	CMP_USEVAL =   [""          ,""          ,""            ,""         , ""             ,""         ,""           ,""]
 		  
 	def __init__(self):
 		self.ENTRY_PORT = "PIN_"
 		self.PORT_TYPE = "Electrical"
-		self.GROUPING = "round"	
+		self.GROUPING = "ROUND"	
 		self.INTERNAL_LEN = "5"
 		self.TERM_AUTO_ASSIGN = "TRUE"
 		self.idNum = 1				# This is the first component
@@ -75,7 +75,7 @@ class xmlWriteCompData:
 				continue		
 			
 			for listIndex in range(len(self.CMP_PARAMS)):
-				tempStr =  comp.getField(self.CMP_PARAMS[listIndex])
+				tempStr =  comp.getField(self.CMP_PARAMS[listIndex]).upper()
 				if tempStr:
 					self.CMP_USEVAL[listIndex] =	tempStr
 				else:
@@ -83,7 +83,7 @@ class xmlWriteCompData:
 						
 # Component COMPONENT --------------------------------------------------------------------			
 			if not self.CMP_USEVAL[0]:						
-				creoModel = comp.getField("Value")
+				creoModel = comp.getValue( )						# Changed parameter call. New kicad_netlist_reader.py
 				self.writeInfoStr("\""+refDes+"\" - Using Component Name as Modelname!\n")
 			else:
 				creoModel = self.CMP_USEVAL[0]
@@ -113,7 +113,7 @@ class xmlWriteCompData:
 				self.writeErrorStr(""+refDes+", no pins found!")
 		
 # Component OBJ_TYPE Connector (Optional)-------------------------------------------------
-			print("<PARAMETER name=\"OBJ_TYPE\" value=\"connector\" />", file = fout)			
+			print("<PARAMETER name=\"OBJ_TYPE\" value=\""+self.CMP_USEVAL[3]+"\" />", file = fout)			
 
 # Check Component Terminators ------------------------------------------------------------
 			if not self.CMP_USEVAL[7]:
@@ -169,7 +169,7 @@ class xmlWriteCompData:
 #
 # These fuctions log the strings and outputs data to stdout and stderr
 #
-#-----------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------		
 	def writeSpecialTerminators( self, termString ):
 		self.__terminatorTable = []							# These are filled once for each connector
 		self.__termPinNumber = []
@@ -184,11 +184,16 @@ class xmlWriteCompData:
 				splitLen = len( splitTermString )			# How Many Strings
 				if ( splitLen	 >= 1 ):					# At least one pin has new terminator
 					for i in range (1, splitLen):
-						if( unicode(splitTermString[i]).isnumeric() ):
+						if( self.ensure_unicode( splitTermString[i] ).isnumeric() ):
 							self.__terminatorTable.append(splitTermString[0])
 							self.__termPinNumber.append(splitTermString[i])
 			else:
-				break			
+				break	
+	
+	def ensure_unicode( self, x ):
+		if sys.version_info < (3, 0):
+			return unicode(x)
+		return str(x)					
 		
 	def getSpecialTerminator( self, pinNum ):
 		try:
@@ -198,6 +203,8 @@ class xmlWriteCompData:
 		except ValueError:
 			return ""
 			
+		
+	
 #-----------------------------------------------------------------------------------------
 # String Logger functions
 #
