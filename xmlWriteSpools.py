@@ -442,9 +442,10 @@ class xmlWriteSpools:
 			if not outerDiam:
 				self.writeWarningStr("No Outer Diameter defined for " + refDes+"!")
 				innerDiam = "11"
-			if int(innerDiam) >= int(outerDiam):
+			if float(innerDiam) >= float(outerDiam):
 				self.writeWarningStr("Inner diameter larger than Outer diameter for " + refDes+"!")
-				outerDiam = str(int(innerDiam)+1)
+				outerDiam = "{:.1f}".format(float(innerDiam)+1)
+				#outerDiam = f"{(float(innerDiam)+1):.1f}"
 				
 			self.__spoolData += "<PARAMETER name=\"OUTER_DIAMETER\" value=\""+outerDiam+"\" />\n"
 

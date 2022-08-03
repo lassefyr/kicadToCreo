@@ -18,9 +18,6 @@
 """
 
 from __future__ import print_function
-#from __future__ import standard_library
-#standard_library.install_aliases()
-
 
 # Import the KiCad python helper module
 import kicad_netlist_reader
@@ -29,54 +26,57 @@ import os
 import xmlWriteCompData
 import xmlWriteSpools
 import xmlWriteConnections
-if sys.version_info.major < 3:
-	import Tkinter as tk
-	import ttk as ttk
-else:
-	import tkinter as tk
-	import tkinter.ttk as ttk
+
+import wx	# 2022_08_03 using wx now. Seems to work in both kicad versions 5 and 6
 	
 import logging
 import threading
+import textwrap
 
-
-# Text Handler class for the tKinter Interface
+#------------------------------------------------------------------------------
+# 	Text Handler class for the wx Interface
+#	class TextHandler(logging.Handler):
+#	Scrolls text with different text colors
+#------------------------------------------------------------------------------     
 class TextHandler(logging.Handler):
-	"""This class allows you to log to a Tkinter Text or ScrolledText widget"""
+	"""This class allows you to log to a wx Text or ScrolledText widget"""
 	def __init__(self, text):
 		# run the regular Handler __init__
 		logging.Handler.__init__(self)
 		# Store a reference to the Text it will log to
 		self.text = text
-#		Set different Background colors for error and warning messages. You can also change 
-#		the foreground color with (or without) by adding e.g. "foreground='red'" 
-		self.text.tag_config("error", background="#cc0000",  font = ('Courier', 12, 'bold'))
-		self.text.tag_config("warn", background="#ff8800",  font = ('Courier', 12, 'bold'))
-
+		
+	# Set different Background colors for error and warning messages.
+	# You can set the foreground and background color to what ever you like here
 	def emit(self, record):
 		msg = self.format(record)
-		def append():
-			self.text.configure(state='normal')
-			if(record.levelname == "ERROR"):				
-				self.text.insert(tk.END, msg + '\n',"error")
-			elif(record.levelname == "WARNING"):
-				self.text.insert(tk.END, msg + '\n',"warn")
+		
+		if(record.levelname == "ERROR"):
+			self.text.SetDefaultStyle(wx.TextAttr(wx.RED,  wx.WHITE))					
+		elif(record.levelname == "WARNING"):
+			self.text.SetDefaultStyle(wx.TextAttr(wx.GREEN,  wx.WHITE))					
+		else:
+			self.text.SetDefaultStyle(wx.TextAttr(wx.BLACK,  wx.WHITE))				
+		
+		# Wrap long lines. You can adjust the line length here
+		for line in msg.split('\n'):
+			if len(line) >= 80: 
+				for splitline in textwrap.wrap(line, width=80):
+					self.text.AppendText( splitline+"\n" )
 			else:
-				self.text.insert(tk.END, msg + '\n')
-			self.text.configure(state='disabled')
-			# Autoscroll to the bottom
-			self.text.yview(tk.END)
-		# This is necessary because we can't modify the Text from other threads
-		self.text.after(0, append)
-	
+				self.text.AppendText( line+"\n" )
+
+#------------------------------------------------------------------------------
+# 	Check parameters
+#------------------------------------------------------------------------------   			
 if len(sys.argv) < 3:
-    print("Usage ", __file__, "<netlist.xml> <output file> <optional tkinter>", file=sys.stderr)
+    print("Usage ", __file__, "<netlist.xml> <output file> <optional dummy for wx interface>", file=sys.stderr)
     sys.exit(1)
 
-# Check whether we want console or tkinter app
-tKinterWin = False
+# Check whether we want console or wx window app
+wantUiWin = False
 if len(sys.argv) == 4:
-	tKinterWin = True
+	wantUiWin = True
 
 # Generate an instance of a generic netlist, and load the netlist tree from
 # the command line option. If the file doesn't exist, execution will stop
@@ -156,32 +156,53 @@ def writeFileEnd( outputFileName ):
 		f = codecs.open(outputFileName, encoding='utf-8', errors='strict')
 		for line in f:
 			pass
-		if(tKinterWin):
+		if(wantUiWin):
 			logger.info( "Valid utf-8" )
 		else:
 			print("Valid utf-8", file = sys.stdout)
 		f.close()
 	except UnicodeDecodeError:
 		f.close()			
-		if(tKinterWin):
+		if(wantUiWin):
 			logger.error( "Invalid utf-8" )			
 		else:
 			print("invalid utf-8", file = sys.stderr)
 		
 #------------------------------------------------------------------------------
-#	Progress Bar for the tKinter interface
+#	Progress Bar for the wx interface
+#	Todo:
+#		- use the filename from the "Output Filename" - Dialog
+#		- allow filename to be changed.
+#		- check that the filename ends as "_crea.xml"
 #------------------------------------------------------------------------------
-def bar(): 
+def bar( event ):
 	import time 
 	
+	progress.SetValue( 0 )
+	progress.Show()
 	# Clear Logger buffer. You must first set the state to normal before clearing.	
-	st.configure(state='normal')
-	st.delete(1.0, tk.END)
-	st.configure(state='disabled')	
+	st.Clear( )
+	lbl_progress.SetLabel("Running...")
+	
 	logger.info('Started ' + time.strftime('%H:%M:%S'))
+	
+	outPutFName = fNameEntry.GetValue( )
+	if( os.path.isfile( outPutFName ) ):
+		logger.info("\nNI: Output Filename Exists: Overwriting")
+	else:
+		logger.info("\nNI: Output Filename does not Exist: Creating")
+		
+	if( outPutFName.lower().endswith(('_creo.xml')) ):
+		logger.info("NI: Correct filename: Ends with \"_creo.xml\"\n")
+	else:
+		logger.info("NI: Invalid filename: \""+outPutFName+"\" Ignoring!\n")
+	
+	if( not mkCreoBtn.GetValue( ) ):
+		logger.info("NI: Creo xml box not checked. Ignored!\n")	
+	
 	writeFileHeader( creoLogicalFileName )
 	
-	progress['value'] = 30	
+	progress.SetValue( 30 )
 	logger.info('Writing component Information')
 	# Write Components ------------------------------------
 	components = xmlWriteCompData.xmlWriteCompData()
@@ -191,11 +212,9 @@ def bar():
 	logger.warning( components.getWarningStr() )
 	logger.error( components.getErrorStr() )
 	
-	st.update() #this works
-	window.update_idletasks() 
-	# time.sleep(4) 
+	wx.Yield()
 	
-	progress['value'] = 66
+	progress.SetValue( 66 )
 	logger.info('\nWriting Spools')
 	# Write Spools ----------------------------------------
 	spools = xmlWriteSpools.xmlWriteSpools()
@@ -206,10 +225,9 @@ def bar():
 	logger.info( 'Spools Found and Created...' )
 	logger.info( spools.printCblSpoolNames() )	
 	
-	st.update() #this works
-	window.update_idletasks() 
+	wx.Yield()
 
-	progress['value'] = 95
+	progress.SetValue( 95 )
 	logger.info('\nWriting Connections')
 	# Write Connections -----------------------------------
 	connections = xmlWriteConnections.xmlWriteConnections( spools )
@@ -218,20 +236,38 @@ def bar():
 	logger.warning( connections.getWarningStr() )
 	logger.error( connections.getErrorStr() )
 
-	st.update() # this works
+	wx.Yield()
 	
-	progress['value'] = 100
-	writeFileEnd( creoLogicalFileName )
-
-def BackAnn():
+	progress.SetValue( 100 )
+	writeFileEnd( creoLogicalFileName )	
+	lbl_progress.SetLabel("Done!")
+	
+#------------------------------------------------------------------------------
+#	Back Annotation button
+#		Reads the Creo logical file and updates Lengths and Part names to Schematic.
+#	Todo:
+#		- Does not nesessarily work at this time.
+#		- More Checks needed
+#------------------------------------------------------------------------------
+def BackAnn( event ):
 	import time 
+	
 	import xmlReadCreo
 	
 	# Clear Logger buffer. You must first set the state to normal before clearing.	
-	st.configure(state='normal')
-	st.delete(1.0, tk.END)
-	st.configure(state='disabled')	
+	st.Clear( )
+	lbl_progress.SetLabel("Running...")
+	
 	logger.info('Started ' + time.strftime('%H:%M:%S'))
+	
+	creoLogicalFileName = os.path.splitext(inputFileName)[0]
+	if( os.path.isfile( ( creoLogicalFileName+"_creoin.xml" )) ):
+		logger.info("\nNI: Logical file from Creo Exists. Proceeding")
+	else:
+		logger.error("\nERROR: Creo Logical File Does Not Exist: Cancelling!")
+		lbl_progress.SetLabel("Error!")
+		return
+	
 	
 	# Split the file extension away if it exists
 	fNameWoExtension = os.path.splitext(inputFileName)[0]
@@ -247,88 +283,88 @@ def BackAnn():
 	logger.error( "Back Annotate Errors" )
 	logger.error( creoCablelengths.getErrorStr())
 	logger.info( "Please Reload the Kicad Schematic" )	
+	lbl_progress.SetLabel("Done!")
+	
 
 #------------------------------------------------------------------------------
 # Create the tKinter window if needed
 #------------------------------------------------------------------------------
-if tKinterWin:
-	window = tk.Tk()
-	window.title("Kicad to Creo Netlist")
-	window.geometry("600x400")
+if wantUiWin:
 
-	# Allow only height to be resized...
-	window.resizable(False, True)
+	app = wx.App()
+	window = wx.Frame(None, title = "Kicad to Creo Netlist", size = (600,400)) 
+	panel = wx.Panel(window)
 
-	createCreoXmlVar = tk.IntVar()
-	createSwCsvVar = tk.IntVar()
+	sizer = wx.GridBagSizer(0, 0)
 
-	outputGroupFrame = tk.LabelFrame(window, text = "Select Output", padx=10, pady=10)
-	outputGroupFrame.grid( row=0, column=0, sticky="w", padx = 10 )
+	#--------------------------------------------------------------------------
+	# Row 0
+	# Check Boxes and write button
+	outputGroupFrame = wx.StaticBox( panel, label = "Select Output" , size = (140,60),pos = (10,10))
+	mkCreoBtn = wx.CheckBox(outputGroupFrame, label = 'Creo Xml', pos = (10,20)) 
+	mkSwBtn = wx.CheckBox(outputGroupFrame, label="SolidWorks csv", pos = (10,40))
+	sizer.Add(outputGroupFrame, pos = (0, 0), flag = wx.ALL, border = 5)
+	mkCreoBtn.SetValue(True)	
+	
+	btn = wx.Button( panel, label = "Write File(s)", size = (100,70)) 
+	btn.Bind(wx.EVT_BUTTON, bar) 
+	sizer.Add(btn, pos = (0, 1), flag = wx.ALIGN_RIGHT | wx.RIGHT | wx.TOP | wx.BOTTOM, border = 5)
 
-	mkCreoBtn = tk.Checkbutton(outputGroupFrame, text="Creo Xml", variable=createCreoXmlVar, onvalue = 1, offvalue = 0)
-	mkCreoBtn.grid(row=0, column=0, sticky="w")
+	#--------------------------------------------------------------------------
+	# Row 1
+	# Output filename and Back annotation button
+	lbl = wx.StaticText( panel, label = "Output Filename:") 	
+	sizer.Add( lbl, pos = (1, 0), flag = wx.ALIGN_BOTTOM | wx.LEFT | wx.TOP, border = 5 )
 
-	mkSwBtn = tk.Checkbutton(outputGroupFrame, text="SolidWorks csv", variable=createSwCsvVar, onvalue = 1, offvalue = 0)
-	mkSwBtn.grid(row=1, column=0, sticky="w")
+	backBtn = wx.Button(panel, label="Back Annotate", size = (100,-1) )
+	backBtn.Bind(wx.EVT_BUTTON, BackAnn) 
+	sizer.Add(backBtn, pos = (1, 1), flag =  wx.ALIGN_RIGHT | wx.RIGHT | wx.TOP | wx.BOTTOM, border = 5)
 
-	lbl = tk.Label(window, text="Output Filename:")
-	lbl.grid(row=1, column=0, sticky = "w", padx=5, pady=5)
+	#--------------------------------------------------------------------------
+	# Row 2
+	# Filename entry box Span both columns
+	fNameEntry = wx.TextCtrl( panel, size = ( 250, -1 ) )
+	sizer.Add(fNameEntry, pos = (2, 0), span = (1, 2), flag = wx.EXPAND | wx.LEFT | wx.RIGHT, border = 5 )
 
 	baseName = os.path.basename(creoLogicalFileName)
-	fileNametext = tk.StringVar()
-	fNameEntry = tk.Entry(window, textvariable = fileNametext )
-	fileNametext.set(baseName)
-	fNameEntry.grid(row=2, column=0, rowspan = 2, sticky = "wens", padx=5)
+	fNameEntry.SetValue( baseName )
 
-	#lbl_fName = tk.Label(window, text = baseName, relief="raise", anchor = "w" )
-	#lbl_fName.grid(row=2, column=0, rowspan = 2, sticky = "wens", padx=5)
-
-	lbl_progress = tk.Label(window, text = "Progress", padx=5)
-	lbl_progress.grid(row=2, column=1, sticky = "wens")
-
-	btn = tk.Button(window, text="Write File(s)", command = bar)
-	btn.grid(row=0, column=1, sticky = "wens", padx = 5,  pady=5 )
-
-	backBtn = tk.Button(window, text="Back Annotate", command = BackAnn)
-	backBtn.grid(row=1, column=1, sticky = "wens", padx = 5,  pady=5 )
-
-
-	progress = ttk.Progressbar(window, orient = "horizontal", length = 100, mode = "determinate")
-	progress.grid(row=3, column=1, sticky = "wens", padx = 5)
-
-	if sys.version_info.major < 3:
-		from ScrolledText import ScrolledText
-	else:
-		from tkinter.scrolledtext import ScrolledText
-
-	st = ScrolledText(window, state='disabled', width=60, height = 10)
-	st.configure(font='TkFixedFont')
-
-	# Make the scroll window resizing...
-	tk.Grid.rowconfigure(window, 4, weight=1)
-	tk.Grid.columnconfigure(window, 0, weight=1)
-	st.grid(row=4, column=0, columnspan=2, sticky="nswe", pady=5, padx=5)
+	#--------------------------------------------------------------------------
+	# Row 3
+	# Logging window, Span both comlumns
+	# https://stackoverflow.com/questions/2819791/how-can-i-redirect-the-logger-to-a-wxpython-textctrl-using-a-custom-logging-hand
+	st = wx.TextCtrl(panel, wx.ID_ANY, style = wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL | wx.TE_RICH | wx.TE_BESTWRAP)
+	sizer.Add( st, pos = (3, 0), span = (1, 2), flag = wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, border = 1)
+		
+	sizer.AddGrowableRow( 3 )		#this makes the textcontrol to span
+	sizer.AddGrowableCol( 1 )		#this makes the textcontrol to span
+	font1 = wx.Font(12, wx.MODERN, wx.NORMAL, wx.NORMAL, False, u'Consolas')
+	st.SetFont(font1)
 
 	# Create textLogger
 	text_handler = TextHandler(st)
-
 	# Add the handler to logger
 	logger = logging.getLogger()
 	logger.addHandler(text_handler)
 	#set level to print out all. Otherwise this will ignore the debug an info prints.
 	logger.root.setLevel(logging.NOTSET)
-	st.update()
+
+	#--------------------------------------------------------------------------
+	# Row 4
+	# Statusbar
+	lbl_progress = wx.StaticText(panel, label = "Status", size = (250,-1), style = wx.TE_READONLY | wx.BORDER_SUNKEN )
+	sizer.Add(lbl_progress, pos = (4, 0), flag = wx.ALIGN_LEFT | wx.LEFT | wx.TOP | wx.BOTTOM , border = 2)
 	
-	setWindowHeight = outputGroupFrame.winfo_height()
-	setWindowHeight += lbl.winfo_height()
-	setWindowHeight += fNameEntry.winfo_height()
-	setWindowHeight += st.winfo_height()
+	progress = wx.Gauge(panel, range = 100, size = (150, -1), style = wx.GA_HORIZONTAL )
+	sizer.Add( progress, pos = (4, 1), flag = wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.TOP | wx.BOTTOM, border = 5)
 
-	mystring =str(st.winfo_width()+25)+"x"+str(setWindowHeight+22)
-	window.geometry(mystring)
 
-	window.update()
-	window.mainloop()
+	sizer.SetMinSize((600, 400) ) 			#works for the panel sizer... Main window can still be resized
+	panel.SetSizerAndFit(sizer)				
+	sizer.SetSizeHints(window)				# uses main frame as size for the panel sizer.
+
+	window.Show(True)
+	app.MainLoop()
 	
 else:
 	writeFileHeader( creoLogicalFileName )

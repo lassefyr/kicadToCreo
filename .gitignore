@@ -1,0 +1,15 @@
+# Compiled Files *
+*.pyc
+
+# xml files *
+*.xml
+*.out
+
+# other *
+*.bak
+*.old
+
+**/__pycache__
+kicad_sample_design/testpcb.pro
+2021_01_08_backup
+2021_01_12_backup
