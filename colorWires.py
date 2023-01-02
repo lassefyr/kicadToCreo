@@ -62,6 +62,7 @@ class cblWireData:
 	def __init__(self, refDes ):
 		self.wireOrCbl = refDes
 		self.symbolName = ""
+		self.mirror = ""
 		self.numWires = 0
 		self.colors = []
 		self.xcoord = 0
@@ -116,17 +117,34 @@ class cblWireData:
 	def getPinCoordinate( self, pinNum ):
 		if(pinNum < len(self.pinycoord)):
 			if( self.rotation == 90 ):
-				myx = self.xcoord + self.pinycoord[ pinNum ]
-				myy = self.ycoord + self.pinxcoord[ pinNum ]
+				if( self.mirror == "x" ):
+					myx = self.xcoord - self.pinycoord[ pinNum ]
+					myy = self.ycoord + self.pinxcoord[ pinNum ]
+				else:
+					myx = self.xcoord - self.pinycoord[ pinNum ]
+					myy = self.ycoord - self.pinxcoord[ pinNum ]
+				
 			elif( self.rotation == 180 ):
 				myx = self.xcoord - self.pinxcoord[ pinNum ]
 				myy = self.ycoord + self.pinycoord[ pinNum ]
+				
 			elif( self.rotation == 270 ):
-				myx = self.xcoord - self.pinycoord[ pinNum ]
-				myy = self.ycoord - self.pinxcoord[ pinNum ]
+				if( self.mirror == "x" ):
+					myx = self.xcoord + self.pinycoord[ pinNum ]
+					myy = self.ycoord - self.pinxcoord[ pinNum ]
+				else:
+					myx = self.xcoord + self.pinycoord[ pinNum ]
+					myy = self.ycoord + self.pinxcoord[ pinNum ]
 			else:
-				myx = self.xcoord + self.pinxcoord[ pinNum ]
-				myy = self.ycoord - self.pinycoord[ pinNum ]
+				if( self.mirror == "x" ):					
+					myx = self.xcoord + self.pinxcoord[ pinNum ]
+					myy = self.ycoord + self.pinycoord[ pinNum ]
+				elif( self.mirror == "y" ):
+					myx = self.xcoord - self.pinxcoord[ pinNum ]
+					myy = self.ycoord - self.pinycoord[ pinNum ]
+				else:
+					myx = self.xcoord + self.pinxcoord[ pinNum ]
+					myy = self.ycoord - self.pinycoord[ pinNum ]
 			
 			myxFloat = round(myx, 2)
 			myyFloat = round(myy, 2)
@@ -135,7 +153,13 @@ class cblWireData:
 			return(myxFloat, myyFloat)
 		else:
 			return(0, 0)
-
+	
+	def getMirrorVal( self ):
+		return( self.mirror )
+		
+	def setMirrorVal( self, myMirror ):
+		self.mirror = myMirror
+		
 	def setNumWires( self, numOfWires ):
 		self.numWires = numOfWires
 
@@ -219,7 +243,7 @@ class setWireColor:
 #-----------------------------------------------------------------------------------------
 	def writeKicadSch_v6( self ):
 		from sexpdata import Symbol, car, cdr		
-		thisLibPart = ""
+		thisLibPart = ""		
 		xcoord = 0
 		ycoodr = 0
 		rotate = 0
@@ -230,13 +254,15 @@ class setWireColor:
 		for i, x in enumerate(self.kiCadSch):
 			if ( car(x) == Symbol('symbol') ):
 				refDes = ""
+				thisMirror = ""
 				for j, y in enumerate(x):
 				#---------------------------------------------------
 				# Check if this item is a cable or a wire. If not then continue
 				#---------------------------------------------------
 					if ( car(y) == Symbol('lib_id') ):
-						thisLibPart = cdr(y)[0]
-
+						thisLibPart = cdr(y)[0]						
+					if (car(y) == Symbol('mirror')):
+						thisMirror = str(cdr(y)[0])
 					if ( car(y) == Symbol('at') ):
 						xcoord = (cdr(y)[0])
 						myfloat = cdr(y)[0]
@@ -251,6 +277,7 @@ class setWireColor:
 							myWires.append( cblWireData( refDes ) )
 							myWires[-1].setSymName( thisLibPart )
 							myWires[-1].setXY( xcoord, ycoord, rotate )
+							myWires[-1].setMirrorVal( thisMirror )
 						else:
 							continue
 
@@ -293,12 +320,14 @@ class setWireColor:
 											for i in myWires:
 												if i.getSymName() in symbolName:
 													i.setPinXY( (cdr(zb)[2][1]), (cdr(zb)[2][2]), int(cdr(zb)[5][1]))
-		'''		for i in myWires:
+		'''
+		for i in myWires:
 			print( i.getWireOrCbl() +" x= " + str(i.getX()) + " Y = " + str(i.getY()),end = "" )
 			print ( i.getPinX() ,end = "")
 			print ( i.getPinY() ,end = "")
 			print ( i.getPinIndex() ,end = "")
 			print ( i.getColors(),end = "")
+			print ( ", Mirror = "+i.getMirrorVal(),end = "")
 			print ("  Rot Angle = "+str(i.getAngle()))
 		'''
 		
@@ -343,11 +372,11 @@ class setWireColor:
 							x2 = cdr(y)[1][1]
 							y2 = cdr(y)[1][2]
 							
-							if( myx == x1 and myy == y1 ):
+							if( math.isclose(myx, x1, abs_tol = 0.01) and  math.isclose(myy, y1, abs_tol = 0.01) ): #if( myx == x1 and myy == y1 ):							
 								matchFlag = True
 								tempX = x2
 								tempY = y2
-							if( myx == x2 and myy == y2 ):
+							if( math.isclose(myx, x2, abs_tol = 0.01) and  math.isclose(myy, y2, abs_tol = 0.01) ): #if( myx == x2 and myy == y2 ):							
 								matchFlag = True
 								tempX = x1
 								tempY = y1							
