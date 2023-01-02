@@ -6,6 +6,11 @@ Target of this project is to produce Creo Schematic compatible output to Creo pa
 PTC Creo is one of the "big" 3d parametric design softwares. Other similar products are Solidworks, Catia, Autocad Inventor, Onshape etc. One advantage of these programs is that they let you model every detail of your product. You can import pcb's using the IDF format and you can also route cables to your end product. The cad program will give you the needed cable lengths and cable drawings.
 
 ## Changes
+**2022.12.31**
+Added wire coloring script. Scipt creates xxx_col.kicad_sch files. Example of how the schematic looks after running the script is below... 
+
+<img src="/kicad_sample_design/samplecolors.jpg" width=30%>
+
 **2022.07.31**
 1. Changed tkinter to wx. It seems that wx is supported on built in python. The graphical interface is still a "work in progress". You can use it from command line directly or from file->Export->Netlist. Add the following netlist command: 
 pythonw.exe "PATH\TO\kicadToCreo.py" "%I" "%O" "DummyArgument". The dummy argument starts the Gui. You can not use the dummy argument on BOM generation (Kicad hangs until Python is killed).
