@@ -349,6 +349,7 @@ class setWireColor:
 		from sexpdata import Symbol, car, cdr
 	#  list_name.pop(index) (if no index then the last is pop).			
 		nextCoordinates = []
+		firstWireFromCbl = True
 		
 		while xyTuples: 		# while there are coordinates on the list				
 			myx, myy = xyTuples.pop( )
@@ -391,7 +392,9 @@ class setWireColor:
 							matchFlag = False							
 							tempUUid = str(cdr(y)[0])
 							
-							if not tempUUid in self.myUUids:
+							if ((firstWireFromCbl) or (not tempUUid in self.myUUids) ):
+								
+								firstWireFromCbl = False
 								self.myUUids.append(tempUUid)
 								xyTuples.append((tempX,tempY))
 							
