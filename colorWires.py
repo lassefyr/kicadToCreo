@@ -16,11 +16,14 @@
     Generate a net list file.
 
     Command line:
-    Run from Kicad eeschema with default parameters "%I" "%O"
-
+    Run from Kicad eeschema with parameters "%I" 0.5
+		"%I" is the generated xml file
+		0.5 is the requested line width  (value less than 1)
+		If the float parameter is omitted then the line width will be 0.3
+	
 	Changes:
-	2022.03.01	Previous update broke V5 operation. Fixed.
-	2022.01.01	added preliminary support for KicadV6
+	2023.02.12  Fixed for v.7.0. Added Color list for wires if they don't already exist
+	
 """
 
 from __future__ import print_function
@@ -36,6 +39,7 @@ import math
 # Colors dictionary:
 # All colors that exists in wires and cables must be found here
 # Pleas add color to this table if it does not exist.
+# Values are (RED, GREEN, BLUE)
 #-----------------------------------------------------------------------------------------
 colors = {
 	"black": (0, 0, 0),
@@ -50,7 +54,9 @@ colors = {
 	"gray": (0xcc, 0xcc, 0xcc),
 	"white": (0xdd, 0xdd, 0xdd),
 	"gold": (0, 0, 0),
-	"silver": (255, 255, 255) 
+	"silver": (255, 255, 255), 
+	"ral4002": (141, 60, 75),
+	"ral8004": (140, 86, 73)
 }
 
 #-----------------------------------------------------------------------------------------
@@ -205,6 +211,7 @@ class setWireColor:
 		self.alreadyProsessed = []
 		self.prosessedSheets = []
 		self.kiCadSch = object()
+		self.modifiedKiCadSch = object()
 		self.myUUids = []
 		self.useThisWidth = wireWidth
 		
@@ -338,13 +345,57 @@ class setWireColor:
 				self.writeWarningStr( "Too Few Pins! Min = 2 pins for wires!\n" )
 				continue
 			for myPins in range(numOfPins):
-				currentColor = 	b.getColor(myPins)
+				currentColor = 	(b.getColor(myPins).split(',')[0])			# some pins may have awg etc information
+				# print("Current color = " + currentColor)
 				
 				nextCoordinates = []
 				nextCoordinates.append((b.getPinCoordinate(myPins)))								
 				self.setWireFollowColor(nextCoordinates, currentColor)
-									
 
+#-----------------------------------------------------------------------------------------
+# def appendWireColorToSchematic( self ):
+#
+#	Kicad 7 omits the wire color fields on wires.
+#	This creates the wirecolor fields on the file...
+#
+#	listofstuff = ['Joe', 'Bob', 'Mary']
+#	dct = {name: classthing(name) for name in listofstuff}			
+#-----------------------------------------------------------------------------------------		
+	def appendWireColorToSchematic( self ):
+		from sexpdata import Symbol, car, cdr
+			
+		mylist = []
+		templist = []
+		for i, x in enumerate(self.kiCadSch):
+			if ( car(x) == Symbol('wire') ):
+				#mylist.append(car(x))
+				for j, y in enumerate(x):	
+					if ( car(y) == Symbol('stroke') ):
+						if( len((cdr(y))) == 2 ):								# Append if doesn't exist. Don't do anything if already present
+							y.append([Symbol("color"), 0, 0, 0, 1])							
+				mylist.append(x)
+			else:
+				mylist.append(x)
+		#print(mylist)
+		#print("-----------------------------")
+		#print(self.kiCadSch)
+		self.kiCadSch = mylist
+		'''
+		try:
+			f = open( "perse.kicad_sch", "w" )
+			f.write(dumps( mylist ))
+		except:
+			self.writeErrorStr( "Could not write file: " + os.path.splitext(myfilename)[0]+"_col.kicad_sch" + "!\n" )
+		finally:
+			self.writeInfoStr( "Writing file: succesfully.\n" )
+			f.close( )
+		'''
+
+#-----------------------------------------------------------------------------------------
+# def setWireFollowColor ( self, xyTuples, wireColor ):
+#
+#	Color wires according to wireColor
+#-----------------------------------------------------------------------------------------
 	def setWireFollowColor ( self, xyTuples, wireColor ):
 		from sexpdata import Symbol, car, cdr
 	#  list_name.pop(index) (if no index then the last is pop).			
@@ -366,7 +417,9 @@ class setWireColor:
 				
 				if ( car(x) == Symbol('wire') ):
 					matchFlag = False
-					for j, y in enumerate(x):
+					#print(x)
+					#print("-------------------")
+					for j, y in enumerate(x):	
 						if ( car(y) == Symbol('pts') ):
 							x1 = cdr(y)[0][1]
 							y1 = cdr(y)[0][2]
@@ -380,30 +433,36 @@ class setWireColor:
 							if( math.isclose(myx, x2, abs_tol = 0.01) and  math.isclose(myy, y2, abs_tol = 0.01) ): #if( myx == x2 and myy == y2 ):							
 								matchFlag = True
 								tempX = x1
-								tempY = y1							
+								tempY = y1	
+							continue													
 						
 						if( car(y) == Symbol("stroke") and matchFlag):
 							# Save this position to be changed later if necessary							
 							# (stroke (width 0.127) (type solid) (color 194 0 0 1)) Hex #C2 00 00 FF, R G B, 0xff is opacity = 1 (value between 0-1)							
 							tempSymbolList = cdr(y)
-							tempred, tempgreen, tempblue = colors.get(wireColor.lower())
+							if wireColor.lower() in colors.keys():
+								tempred, tempgreen, tempblue = colors.get(wireColor.lower())
+							else:
+								self.writeErrorStr("Color "+ wireColor + " Not in Dictionary. Using Default Color" + "\n")
+								tempred, tempgreen, tempblue = 45, 77, 88								
+							continue
 							
 						if( car(y) == Symbol("uuid") and matchFlag):
 							matchFlag = False							
 							tempUUid = str(cdr(y)[0])
 							
 							if ((firstWireFromCbl) or (not tempUUid in self.myUUids) ):
-								
 								firstWireFromCbl = False
-								self.myUUids.append(tempUUid)
-								xyTuples.append((tempX,tempY))
-							
-								tempSymbolList[0][1] = wireThickness
+								self.myUUids.append(tempUUid)								
+								xyTuples.append((tempX,tempY))															
+								tempSymbolList[0][1] = wireThickness								
 								tempSymbolList[2][1] = tempred
 								tempSymbolList[2][2] = tempgreen
 								tempSymbolList[2][3] = tempblue
-								tempSymbolList[2][4] = 1								
-
+								tempSymbolList[2][4] = 1										
+							
+							continue
+						
 #-----------------------------------------------------------------------------------------
 # Read existing sheetnames in the design
 #
@@ -411,6 +470,8 @@ class setWireColor:
 	def readCreoSheetNames( self, fileName ):
 		self.creoSchXmlName = fileName +".xml"
 
+		if( not os.path.isfile(self.creoSchXmlName) ):
+			sys.exit("error: xml file not found!")
 		creoXml = minidom.parse( self.creoSchXmlName )
 		sheetNames = creoXml.getElementsByTagName("sheet")
 
@@ -465,12 +526,14 @@ class setWireColor:
 					continue
 				finally:
 					self.kiCadSch = loads( self.line )
-					self.writeKicadSch_v6( )
+					self.appendWireColorToSchematic( )										# Overwrites the self.kiCadSch
+					self.writeKicadSch_v6( )					
 					f.close( )
+					#sys.exit("test exit")
 				
 				try:
 					f = open( os.path.splitext(myfilename)[0]+"_col.kicad_sch", "w" )
-					f.write(dumps( self.kiCadSch ))
+					f.write(dumps( self.kiCadSch ) )										# Pretty_print=True 
 				except:
 					self.writeErrorStr( "Could not write file: " + os.path.splitext(myfilename)[0]+"_col.kicad_sch" + "!\n" )
 				finally:
@@ -489,6 +552,8 @@ class setWireColor:
 #
 #-----------------------------------------------------------------------------------------
 	def getSourceFilenameFromXml( self, xmlFileName ):
+		if( not os.path.isfile(xmlFileName) ):
+			sys.exit("error: xml file not found!")	
 		tmpObject = minidom.parse(xmlFileName)
 		currentFileName = tmpObject.getElementsByTagName("source")
 		del tmpObject
@@ -548,13 +613,13 @@ if __name__ == '__main__':
 			wireWidth = float(sys.argv[2])
 		except ValueError:
 			print( "Second argument is not a float number" )
-			sys.exit(os.EX_USAGE)
+			sys.exit("Error")
 			
 		if( wireWidth > 1):
 			wireWidth = 1
 			print( "Using Max Width = 1.0" )
 	else:
-		sys.exit(os.EX_USAGE)
+		sys.exit( "Too Few Parameters" )
 	
 	#sys.exit(0)
 	fileToProcess = sys.argv[1]    					# unpack 2 command line arguments
@@ -571,7 +636,7 @@ if __name__ == '__main__':
 	fileExtension = os.path.splitext(tempFileName)[1]
 
 	if( fileExtension == ".kicad_sch" ):
-		wireColors.writeInfoStr( "\nProcess Kicad V6 file.\n")
+		wireColors.writeInfoStr( "\nProcess Kicad >=V6 file.\n")
 		wireColors.readCreoSheetNames( fileNameToProcess )
 		wireColors.colorAllWires( fileNameToProcess )
 	else:
@@ -580,10 +645,11 @@ if __name__ == '__main__':
 	print("Info", file=sys.stdout)
 	print( wireColors.getInfoStr(), file=sys.stdout )
 
-	print("Warnigns", file=sys.stdout)
+	print("Warnigns?", file=sys.stdout)
 	print( wireColors.getWarningStr(), file=sys.stdout )
 
-	print("Errors", file=sys.stderr)
+	print("Errors?", file=sys.stderr)
 	print( wireColors.getErrorStr(), file=sys.stderr )
-	print( "Please Reload the Kicad Schematic if Operation was Successful", file=sys.stdout )	
+	basename_noext = os.path.basename(tempFileName).split('.', 1)[0]
+	print( "Please load the Kicad Schematic named "+ basename_noext+"_col.kicad_sch if Operation was Successful", file=sys.stdout )	
 
