@@ -6,6 +6,9 @@ Target of this project is to produce Creo Schematic compatible output to Creo pa
 PTC Creo is one of the "big" 3d parametric design softwares. Other similar products are Solidworks, Catia, Autocad Inventor, Onshape etc. One advantage of these programs is that they let you model every detail of your product. You can import pcb's using the IDF format and you can also route cables to your end product. The cad program will give you the needed cable lengths and cable drawings.
 
 ## Changes
+**2023.02.12**
+Wire coloring script was modified to work with Kicad 7. By default the 7.0.0 version s-expression schema does not contain the color-field for the wires.
+
 **2022.12.31**
 Added wire coloring script. Scipt creates xxx_col.kicad_sch files. Example of how the schematic looks after running the script is below... 
 
