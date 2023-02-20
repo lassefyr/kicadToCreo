@@ -119,8 +119,10 @@ class xmlWriteCompData:
 			if not self.CMP_USEVAL[7]:
 				self.writeInfoStr("\""+refDes+"\" - No termName (Crimp) found!\n")
 			else:						#Check Special terminator values for Pins
-				self.writeSpecialTerminators( comp )
-						
+				if self.CMP_USEVAL[7].upper() == "NONE":
+					self.CMP_USEVAL[7] = ""
+				else:
+					self.writeSpecialTerminators( comp )						
 		
 # Component PORT parameters for each pin  ------------------------------------------------
 			forbiddenchars = set('!\"#$%&\'()*+,-./:;<=>?@[\\]^`{|}~.')
@@ -215,6 +217,8 @@ class xmlWriteCompData:
 		self.__infoString += iStr
 
 	def getInfoStr( self ):
+		if self.__infoString == "":
+			self.__infoString="Components: No Info!"
 		return self.__infoString 
 
 	def writeErrorStr( self, eStr ):
@@ -233,7 +237,7 @@ class xmlWriteCompData:
 		
 	def getWarningStr( self ):
 		if self.__warningString == "":
-			self.__warningString="Components: Warnigns!"
+			self.__warningString="Components: No Warnigns!"
 		return self.__warningString 
 		
 	def clearWarningStr( self ):

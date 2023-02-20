@@ -77,7 +77,12 @@ __all__ = [
 ]
 
 import re
-from collections import namedtuple, Iterable, Mapping, Sequence
+from collections import namedtuple
+try:
+    from collections.abc import Iterable, Mapping, Sequence
+except ImportError:
+    # Python < 3.3
+    from collections import Iterable, Mapping, Sequence
 from itertools import chain
 from string import whitespace
 
@@ -446,6 +451,14 @@ class String(unicode):
     def __ne__(self, other):
         return not self == other
 
+    def __hash__(self):
+        """
+        >>> D = {'a': 1, String('a'): 2, Symbol('a'): 3}
+        >>> len(D)
+        3
+        """
+        return unicode.__hash__(self)
+
     _lisp_quoted_specials = [  # from Pymacs
         ('\\', '\\\\'),    # must come first to avoid doubly quoting "\"
         ('"', '\\"'), ('\b', '\\b'), ('\f', '\\f'),
@@ -769,7 +782,3 @@ def parse(string, **kwds):
 
     """
     return Parser(string, **kwds).parse()
-	
-	
-	
-	

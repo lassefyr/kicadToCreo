@@ -372,7 +372,7 @@ else:
 	# Process the commands in console mode
 	#------------------------------------------------------------------------------
 	# Process Components (Connectors)
-	print( "Writing Components, Connectors:" )
+	print( "\nWriting Components, Connectors:" )
 	print( "-------------------------------" )
 	components = xmlWriteCompData.xmlWriteCompData()
 	components.writeCompData(netlist,creoLogicalFileName)
@@ -381,7 +381,7 @@ else:
 	print( components.getErrorStr(), file=sys.stderr )
 
 	# Process Spools (Wires, Cables)
-	print( "Writing Spools (Wires, Cables)" )
+	print( "\nWriting Spools (Wires, Cables)" )
 	print( "------------------------------" )
 	spools = xmlWriteSpools.xmlWriteSpools()
 	spools.writeSpoolData(netlist,creoLogicalFileName)
