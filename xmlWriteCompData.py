@@ -74,9 +74,11 @@ class xmlWriteCompData:
 			if (refDes.startswith("TUBE") or refDes.startswith("SHRINK") or refDes.startswith("TAPE")): 
 				continue		
 			
-			for listIndex in range(len(self.CMP_PARAMS)):
-				tempStr =  comp.getField(self.CMP_PARAMS[listIndex]).upper()
+			for listIndex in range(len(self.CMP_PARAMS)):			
+				tempStr =  comp.getField(self.CMP_PARAMS[listIndex])
 				if tempStr:
+					if (listIndex != 7 ):			# Do not uppercase the Term_name parameter.
+						tempStr = tempStr.upper( )					
 					self.CMP_USEVAL[listIndex] =	tempStr
 				else:
 					self.CMP_USEVAL[listIndex] =	self.CMP_DEFAULTS[listIndex]
