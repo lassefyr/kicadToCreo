@@ -64,7 +64,7 @@ See the source code for more information.
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-__version__ = '0.0.4'
+__version__ = '1.0.0'
 __author__ = 'Joshua D. Boyd, Takafumi Arakaki'
 __license__ = 'BSD License'
 __all__ = [
@@ -480,6 +480,10 @@ class String(unicode):
     def unquote(cls, string):
         return cls._lisp_quoted_to_raw.get(string, string)
 
+    def value(self):
+        return unicode(self)
+
+
 @tosexp.register(String)
 def _(obj, **kwds):
     return '"' + String.quote(obj) + '"'
@@ -782,3 +786,5 @@ def parse(string, **kwds):
 
     """
     return Parser(string, **kwds).parse()
+
+

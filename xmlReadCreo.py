@@ -19,6 +19,7 @@
     Run from Kicad eeschema with default parameters "%I" "%O"
 	
 	Changes:
+	2023.05.01	Kicad 7.0.2 hierarchical refdes issue patch. Not tested to work with all combinations.
 	2022.03.01	Previous update broke V5 operation. Fixed.
 	2022.01.01	added preliminary support for KicadV6
 """
@@ -110,6 +111,27 @@ class xmlReadCreo:
 #		print( self.harnessNum )
 
 #-----------------------------------------------------------------------------------------
+# Find the Last refdes from the symbol -> instances-record
+# Kicad has an uninvestigated way of storing the visible RefDes-values. This change was 
+# added to Kicad 7.0.2. Without understanding why I just read the last refdes available...
+# In current tests the the recursion count has been 9. Might get bigger 
+# with deeper hierarchical designs.
+#-----------------------------------------------------------------------------------------
+#	recursiveCtr = 0
+	lastRefDes = ""
+	def find_RefDes( self, listItem ):
+		from sexpdata import Symbol, car, cdr
+		#self.recursiveCtr+=1
+		for i, j in  enumerate(listItem):		
+			if ( not hasattr(j, "__getitem__") ):
+				return				
+			elif ( isinstance( car(j), Symbol ) and ( car(j) != Symbol("reference")) ):		
+				if( hasattr(j, "__getitem__") ):
+					self.find_RefDes( j )
+			elif( isinstance( car(j), Symbol) and ( car(j)== Symbol("reference")) ):
+				self.lastRefDes = cdr(j)[0]				
+				
+#-----------------------------------------------------------------------------------------
 # Write Kicad V6 Schematic Sheet Data
 #
 #-----------------------------------------------------------------------------------------				
@@ -124,7 +146,17 @@ class xmlReadCreo:
 				#---------------------------------------------------
 					if ( (car(y) == Symbol('property')) and  ( cdr(y)[0]== "Reference" )): 
 						if( (cdr(y)[1][:1] == 'W') or (cdr(y)[1][:3]=="CBL")):							
-							refDes = cdr(y)[1]							
+							refDes = cdr(y)[1]
+							# Find instance reference designator
+							for d, z in  enumerate(x):
+								if ( car(z) == Symbol('instances') ):
+									#self.recursiveCtr=0
+									self.lastRefDes = ""
+									self.find_RefDes( z )
+									#print( "FINAL REFDES = "+self.lastRefDes)
+									#print( "recursionCount = "+ str(self.recursiveCtr))
+									if(self.lastRefDes):
+										refDes = self.lastRefDes
 						else:
 							continue	
 					
@@ -153,8 +185,7 @@ class xmlReadCreo:
 							roundedWireLen = str(roundedIntLen).split('.')[0] 				# Round up and no decimal places
 							self.writeInfoStr( "Name: " + "{0:<6}".format(refDes) + " Harness Name: " + "{0:<15}".format(self.harnessNum[myindex]) + " lenght: " +roundedWireLen + "\n" )
 							y[2] = (roundedWireLen+"mm")
-
-
+	
 #-----------------------------------------------------------------------------------------
 # Read data from Creo xml and store the read lengths, part numbers, and refdes values.
 #
@@ -450,6 +481,4 @@ if __name__ == '__main__':
 	print("Errors", file=sys.stderr)
 	print( creoCablelengths.getErrorStr(), file=sys.stderr )
 	print( "Please Reload the Kicad Schematic if Operation was Successful", file=sys.stdout )
-	
-	
 	

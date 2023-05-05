@@ -17,13 +17,16 @@
 
     Command line:
     Run from Kicad eeschema with parameters "%I" 0.5
-		"%I" is the generated xml file
-		0.5 is the requested line width  (value less than 1)
-		If the float parameter is omitted then the line width will be 0.3
+		"%I" is the generated xml file. Example: python "colorWires.py" corsair_type3.xml 0.5
+		
+		- corsair_type3.xml is the xml kicad generates from the schematic corsair_type3.kicad_sch
+		- 0.5 is the requested line width  (value less than 1)
+		- If the float parameter is omitted then the line width will be 0.3
+		
 	
 	Changes:
-	2023.02.12  Fixed for v.7.0. Added Color list for wires if they don't already exist
-	
+	2023.05.01  Documnetation issues
+	2023.02.12  Fixed for v.7.0. Added Color list for wires if they don't already exist	
 """
 
 from __future__ import print_function
@@ -54,8 +57,10 @@ colors = {
 	"gray": (0xcc, 0xcc, 0xcc),
 	"white": (0xdd, 0xdd, 0xdd),
 	"gold": (0, 0, 0),
+	"pink": (179, 43, 104),
 	"silver": (255, 255, 255), 
 	"ral4002": (141, 60, 75),
+	"ral7000": (122, 136, 142),
 	"ral8004": (140, 86, 73)
 }
 
@@ -651,5 +656,8 @@ if __name__ == '__main__':
 	print("Errors?", file=sys.stderr)
 	print( wireColors.getErrorStr(), file=sys.stderr )
 	basename_noext = os.path.basename(tempFileName).split('.', 1)[0]
-	print( "Please load the Kicad Schematic named "+ basename_noext+"_col.kicad_sch if Operation was Successful", file=sys.stdout )	
+	print( "Please load the Kicad Schematic named "+ basename_noext+"_col.kicad_sch if Operation was Successful", file=sys.stdout )
+	print( "-------------------------------------------------------", file=sys.stdout )	
+	print( "NOTE: Hierarchical schematics are not linked correctly.", file=sys.stdout )	
+	print( "All schematics are just renamed to xx_col.kicad_sch for viewing/documentation.", file=sys.stdout )	
 
