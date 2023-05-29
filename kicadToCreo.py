@@ -15,6 +15,9 @@
 
     Command line: 
     Run from Kicad eeschema with default parameters "%I" "%O"
+	
+	For Wx interface add a dummy parameter at the end
+	Example:  kicadToCreo "%I" "%O" wx
 """
 
 from __future__ import print_function
