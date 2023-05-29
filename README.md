@@ -7,10 +7,14 @@ PTC Creo is one of the "big" 3d parametric design softwares. Other similar produ
 
 ## Changes
 **2023.05.28**
-Added code to Back-Annotation script xmlReadCreo. I noticed that the exported creo schematic xml did not have any info for the ribbon cable. But the Cabling Info -> Harness wirelist -> All creates a cabling.inf file to working directory that can be also read. This file has the length for ribbon cables also. I created a mapkey for creo to output this file so it is now much easier to read the wire lengths and part numbers to kicad. Some features listed here...
+Added code to Back-Annotation script xmlReadCreo. I noticed that the exported creo schematic xml did not have any info for the ribbon cable. But the Cabling Info -> Harness wirelist -> All
+
+<img src="/images/Cables_info_setting.jpg" width=10%>
+
+creates a cabling.inf file in to the working directory that does contain the correct information. I created a mapkey for creo to output this file so it is now much faster to read the wire lengths and part numbers to kicad. Some features listed here...
 1. Path to "cables.inf" is hardcoded on the script. 
 1. Cables.Inf.* are read and only the latest is used. The file must not be more than 1 hour old.
-1. If valid "cables.inf" is not found then the script reverts to using the old xxxx_creoin.xml file.
+1. If a valid "cables.inf" is not found then the script reverts to using the old xxxx_creoin.xml file.
 
 **2023.02.12**
 Wire coloring script was modified to work with Kicad 7. By default the 7.0.0 version s-expression schema does not contain the color-field for the wires.
