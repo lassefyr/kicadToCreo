@@ -28,7 +28,9 @@ from __future__ import print_function
 from xml.dom import minidom
 import sys
 import sch
+import glob
 import os
+import datetime
 import shutil
 import math
 #import sexpdata
@@ -191,41 +193,121 @@ class xmlReadCreo:
 #
 #-----------------------------------------------------------------------------------------
 	def readCreoPartNumsAndLengths( self, fileName ):
-		self.creoSchXmlName = os.path.splitext(fileName)[0] +"_creoin.xml"
-			
-		self.writeInfoStr( "Creo Back Annotation - Lengths and Harness Names\n" )								
-		self.writeInfoStr( "------------------------------------------------\n" )								
+		"""
+		This function Reads the wirenames (creo part names) and their lengths.		
 
-		if( os.path.isfile(self.creoSchXmlName) ):
-			self.writeInfoStr( "Creo Schematic Xml-file OK: " + self.creoSchXmlName + "\n" )								
-		else:
-			self.writeErrorStr( "Creo Schematic Inputfile NOT FOUND: " + self.creoSchXmlName + "\n" )
-			self.writeInfoStr( "NOTE:You need to export Creo Schematic xml file with name: " + self.creoSchXmlName + "\n" )			
-			self.writeInfoStr( "(Cabling -> Logical Data -> Export -> Creo Schematic)\n" )			
-			return False
-									
-		creoXml = minidom.parse( self.creoSchXmlName )
-		connections = creoXml.getElementsByTagName("CONNECTION")
+		Args:
+			arg1: Original design name
+		
+		Note:
+			cables.inf file is used if possible. I now create cables.inf with mapkey
+			and read the latest version from the work directory. cables.inf must not be
+			older than 1 hour.
+
+		Returns:
+			True if succesful
+		"""
+		
+		file_path = "C:\PTC\work9\cables.inf"  # Replace with the actual path to your text file
+		readCblName = ""
+		harnessName = ""
+
 		self.refDesVals = []
 		self.harnessNum = []
 		self.wireLength = []
-		for connection in connections:
-			wireName = connection.getAttribute("name")
-			type = connection.getAttribute("type")
-			varName = ""
-			varValue = ""
-			if wireName[:1] =="W" or type == "ASSEMBLY":
-				self.refDesVals.append(wireName)
-				parameters = connection.getElementsByTagName('PARAMETER')
-				for param in parameters:
-					varName = param.getAttribute('name')
-					varValue = param.getAttribute('value')
-					if( varName == "LENGTH" ):
-						self.wireLength.append(varValue)
-					if( varName == "HARNESS_NAME"):
-						self.harnessNum.append(varValue)
+			
+		self.writeInfoStr( "Creo Back Annotation - Lengths and Harness Names\n" )								
+		self.writeInfoStr( "------------------------------------------------\n" )	
+		
+		files = glob.glob( file_path + '.*' )
+		sorted_files = sorted(files, key=lambda x: os.path.splitext(x)[1], reverse=True )
 
+		# Test whether the cables.inf.x file exists and is not older than one hour
+		# Cables.Inf works also for flat cables. I could not get the length for the ribbon
+		# cable when exporting the creo schematic xml.
+		if( (sorted_files) and self.is_file_newer_than_one_hour( sorted_files[0] ) ):
+			self.writeInfoStr( "Using "+ sorted_files[0] + " for back-annotation\n" )
+			with open(sorted_files[0], "r") as file:
+				for line in file:
+					# Process each line here
+					thisLine = line.strip()
+					if(thisLine.startswith("HARNESS NAME:")):
+						tokens = thisLine.split(":")
+						#print("Harness Name = "+tokens[1])
+						harnessName = tokens[1]
+						continue
+					
+					if( thisLine.startswith("W") or thisLine.startswith("CBL") ):
+						tokens = thisLine.split()
+						if(readCblName == tokens[0].split(":",1)[0]):
+							#print("Already read cbl")
+							continue
+						
+						readCblName =  tokens[0]
+						cblLength = tokens[2]
+																		
+						self.harnessNum.append( harnessName )
+						self.refDesVals.append( readCblName )
+						self.wireLength.append( cblLength )
+		# else continue with the old method of reading _creoin.xml from the current directory
+		
+		else:						
+			self.creoSchXmlName = os.path.splitext(fileName)[0] +"_creoin.xml"
+			self.writeInfoStr( "Using "+ self.creoSchXmlName + " for back-annotation\n" )
 
+			if( os.path.isfile(self.creoSchXmlName) ):
+				self.writeInfoStr( "Creo Schematic Xml-file OK: " + self.creoSchXmlName + "\n" )								
+			else:
+				self.writeErrorStr( "Creo Schematic Inputfile NOT FOUND: " + self.creoSchXmlName + "\n" )
+				self.writeInfoStr( "NOTE:You need to export Creo Schematic xml file with name: " + self.creoSchXmlName + "\n" )			
+				self.writeInfoStr( "(Cabling -> Logical Data -> Export -> Creo Schematic)\n" )			
+				return False
+										
+			creoXml = minidom.parse( self.creoSchXmlName )
+			connections = creoXml.getElementsByTagName("CONNECTION")
+
+			for connection in connections:
+				readCblName = connection.getAttribute("name")
+				type = connection.getAttribute("type")
+				varName = ""
+				harnessName = ""
+				if readCblName[:1] =="W" or type == "ASSEMBLY":
+					self.refDesVals.append(readCblName)
+					parameters = connection.getElementsByTagName('PARAMETER')
+					for param in parameters:
+						varName = param.getAttribute('name')
+						harnessName = param.getAttribute('value')
+						if( varName == "LENGTH" ):
+							self.wireLength.append(harnessName)
+						if( varName == "HARNESS_NAME"):
+							self.harnessNum.append(harnessName)
+							
+		return True
+		
+	def is_file_newer_than_one_hour( self, file_path ):
+		"""
+		This function Checks whether the cables.inf file was generated within the past hour.
+		If not then return false.
+
+		Args:
+			arg1: Path to the file to check	
+
+		Returns:
+			The result true if file is generated within the past hour.
+			The result is False if file doesn't exist or was generated over an hour ago.
+		"""
+		if not os.path.isfile(file_path):
+			return False  # File doesn't exist
+
+		file_stat = os.stat(file_path)
+		modified_time = datetime.datetime.fromtimestamp(file_stat.st_mtime)
+		current_time = datetime.datetime.now()
+
+		time_difference = current_time - modified_time
+		time_difference_in_hours = time_difference.total_seconds() / 3600
+
+		return time_difference_in_hours < 1
+		
 #-----------------------------------------------------------------------------------------
 # Read existing sheetnames in the design
 #
@@ -461,14 +543,14 @@ if __name__ == '__main__':
 	
 	if( fileExtension == ".sch" ):
 		creoCablelengths.writeInfoStr( "\nProsess Kicad V5 file.\n")
-		creoCablelengths.readCreoPartNumsAndLengths( fileToProcess )
-		creoCablelengths.readCreoSheetNames( fileNameToProcess )
-		creoCablelengths.backAnnotate( fileNameToProcess )
+		if( creoCablelengths.readCreoPartNumsAndLengths( fileToProcess ) ):		
+			creoCablelengths.readCreoSheetNames( fileNameToProcess )
+			creoCablelengths.backAnnotate( fileNameToProcess )
 	elif( fileExtension == ".kicad_sch" ):
 		creoCablelengths.writeInfoStr( "\nProsess Kicad V6 file.\n")
-		creoCablelengths.readCreoPartNumsAndLengths( fileToProcess )
-		creoCablelengths.readCreoSheetNames( fileNameToProcess )
-		creoCablelengths.backAnnotateV6( fileNameToProcess )	
+		if( creoCablelengths.readCreoPartNumsAndLengths( fileToProcess ) ):		
+			creoCablelengths.readCreoSheetNames( fileNameToProcess )
+			creoCablelengths.backAnnotateV6( fileNameToProcess )	
 	else:
 		creoCablelengths.writeInfoStr( "\nNo Valid Filename found " + fileToProcess + "\n" )
 	
