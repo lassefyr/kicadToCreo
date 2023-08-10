@@ -6,6 +6,9 @@ Target of this project is to produce Creo Schematic compatible output to Creo pa
 PTC Creo is one of the "big" 3d parametric design softwares. Other similar products are Solidworks, Catia, Autocad Inventor, Onshape etc. One advantage of these programs is that they let you model every detail of your product. You can import pcb's using the IDF format and you can also route cables to your end product. The cad program will give you the needed cable lengths and cable drawings.
 
 ## Changes
+**2023.08.10**
+Create separate spool files for tubes and tapes. You can use the Spool->Read command to read the spool info to Creo.
+
 **2023.05.28**
 Added code to Back-Annotation script xmlReadCreo. I noticed that the exported creo schematic xml did not have any info for the ribbon cable. But the Cabling Info -> Harness wirelist -> All
 
