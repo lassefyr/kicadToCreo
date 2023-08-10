@@ -60,10 +60,13 @@ class xmlWriteSpools:
 		self.writeWireSpool(components)
 		print(self.__spoolData, file = fout)
 
+		# ---------------------------------------------------------------------
+		# .spl file is written for each tube, shrink, or tape.
 		# Zero the array before otherSpool. Other spools are the tubes, shrinks and tape.
 		self.__spoolData = ""
-		self.writeOtherSpool(components)
-		#print(self.__spoolData, file = fout)
+		self.writeOtherSpool(components, outputFileName)
+		# ---------------------------------------------------------------------
+				
 		fout.write(self.__spoolData)
 
 		# Zero the array before CblSpool and write cables (multiple conductor cables with sheath)
@@ -367,7 +370,7 @@ class xmlWriteSpools:
 #		Load the .spl file (overwrite the existing spool).
 #
 #-----------------------------------------------------------------------------------------
-	def writeOtherSpool(self, components ):
+	def writeOtherSpool(self, components, currentFilePath ):
 		spoolList = []				# Spool list is empty
 		for comp in components:
 			refDes = comp.getRef()
@@ -392,9 +395,14 @@ class xmlWriteSpools:
 				continue
 			spoolList.append(spoolName)
 					
+			_localSpoolFileData =  ("! This spool file is created by Kicad.\n"
+									"! Preferably edit the parameters in Kicad\n"
+									"! and then regenerate the file\n"
+									"! Spool Name\n")
 					
 			self.__spoolData += "<SPOOL name=\""+spoolName+"\" type=\"NORMAL_SPOOL\" subType=\"SHEATH_SPOOL\" >\n"
 			self.__spoolData += "<SYS_PARAMETER id=\"Sh_"+spoolName+"\" />\n"
+			_localSpoolFileData += "NAME\t"+spoolName.upper()+"\n"
 
 # Sheath TYPE (Shrink, Tube, or Tape) ----------------------------------------------------						
 			self.__spoolData += "<PARAMETER name=\"TYPE\" value=\"SHEATH\" />\n"			
@@ -405,6 +413,7 @@ class xmlWriteSpools:
 				self.writeWarningStr("No Sheath Type defined for "+refDes+"!")
 				sheathType = "TUBE"
 			self.__spoolData += "<PARAMETER name=\"SHEATH_TYPE\" value=\""+sheathType+"\" />\n"
+			_localSpoolFileData += "! Spool Type\nTYPE\tSHEATH\n! Type of sheath\nSHEATH_TYPE\t"+sheathType.upper()+"\n"
 
 # Sheath WALL THICKNESS -------------------------------------------------------------------------									
 			thickness = comp.getField("Wall_Thickness")
@@ -412,6 +421,7 @@ class xmlWriteSpools:
 				self.writeWarningStr("No Wall Thickness defined for "+refDes+"! Using default value = 1")
 				thickness = "1"
 			self.__spoolData += "<PARAMETER name=\"WALL_THICKNESS\" value=\""+thickness+"\" />\n"
+			_localSpoolFileData += "! Wall thickness\nWALL_THICKNESS\t"+thickness+"\n"
 
 # Sheath COLOR -----------------------------------------------------------------------------			
 			spoolColor = comp.getField("Color").lower()
@@ -419,6 +429,7 @@ class xmlWriteSpools:
 				self.writeWarningStr("No Spool color defined for "+spoolName)
 				spoolColor = self.DEF_COLOR.lower()
 			self.__spoolData += "<PARAMETER name=\"COLOR\" value=\""+spoolColor+"\" />\n"
+			_localSpoolFileData += "! Color\nCOLOR\t"+spoolColor+"\n"
 
 # Sheath MIN_BEND_RADIUS -------------------------------------------------------------------			
 			minBend = comp.getField("Min_bend_radius")
@@ -426,9 +437,11 @@ class xmlWriteSpools:
 				self.writeWarningStr("No minimum bend radius defined for "+spoolName)
 				minBend = self.MIN_BEND
 			self.__spoolData += "<PARAMETER name=\"MIN_BEND_RADIUS\" value=\""+minBend+"\" />\n"
+			_localSpoolFileData += "! Minimal Bend Radius\nMIN_BEND_RADIUS\t"+minBend+"\n"
 
 # Sheath UNITS (default to mm)--------------------------------------------------------------															
 			self.__spoolData += "<PARAMETER name=\"UNITS\" value=\"MM\" />\n"
+			_localSpoolFileData += "! Units\nUNITS\tMM\n"
 
 # Sheath Inner Diameter  -------------------------------------------------------------------
 			innerDiam = comp.getField("Preshrink_inner_diameter")
@@ -436,6 +449,7 @@ class xmlWriteSpools:
 				self.writeWarningStr("No Inned Diameter defined for " + refDes+"!")
 				innerDiam = "10"
 			self.__spoolData += "<PARAMETER name=\"PRESHRINK_INNER_DIAMETER\" value=\""+innerDiam+"\" />\n"
+			_localSpoolFileData += "! Preshrink inner diameter\nPRESHRINK_INNER_DIAMETER\t"+innerDiam+"\n"
 
 # Sheath Outer Diameter  -------------------------------------------------------------------
 			outerDiam = comp.getField("Outer_Diameter")
@@ -448,21 +462,32 @@ class xmlWriteSpools:
 				#outerDiam = f"{(float(innerDiam)+1):.1f}"
 				
 			self.__spoolData += "<PARAMETER name=\"OUTER_DIAMETER\" value=\""+outerDiam+"\" />\n"
+			_localSpoolFileData += "! Outer diameter\nOUTER_DIAMETER\t"+outerDiam+"\n"
 
 # Sheath USER_PARAMETERS (Vendor and Vendor_pn) --------------------------------------------															
 			user_parameter = comp.getField("Vendor")
 			if user_parameter:
 				self.__spoolData += "<PARAMETER name=\"VENDOR\" value=\""+user_parameter+"\" />\n"
+				_localSpoolFileData += "VENDOR\t\""+user_parameter+"\"\n"
 			user_parameter = comp.getField("Vendor_pn")
 			if user_parameter:
 				self.__spoolData += "<PARAMETER name=\"VENDOR_PN\" value=\""+user_parameter+"\" />\n"
+				_localSpoolFileData += "VENDOR_PN\t\""+user_parameter+"\"\n"
 			
 # Sheath USER_PARAMETERS (Specification) ---------------------------------------------------															
 			if description:
 				self.__spoolData += "<PARAMETER name=\"SPECIFICATION\" value=\""+description+"\" />\n"
+				_localSpoolFileData += "SPECIFICATION\t\""+description+"\"\n"
 			
 # Sheath END SPOOL DEFINE ------------------------------------------------------------------															
 			self.__spoolData += "</SPOOL>\n"
+						
+			import os
+			myPath = os.path.dirname(currentFilePath)
+			myPath = os.path.join(myPath, spoolName+".spl")
+				
+			with open(myPath, "w") as f:
+				f.write(_localSpoolFileData)
 
 #-----------------------------------------------------------------------------------------
 # String Logger functions
